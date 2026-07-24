@@ -1,0 +1,351 @@
+openapi: 3.0.3
+info:
+  title: topi Seller catalog shippingMethod API
+  description: '# Localization
+
+
+    Strings returned can be localized when the _Accept-Language_ header is provided in the request. It should follow the [RFC-2616 convention](http://www.ietf.org/rfc/rfc2616.txt).
+
+    '
+  version: 1.0.0
+servers:
+- url: https://seller-api-sandbox.topi-sandbox.eu
+- url: https://seller-api.topi.eu
+- url: https://seller-api.topi-staging.eu
+- url: https://seller-api-sandbox.topi-sandbox-staging.eu
+tags:
+- name: shippingMethod
+  description: 'Provides operations to handle shipping-related tasks.
+
+    '
+paths:
+  /v1/shipping-method:
+    get:
+      tags:
+      - shippingMethod
+      summary: Get all shipping methods
+      description: Get all shipping methods
+      operationId: shippingMethod#getShippingMethods
+      parameters:
+      - name: page
+        in: query
+        description: Which page number to fetch (zero-indexed)
+        allowEmptyValue: true
+        schema:
+          type: integer
+          description: Which page number to fetch (zero-indexed)
+          default: 0
+          example: 0
+          format: int64
+        example: 0
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedShippingMethodResult'
+              example:
+                data:
+                - id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  is_in_store_pickup: true
+                  name: United Parcel Service
+                  seller_shipping_method_reference: Sandbox Shipping Service
+                  supported: true
+                pagination:
+                  has_more: false
+                  page: 0
+        '400':
+          description: 'BadRequest: Bad Request response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-shipping-method:read
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X GET https://seller-api.topi.eu/v1/shipping-method \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\"\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/shipping-method', {\n  method: 'GET',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+  /v1/shipping-method/method:
+    post:
+      tags:
+      - shippingMethod
+      summary: Create shipping method
+      description: 'Creates a shipping method. This is global for all the offers.
+
+
+        Returns HTTP 200 plus basic information about the newly created shipping method.
+
+
+        The request returns an HTTP Unprocessable Entity when the provided `"seller_shipping_method_reference"` is not unique.
+
+
+        ## When using in the Sandbox
+
+
+        The following seller shipping method references are considered to be available and will make the API return an HTTP Unprocessable Entity error.
+
+
+        - `"Bridges"`
+
+
+        Note: The sandbox will always return the same fixture regardless of the payload provided.
+
+        '
+      operationId: shippingMethod#create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateShippingMethodPayload'
+            example:
+              is_in_store_pickup: true
+              name: United Parcel Service
+              seller_shipping_method_reference: Sandbox Shipping Service
+      responses:
+        '201':
+          description: Created response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShippingMethodResult'
+              example:
+                id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                is_in_store_pickup: true
+                name: United Parcel Service
+                seller_shipping_method_reference: Sandbox Shipping Service
+                supported: true
+        '400':
+          description: 'BadRequest: Bad Request response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '422':
+          description: 'Unprocessable: Unprocessable Entity response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-shipping-method:edit
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X POST https://seller-api.topi.eu/v1/shipping-method/method \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n  \"is_in_store_pickup\": true,\n  \"name\": \"United Parcel Service\",\n  \"seller_shipping_method_reference\": \"Sandbox Shipping Service\"\n}'\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/shipping-method/method', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n  \"is_in_store_pickup\": true,\n  \"name\": \"United Parcel Service\",\n  \"seller_shipping_method_reference\": \"Sandbox Shipping Service\"\n})\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+components:
+  schemas:
+    CreateShippingMethodPayload:
+      type: object
+      properties:
+        is_in_store_pickup:
+          type: boolean
+          description: Is this shipping method in store pickup
+          example: true
+        name:
+          type: string
+          description: Name for the shipping method.
+          example: United Parcel Service
+        seller_shipping_method_reference:
+          type: string
+          description: Seller's own reference for this shipping method.
+          example: Sandbox Shipping Service
+      example:
+        is_in_store_pickup: true
+        name: United Parcel Service
+        seller_shipping_method_reference: Sandbox Shipping Service
+      required:
+      - seller_shipping_method_reference
+    PageMetadata:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+          description: Whether there are more pages
+          default: false
+          example: false
+        page:
+          type: integer
+          description: Current page number (zero-indexed)
+          default: 0
+          example: 0
+          format: int64
+      description: Metadata about the returned page
+      example:
+        has_more: false
+        page: 0
+      required:
+      - page
+      - has_more
+    ShippingMethodResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: topi shipping method ID.
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        is_in_store_pickup:
+          type: boolean
+          description: Is this shipping method in store pickup
+          example: true
+        name:
+          type: string
+          description: Name for the shipping method.
+          example: United Parcel Service
+        seller_shipping_method_reference:
+          type: string
+          description: Seller's own reference for this shipping method.
+          example: Sandbox Shipping Service
+        supported:
+          type: boolean
+          description: Supported shipping method.
+          example: true
+      description: Basic information about a shipping method.
+      example:
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        is_in_store_pickup: true
+        name: United Parcel Service
+        seller_shipping_method_reference: Sandbox Shipping Service
+        supported: true
+      required:
+      - id
+      - seller_shipping_method_reference
+      - supported
+    PaginatedShippingMethodResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShippingMethodResult'
+          description: Array of ShippingMethodResult
+          example:
+          - id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            is_in_store_pickup: true
+            name: United Parcel Service
+            seller_shipping_method_reference: Sandbox Shipping Service
+            supported: true
+        pagination:
+          $ref: '#/components/schemas/PageMetadata'
+      example:
+        data:
+        - id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          is_in_store_pickup: true
+          name: United Parcel Service
+          seller_shipping_method_reference: Sandbox Shipping Service
+          supported: true
+        pagination:
+          has_more: false
+          page: 0
+      required:
+      - data
+      - pagination
+    Error:
+      type: object
+      properties:
+        fault:
+          type: boolean
+          description: Is the error a server-side fault?
+          example: false
+        id:
+          type: string
+          description: ID is a unique identifier for this particular occurrence of the problem.
+          example: 123abc
+        message:
+          type: string
+          description: Message is a human-readable explanation specific to this occurrence of the problem.
+          example: parameter 'p' must be an integer
+        name:
+          type: string
+          description: Name is the name of this class of errors.
+          example: bad_request
+        temporary:
+          type: boolean
+          description: Is the error temporary?
+          example: false
+        timeout:
+          type: boolean
+          description: Is the error a timeout?
+          example: false
+      example:
+        fault: false
+        id: 123abc
+        message: parameter 'p' must be an integer
+        name: bad_request
+        temporary: false
+        timeout: false
+      required:
+      - name
+      - id
+      - message
+      - temporary
+      - timeout
+      - fault
+  securitySchemes:
+    OAuth2Seller_header_Authorization:
+      type: oauth2
+      description: 'Read our [Integration Guide](https://docs.topi.eu/docs/integration-guide/authentication) for detailed instructions on how to authenticate.
+
+        '
+      flows:
+        clientCredentials:
+          tokenUrl: https://identity.topi.eu/oauth2/token
+          refreshUrl: https://identity.topi.eu/oauth2/token
+          scopes:
+            seller-branding:read: read seller branding config
+            seller-catalog:edit: add product to catalog
+            seller-catalog:read: view and search catalog
+            seller-metrics:read: read metrics urls
+            seller-offer:edit: edit offer details
+            seller-offer:read: read offer details
+            seller-order:edit: edit order details
+            seller-order:read: read order details
+            seller-scenario-simulations:run: run scenario simulations
+            seller-shipment:edit: edit shipment details
+            seller-shipping-method:edit: edit seller shipping method details
+            seller-shipping-method:read: read seller shipping method details
+            user-info:read: read user info

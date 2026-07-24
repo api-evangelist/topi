@@ -1,0 +1,3736 @@
+openapi: 3.0.3
+info:
+  title: topi Seller catalog API
+  description: '# Localization
+
+
+    Strings returned can be localized when the _Accept-Language_ header is provided in the request. It should follow the [RFC-2616 convention](http://www.ietf.org/rfc/rfc2616.txt).
+
+    '
+  version: 1.0.0
+servers:
+- url: https://seller-api-sandbox.topi-sandbox.eu
+- url: https://seller-api.topi.eu
+- url: https://seller-api.topi-staging.eu
+- url: https://seller-api-sandbox.topi-sandbox-staging.eu
+tags:
+- name: catalog
+  description: Topi catalog for sellers
+paths:
+  /v1/catalog/basket/pricing:
+    post:
+      tags:
+      - catalog
+      summary: Calculate pricing for a whole basket
+      description: '## <span style="color:#cc3333">*Deprecated*</span>
+
+
+        Calculate pricing endpoint is being replaced by two other endpoints:
+
+        - listRecommendedRentalPrices
+
+        - cartRentalOverview
+
+
+        Please make sure to migrate to one of the above endpoints based on your use case.
+
+
+
+        ### Description
+
+
+        calculate the price for a product'
+      operationId: catalog#calculateBasketPricing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculateBasketPricingRequestBody'
+            example:
+              pricing_requests:
+              - base_rental_price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                identifier: abc123
+                price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                quantity: 1
+                seller_product_reference:
+                  reference: 123ab-5343
+                  source: sap
+                sublines:
+                - base_rental_price:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                    tax_rate: 1900
+                  price:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                    tax_rate: 1900
+                  seller_product_reference:
+                    reference: 123ab-5343
+                    source: sap
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculateBasketPricingResponseBody'
+              example:
+                basket_total_pay_now:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                basket_total_rent:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                summaries:
+                - available_contract_types:
+                  - rent
+                  default_tenure: 1
+                  identifier: abc123
+                  is_supported: true
+                  pay_now:
+                    amount:
+                      currency: EUR
+                      gross: 119000
+                      net: 100000
+                      tax_rate: 1900
+                    id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  pay_now_excluding_sublines:
+                    amount:
+                      currency: EUR
+                      gross: 119000
+                      net: 100000
+                      tax_rate: 1900
+                    id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  rent:
+                  - duration: 12
+                    id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                    monthly_amount:
+                      currency: EUR
+                      gross: 119000
+                      net: 100000
+                      tax_rate: 1900
+                  rent_excluding_sublines:
+                  - duration: 12
+                    id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                    monthly_amount:
+                      currency: EUR
+                      gross: 119000
+                      net: 100000
+                      tax_rate: 1900
+                  sublines:
+                  - available_contract_types:
+                    - rent
+                    default_tenure: 1
+                    identifier: abc123
+                    is_supported: true
+                    pay_now:
+                      amount:
+                        currency: EUR
+                        gross: 119000
+                        net: 100000
+                        tax_rate: 1900
+                      id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                    rent:
+                    - duration: 12
+                      id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                      monthly_amount:
+                        currency: EUR
+                        gross: 119000
+                        net: 100000
+                        tax_rate: 1900
+                    summary: Rent with topi for €24.32/month
+                    total_pay_now:
+                      amount:
+                        currency: EUR
+                        gross: 119000
+                        net: 100000
+                        tax_rate: 1900
+                      id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                    total_rent:
+                    - duration: 12
+                      id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                      monthly_amount:
+                        currency: EUR
+                        gross: 119000
+                        net: 100000
+                        tax_rate: 1900
+                  summary: Rent with topi for €24.32/month
+                  total_pay_now:
+                    amount:
+                      currency: EUR
+                      gross: 119000
+                      net: 100000
+                      tax_rate: 1900
+                    id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  total_rent:
+                  - duration: 12
+                    id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                    monthly_amount:
+                      currency: EUR
+                      gross: 119000
+                      net: 100000
+                      tax_rate: 1900
+        '400':
+          description: 'BadRequest: Bad Request response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '404':
+          description: 'NotFound: Not Found response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: 'Unprocessable: Unprocessable Entity response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:read
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X POST https://seller-api.topi.eu/v1/catalog/basket/pricing \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"identifier\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"sublines\": [\n        {\n          \"base_rental_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"seller_product_reference\": {\n            \"reference\": \"123ab-5343\",\n            \"source\": \"sap\"\n          }\n        }\n      ]\n    }\n  ]\n}'\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/basket/pricing', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"identifier\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"sublines\": [\n        {\n          \"base_rental_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"seller_product_reference\": {\n            \"reference\": \"123ab-5343\",\n            \"source\": \"sap\"\n          }\n        }\n      ]\n    }\n  ]\n})\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+  /v1/catalog/carts/rental-overview:
+    post:
+      tags:
+      - catalog
+      summary: Get rental overview for products
+      operationId: catalog#cartRentalOverview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRentalOverviewRequestBody'
+            example:
+              products:
+              - base_rental_price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                quantity: 1
+                seller_product_reference:
+                  reference: 123ab-5343
+                  source: sap
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartRentalOverviewResult'
+              example:
+                can_checkout: false
+                currency: EUR
+                product_prices:
+                - available_rental_terms:
+                  - duration: 12
+                    id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                    monthly_amount:
+                      currency: EUR
+                      gross: 119000
+                      net: 100000
+                      tax_rate: 1900
+                  can_checkout: false
+                  currency: EUR
+                  has_rental_terms: false
+                  quantity: 1
+                  seller_product_reference:
+                    reference: 123ab-5343
+                    source: sap
+                  summary: Rent with topi from €23.45/month
+                  total_rental_amount: 1
+                total_rental_amount: 1
+                total_rental_summary: Rent with topi from €123.45/month
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:read
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X POST https://seller-api.topi.eu/v1/catalog/carts/rental-overview \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n}'\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/carts/rental-overview', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n})\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+  /v1/catalog/check-supported:
+    post:
+      tags:
+      - catalog
+      summary: Check if products are supported
+      description: 'Checks whether the products with the given references are supported or not.
+
+
+        ### When using in the Sandbox
+
+
+        Returns the requested products with their available contract terms, depending on the combination of the supplied Source and Reference values:
+
+
+        - To get a product with `PayNow` contract terms : The supplied `source` should be `SAP` with `reference` specified as `1234-5678`.
+
+        - To get a product with `Rent` contract terms : There are two ways to get this value either when the supplied `source` is `SAP` and the `reference` is `1111-1111` or with `source` set to `B6` and `reference` specified as `2222-2222`.
+
+        - To get a product that is not topi supported: Specify the `source` as `SAP` and `reference` should be `8765-4321`.
+
+
+        In other cases this method will return an empty array.
+
+
+        This method has been defined as POST because the size of the input values could grow fast.
+
+        '
+      operationId: catalog#checkSupported
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckSupportedRequestBody'
+            example:
+              seller_product_references:
+              - reference: 123ab-5343
+                source: sap
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsSummary'
+              example:
+                products:
+                - available_contract_terms:
+                    can_pay_now: false
+                    can_rent: false
+                    rent:
+                      duration: 1
+                  id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  is_supported: false
+                  seller_product_reference:
+                    reference: 123ab-5343
+                    source: sap
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:read
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X POST https://seller-api.topi.eu/v1/catalog/check-supported \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n  \"seller_product_references\": [\n    {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  ]\n}'\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/check-supported', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n  \"seller_product_references\": [\n    {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  ]\n})\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+  /v1/catalog/import:
+    post:
+      tags:
+      - catalog
+      summary: Import products into the catalog
+      description: 'Add a batch of products to the catalog.
+
+
+        ### When using in the Sandbox
+
+
+        Use the following scenarios to get different fixtures:
+
+
+        - Status `"completed"`: `Send a catalog with less than 10 products`
+
+        - Status `"created"`: `Send a catalog with 10 products or more`
+
+        - Status `"failed"`: `Send a product inside the catalog with the "source" or the "reference" in the "seller_product_reference" as empty string`
+
+        '
+      operationId: catalog#importCatalog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportCatalogRequestBody'
+            example:
+              products:
+              - base_rental_price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                description: aaa
+                extra_details:
+                - property: memory
+                  value: 16GB DDR5
+                image:
+                  url: https://example.com/foo
+                is_active: false
+                manufacturer: abc123
+                price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                product_standard_identifiers:
+                - id: 123ab-4567
+                  identifier_type: EAN
+                seller_categories:
+                - id: abc123
+                  name: abc123
+                  parent_category_id: abc123
+                seller_product_references:
+                - reference: 123ab-5343
+                  source: sap
+                - reference: 123ab-5343
+                  source: sap
+                seller_product_type: software
+                shop_product_description_url: https://example.com/foo
+                subtitle: abc123
+                title: abc123
+              - base_rental_price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                description: aaa
+                extra_details:
+                - property: memory
+                  value: 16GB DDR5
+                image:
+                  url: https://example.com/foo
+                is_active: false
+                manufacturer: abc123
+                price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                product_standard_identifiers:
+                - id: 123ab-4567
+                  identifier_type: EAN
+                seller_categories:
+                - id: abc123
+                  name: abc123
+                  parent_category_id: abc123
+                seller_product_references:
+                - reference: 123ab-5343
+                  source: sap
+                - reference: 123ab-5343
+                  source: sap
+                seller_product_type: software
+                shop_product_description_url: https://example.com/foo
+                subtitle: abc123
+                title: abc123
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResult'
+              example:
+                id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                status: started
+                summary:
+                  sample_products_rejected:
+                  - error_code: unsupported_product
+                    error_description: the product type is not supported
+                    seller_product_reference:
+                      reference: 123ab-5343
+                      source: sap
+                  total_products: 1
+                  total_products_imported: 1
+                  total_products_rejected: 1
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '413':
+          description: 'TooManyProducts: Request Entity Too Large response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: 'Unprocessable: Unprocessable Entity response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:edit
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X POST https://seller-api.topi.eu/v1/catalog/import \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    },\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    }\n  ]\n}'\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/import', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    },\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    }\n  ]\n})\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+  /v1/catalog/imports:
+    post:
+      tags:
+      - catalog
+      summary: Create a CSV import job
+      description: "Creates a new CSV import job and returns the created import id and a pre-signed upload URL.\n\n## Upload flow\n\n1. Call `POST /imports` with the `filename` of your CSV file. The response contains the import\n   `id` and an `upload_url` — a temporary link to upload the file to.\n2. Upload the file with an HTTP `PUT` request to `upload_url`. The request must include two\n   headers: `Content-Type: text/csv` and `x-goog-content-length-range: 0,262144000`. Uploads\n   without them are rejected. The file may be at most **250 MB**.\n3. The file is then checked and processed in the background. Call `GET /imports/{id}` to follow\n   progress. When some rows could not be imported, the response links to a downloadable CSV\n   listing each failed row and the reason. If the file fails the initial check (for example a\n   required column is missing), the import status becomes `failed` and the `error` field\n   explains why.\n\nA seller can have at most **5 imports running** at the same time. Starting a sixth returns a\n`TooManyRequests` error — wait for an earlier import to finish and try again.\n\n## CSV format\n\nThe first line of the file must be a header row with column names. Column names are not\ncase-sensitive and surrounding spaces are ignored; any column not listed below is simply skipped.\n\nRe-uploading a product you imported before (same `reference`) updates that product instead of\ncreating a duplicate. Leaving an optional cell empty on re-import keeps the product's existing\nvalue for that field.\n\n### Required columns\n\nThe import is rejected if any of these are missing from the header.\n\n| Column | Description | Format |\n|---|---|---|\n| `title` | Product name shown to customers | Non-empty text |\n| `reference` | Your product identifier(s) | One or more values joined by `\\|`; count must match `reference_source` |\n| `reference_source` | Source/type of each reference (e.g. `sku`, `ean`) | `\\|`-separated, same count as `reference` |\n| `is_active` | Whether the product is sellable | `true`/`false`, `1`/`0`, `yes`/`no`, `y`/`n` (case-insensitive) |\n| `price_gross` | Sale price incl. VAT | Number > 0, must be >= `price_net` |\n| `price_net` | Sale price excl. VAT | Number > 0 |\n\n### Optional columns\n\n| Column | Description | Format |\n|---|---|---|\n| `currency` | Currency code, e.g. `EUR` | Defaults to the seller currency if blank |\n| `manufacturer` | Brand / maker | Text |\n| `subtitle` | Short tagline under the title | Text |\n| `description` | Long product description | Text, max 2000 characters |\n| `base_rental_price_gross` | Monthly rental price incl. VAT | Number > 0, must be >= net if both set |\n| `base_rental_price_net` | Monthly rental price excl. VAT | Number > 0 |\n| `ean` | EAN barcode | Text |\n| `mpn` | Manufacturer part number | Text |\n| `image_url` | Product image | Valid URL |\n| `seller_category_id` | Your category ID | Text |\n| `seller_category_name` | Your category name | Text |\n| `seller_category_parent_id` | Parent category ID | Text |\n| `seller_product_type` | Product type | One of `hardware`, `software`, `service`, `hardware_built_to_order`, or blank |\n| `shop_product_description_url` | Link to the product page on your shop | Valid URL |\n| `extra_details` | Custom key/value attributes | `key=value` pairs joined by `\\|` |\n\n### Prices\n\n- Prices are written in whole currency units, not cents: `2499.00` means 2,499 euros.\n- `price_gross` (with VAT) must be greater than or equal to `price_net` (without VAT).\n- Both decimal styles are accepted: a point (`1999.99`) or a comma (`1999,99`) before the\n  decimals. Thousands separators are also fine in either style: `1,234.56` and `1.234,56` both\n  mean one thousand two hundred thirty-four euros and 56 cents.\n- One shape cannot be told apart: a value like `1,234` could mean `1.234` or `1234`, so that\n  row is rejected with an error. To avoid this, always write the cents explicitly — `1234.00`\n  (or `1.234,00`) for one thousand two hundred thirty-four euros, `1.23` (or `1,23`) for one\n  euro and 23 cents.\n\n### Notes\n\n- **Multiple references**: a product can carry several identifiers — pipe-separate them in\n  `reference` (e.g. `MBP14-001|0719726100000`) with matching kinds in `reference_source`\n  (e.g. `sku|ean`). The two columns must have an equal number of `|`-separated values.\n- **Duplicate references** within the same file are rejected per row; the rest of the file still\n  imports.\n- A row that fails validation does not stop the import: valid rows still import, and every\n  failed row is listed with its reason in the downloadable error CSV.\n\n### Example\n\n```csv\ntitle,reference,reference_source,is_active,price_gross,price_net,currency,manufacturer,seller_product_type,extra_details\nApple MacBook Pro 14,MBP14-001,sku,true,2499.00,2099.16,EUR,Apple,hardware,color=Space Black|warranty=24 months\nDell UltraSharp Monitor,DELL-U2724|0719726100000,sku|ean,1,649.00,545.38,EUR,Dell,hardware,resolution=3840x2160|panel=IPS\n```\n"
+      operationId: catalog#createImport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImportRequestBody'
+            example:
+              filename: abc123
+      responses:
+        '201':
+          description: Created response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateImportResult'
+              example:
+                id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                upload_url: https://example.com/foo
+        '400':
+          description: 'BadRequest: Bad Request response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '429':
+          description: 'TooManyRequests: Too Many Requests response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:edit
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X POST https://seller-api.topi.eu/v1/catalog/imports \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n  \"filename\": \"abc123\"\n}'\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/imports', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n  \"filename\": \"abc123\"\n})\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+  /v1/catalog/imports/{id}:
+    delete:
+      tags:
+      - catalog
+      summary: Cancel a CSV import job
+      description: 'Cancels a CSV import job.
+
+
+        Only imports in `pending`, `queued`, and `running`  status can be cancelled. Cancelling a completed or already-cancelled import returns an error.
+
+
+        '
+      operationId: catalog#cancelImport
+      parameters:
+      - name: id
+        in: path
+        description: The import job ID to cancel.
+        required: true
+        schema:
+          type: string
+          description: The import job ID to cancel.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          format: uuid
+        example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: OK response.
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '404':
+          description: 'NotFound: Not Found response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: 'Unprocessable: Unprocessable Entity response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:edit
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X DELETE https://seller-api.topi.eu/v1/catalog/imports/{id} \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\"\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/imports/{id}', {\n  method: 'DELETE',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+    get:
+      tags:
+      - catalog
+      summary: Get CSV import job details
+      description: "Retrieves the details of a CSV import job.\n\n## Failure reporting\n\nThere are two distinct failure surfaces:\n\n- **`error`** — set when the import fails before any rows are processed, e.g. a required\n  column is missing from the header, the uploaded file is not a valid CSV, or the upload\n  has the wrong content type. The job status is `failed`, the row counters stay at 0, and\n  no error CSV is produced. Fix the file and create a new import.\n- **`failed` / `errors_url`** — row-level failures during processing. The import keeps\n  going; rows that failed are counted in `failed` and detailed in the downloadable CSV at\n  `errors_url`. The `error` field stays empty in this case.\n"
+      operationId: catalog#getImport
+      parameters:
+      - name: id
+        in: path
+        description: The import job ID.
+        required: true
+        schema:
+          type: string
+          description: The import job ID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          format: uuid
+        example: 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogImportJob'
+              example:
+                categorization:
+                  done: false
+                  pending: 1
+                  supported: 1
+                  to_be_reviewed: 1
+                  total: 1
+                  unsupported: 1
+                created_at: '1970-01-01T00:00:01Z'
+                error: abc123
+                errors_url: https://example.com/foo
+                failed: 1
+                filename: abc123
+                id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                object_path: https://example.com/foo
+                processed: 1
+                status: queued
+                succeeded: 1
+                updated_at: '1970-01-01T00:00:01Z'
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '404':
+          description: 'NotFound: Not Found response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:edit
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X GET https://seller-api.topi.eu/v1/catalog/imports/{id} \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\"\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/imports/{id}', {\n  method: 'GET',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+  /v1/catalog/list-recommended-rental-prices:
+    post:
+      tags:
+      - catalog
+      summary: List recommended rental prices for products
+      description: Given a list of products, retrieve information about the recommended monthly rental price and term, if applicable, for each of the requested products.
+      operationId: catalog#listRecommendedRentalPrices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRecommendedRentalPricesRequestBody'
+            example:
+              pricing_requests:
+              - base_rental_price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                seller_product_reference:
+                  reference: 123ab-5343
+                  source: sap
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductRentalPricingDetails'
+                example:
+                - currency: EUR
+                  has_rental_terms: false
+                  monthly_rental_amount: 100000
+                  monthly_rental_terms:
+                    duration: 12
+                    id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                    monthly_amount:
+                      currency: EUR
+                      gross: 119000
+                      net: 100000
+                      tax_rate: 1900
+                  seller_product_reference:
+                    reference: 123ab-5343
+                    source: sap
+                  summary: Rent with topi from €23.45/month
+              example:
+              - currency: EUR
+                has_rental_terms: false
+                monthly_rental_amount: 100000
+                monthly_rental_terms:
+                  duration: 12
+                  id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  monthly_amount:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                    tax_rate: 1900
+                seller_product_reference:
+                  reference: 123ab-5343
+                  source: sap
+                summary: Rent with topi from €23.45/month
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:read
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X POST https://seller-api.topi.eu/v1/catalog/list-recommended-rental-prices \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n}'\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/list-recommended-rental-prices', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n})\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+  /v1/catalog/pricing:
+    post:
+      tags:
+      - catalog
+      summary: Calculate pricing for a single product
+      description: '## <span style="color:#cc3333">*Deprecated*</span>
+
+
+        Calculate pricing endpoint is being replaced by two other endpoints:
+
+        - listRecommendedRentalPrices
+
+        - cartRentalOverview
+
+
+        Please make sure to migrate to one of the above endpoints based on your use case.
+
+
+
+        ### Description
+
+
+        calculate the price for a product'
+      operationId: catalog#calculatePricing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatePricingRequestBody'
+            example:
+              pricing_request:
+                base_rental_price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                seller_product_reference:
+                  reference: 123ab-5343
+                  source: sap
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatePriceSummary'
+              example:
+                available_contract_types:
+                - rent
+                is_supported: true
+                pay_now:
+                  amount:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                    tax_rate: 1900
+                  id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                rent:
+                - duration: 12
+                  id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  monthly_amount:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                    tax_rate: 1900
+                sublines:
+                - available_contract_types:
+                  - rent
+                  is_supported: true
+                  pay_now:
+                    amount:
+                      currency: EUR
+                      gross: 119000
+                      net: 100000
+                      tax_rate: 1900
+                    id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  rent:
+                  - duration: 12
+                    id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                    monthly_amount:
+                      currency: EUR
+                      gross: 119000
+                      net: 100000
+                      tax_rate: 1900
+                  summary: Rent with topi for €24.32/month
+                summary: Rent with topi for €24.32/month
+        '400':
+          description: 'BadRequest: Bad Request response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '404':
+          description: 'NotFound: Not Found response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: 'Unprocessable: Unprocessable Entity response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:read
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X POST https://seller-api.topi.eu/v1/catalog/pricing \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n  \"pricing_request\": {\n    \"base_rental_price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"seller_product_reference\": {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  }\n}'\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/pricing', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n  \"pricing_request\": {\n    \"base_rental_price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"seller_product_reference\": {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  }\n})\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+  /v1/catalog/products:
+    get:
+      tags:
+      - catalog
+      summary: Search products by term
+      description: get products that match a search term
+      operationId: catalog#searchProducts
+      parameters:
+      - name: term
+        in: query
+        description: The Seller Product Reference
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: The Seller Product Reference
+          example: abc123
+        example: abc123
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchProductResult'
+                example:
+                - archived: false
+                  available_contract_terms:
+                    can_pay_now: false
+                    can_rent: false
+                    rent:
+                      duration: 1
+                  base_rental_price:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                  description: abc123
+                  ean: abc123
+                  list_price:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                  manufacturer: abc123
+                  mpn: abc123
+                  origin: abc123
+                  pretty_id: abc123
+                  pricing_category: abc123
+                  product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  reference: abc123
+                  seller_product_references:
+                  - reference: 123ab-5343
+                    source: sap
+                  subtitle: abc123
+                  title: abc123
+              example:
+              - archived: false
+                available_contract_terms:
+                  can_pay_now: false
+                  can_rent: false
+                  rent:
+                    duration: 1
+                base_rental_price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                description: abc123
+                ean: abc123
+                list_price:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                manufacturer: abc123
+                mpn: abc123
+                origin: abc123
+                pretty_id: abc123
+                pricing_category: abc123
+                product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                reference: abc123
+                seller_product_references:
+                - reference: 123ab-5343
+                  source: sap
+                subtitle: abc123
+                title: abc123
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '404':
+          description: 'NotFound: Not Found response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: 'Unprocessable: Unprocessable Entity response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:read
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X GET https://seller-api.topi.eu/v1/catalog/products \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\"\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/products', {\n  method: 'GET',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+  /v1/catalog/products_paginated:
+    get:
+      tags:
+      - catalog
+      summary: 'Paginated product search by term, note: this method will not support any filtering, please refer to the POST endpoint for filtering.'
+      description: 'get paginated products that match a search term, note: this method will not support any filtering.'
+      operationId: catalog#searchProductsPaginated
+      parameters:
+      - name: term
+        in: query
+        description: The Seller Product Reference
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: The Seller Product Reference
+          example: abc123
+        example: abc123
+      - name: limit
+        in: query
+        description: the size of the page
+        allowEmptyValue: true
+        schema:
+          type: integer
+          description: the size of the page
+          example: 1
+          format: int64
+        example: 1
+      - name: page
+        in: query
+        description: the index of the page
+        allowEmptyValue: true
+        schema:
+          type: integer
+          description: the index of the page
+          example: 1
+          format: int64
+        example: 1
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPaginationResult'
+              example:
+                limit: 1
+                page: 1
+                rows:
+                - archived: false
+                  available_contract_terms:
+                    can_pay_now: false
+                    can_rent: false
+                    rent:
+                      duration: 1
+                  base_rental_price:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                  description: abc123
+                  ean: abc123
+                  list_price:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                  manufacturer: abc123
+                  mpn: abc123
+                  origin: abc123
+                  pretty_id: abc123
+                  pricing_category: abc123
+                  product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  reference: abc123
+                  seller_product_references:
+                  - reference: 123ab-5343
+                    source: sap
+                  subtitle: abc123
+                  title: abc123
+                totalPages: 1
+                totalRows: 1
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '404':
+          description: 'NotFound: Not Found response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: 'Unprocessable: Unprocessable Entity response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:read
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X GET https://seller-api.topi.eu/v1/catalog/products_paginated \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\"\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/products_paginated', {\n  method: 'GET',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+    post:
+      tags:
+      - catalog
+      summary: Paginated product search by term, filtering by provided options
+      description: get paginated products that match a search term and the provided filters
+      operationId: catalog#searchAndFilterProductsPaginated
+      parameters:
+      - name: term
+        in: query
+        description: The Seller Product Reference
+        allowEmptyValue: true
+        schema:
+          type: string
+          description: The Seller Product Reference
+          example: abc123
+        example: abc123
+      - name: limit
+        in: query
+        description: the size of the page
+        allowEmptyValue: true
+        schema:
+          type: integer
+          description: the size of the page
+          example: 1
+          format: int64
+        example: 1
+      - name: page
+        in: query
+        description: the index of the page
+        allowEmptyValue: true
+        schema:
+          type: integer
+          description: the index of the page
+          example: 1
+          format: int64
+        example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchAndFilterProductsPaginatedRequestBody'
+            example:
+              filtering_logic: OR
+              filtering_options:
+              - operation: '>'
+                property: abc123
+                value: abc123
+      responses:
+        '200':
+          description: OK response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPaginationResult'
+              example:
+                limit: 1
+                page: 1
+                rows:
+                - archived: false
+                  available_contract_terms:
+                    can_pay_now: false
+                    can_rent: false
+                    rent:
+                      duration: 1
+                  base_rental_price:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                  description: abc123
+                  ean: abc123
+                  list_price:
+                    currency: EUR
+                    gross: 119000
+                    net: 100000
+                  manufacturer: abc123
+                  mpn: abc123
+                  origin: abc123
+                  pretty_id: abc123
+                  pricing_category: abc123
+                  product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                  reference: abc123
+                  seller_product_references:
+                  - reference: 123ab-5343
+                    source: sap
+                  subtitle: abc123
+                  title: abc123
+                totalPages: 1
+                totalRows: 1
+        '401':
+          description: 'Unauthorized: Unauthorized response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '403':
+          description: 'InvalidScopes: Forbidden response.'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: abc123
+              example: abc123
+        '404':
+          description: 'NotFound: Not Found response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: 'Unprocessable: Unprocessable Entity response.'
+          content:
+            application/vnd.goa.error:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - OAuth2Seller_header_Authorization:
+        - seller-catalog:read
+      x-code-samples:
+      - lang: curl
+        label: cURL
+        source: "curl -X POST https://seller-api.topi.eu/v1/catalog/products_paginated \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n  \"filtering_logic\": \"OR\",\n  \"filtering_options\": [\n    {\n      \"operation\": \">\",\n      \"property\": \"abc123\",\n      \"value\": \"abc123\"\n    }\n  ]\n}'\n"
+      - lang: javascript
+        label: JavaScript (fetch)
+        source: "const response = await fetch('https://seller-api.topi.eu/v1/catalog/products_paginated', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n  \"filtering_logic\": \"OR\",\n  \"filtering_options\": [\n    {\n      \"operation\": \">\",\n      \"property\": \"abc123\",\n      \"value\": \"abc123\"\n    }\n  ]\n})\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
+components:
+  schemas:
+    RentContractTerm:
+      type: object
+      properties:
+        duration:
+          type: integer
+          description: Duration of the rental term in months.
+          example: 12
+          enum:
+          - 6
+          - 12
+          - 24
+          - 36
+          format: int64
+        id:
+          type: string
+          description: The internal Id for the contract term
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        monthly_amount:
+          $ref: '#/components/schemas/MoneyAmountWithRequiredTax'
+      example:
+        duration: 12
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        monthly_amount:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+      required:
+      - monthly_amount
+      - duration
+    MoneyAmount:
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 'Currency code, see ISO 4127 (https://www.iso.org/iso-4217-currency-codes.html) (supported: EUR, GBP, USD)'
+          example: EUR
+        gross:
+          type: integer
+          description: Gross amount of money, expressed in the minor unit for the currency
+          example: 119000
+          format: int64
+        net:
+          type: integer
+          description: Net amount of money, expressed in the minor unit for the currency
+          example: 100000
+          format: int64
+      example:
+        currency: EUR
+        gross: 119000
+        net: 100000
+      required:
+      - gross
+      - net
+      - currency
+    CreateImportResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The import job ID.
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        upload_url:
+          type: string
+          description: The upload url in the storage where the uploaded CSV is located.
+          example: https://example.com/foo
+          format: uri
+      example:
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        upload_url: https://example.com/foo
+      required:
+      - id
+      - upload_url
+    FilteringOption:
+      type: object
+      properties:
+        operation:
+          type: string
+          description: the operation to filter on e.g >
+          example: '>'
+          enum:
+          - <
+          - '>'
+          - '='
+          - '!='
+          - <=
+          - '>='
+          - contains
+          - does not contain
+        property:
+          type: string
+          description: the property to filter on e.g title
+          example: abc123
+        value:
+          type: string
+          description: the value to match
+          example: abc123
+      description: option for filtering products on the backend
+      example:
+        operation: '>'
+        property: abc123
+        value: abc123
+      required:
+      - property
+      - operation
+      - value
+    AddProduct:
+      type: object
+      properties:
+        base_rental_price:
+          $ref: '#/components/schemas/MoneyAmount'
+        description:
+          type: string
+          description: Detailed description of the product.
+          example: aaa
+          maxLength: 2000
+        extra_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtraProductDetails'
+          description: Additional details about the product, such as CPU, memory size, etc.
+          example:
+          - property: memory
+            value: 16GB DDR5
+        image:
+          $ref: '#/components/schemas/ProductImage'
+        is_active:
+          type: boolean
+          description: Indicates if the product is currently active.
+          example: false
+        manufacturer:
+          type: string
+          description: Name of the product's manufacturer.
+          example: abc123
+        price:
+          $ref: '#/components/schemas/MoneyAmountWithOptionalTax'
+        product_standard_identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductStandardIdentifier'
+          description: List of standardized identifiers for the product, such as UPC, EAN, or ISBN.
+          example:
+          - id: 123ab-4567
+            identifier_type: EAN
+        seller_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSellerCategory'
+          description: An array of categories provided by the seller for this product.
+          example:
+          - id: abc123
+            name: abc123
+            parent_category_id: abc123
+        seller_product_references:
+          type: array
+          items:
+            $ref: '#/components/schemas/SellerProductReference'
+          description: An array of the seller's unique references for this product.
+          example:
+          - reference: 123ab-5343
+            source: sap
+          - reference: 123ab-5343
+            source: sap
+          minItems: 1
+        seller_product_type:
+          type: string
+          description: Type of the product, such as hardware, software, service, etc.
+          example: software
+          enum:
+          - hardware
+          - software
+          - service
+          - hardware_built_to_order
+        shop_product_description_url:
+          type: string
+          example: https://example.com/foo
+          format: uri
+        subtitle:
+          type: string
+          description: Subtitle of the product.
+          example: abc123
+        title:
+          type: string
+          description: Title of the product.
+          example: abc123
+      example:
+        base_rental_price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+        description: aaa
+        extra_details:
+        - property: memory
+          value: 16GB DDR5
+        image:
+          url: https://example.com/foo
+        is_active: false
+        manufacturer: abc123
+        price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+        product_standard_identifiers:
+        - id: 123ab-4567
+          identifier_type: EAN
+        seller_categories:
+        - id: abc123
+          name: abc123
+          parent_category_id: abc123
+        seller_product_references:
+        - reference: 123ab-5343
+          source: sap
+        - reference: 123ab-5343
+          source: sap
+        seller_product_type: software
+        shop_product_description_url: https://example.com/foo
+        subtitle: abc123
+        title: abc123
+      required:
+      - title
+      - seller_product_references
+      - price
+      - is_active
+    ProductPaginationResult:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: the size of the page
+          example: 1
+          format: int64
+        page:
+          type: integer
+          description: the index of the page
+          example: 1
+          format: int64
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchProductResult'
+          description: The products returned.
+          example:
+          - archived: false
+            available_contract_terms:
+              can_pay_now: false
+              can_rent: false
+              rent:
+                duration: 1
+            base_rental_price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+            description: abc123
+            ean: abc123
+            list_price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+            manufacturer: abc123
+            mpn: abc123
+            origin: abc123
+            pretty_id: abc123
+            pricing_category: abc123
+            product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            reference: abc123
+            seller_product_references:
+            - reference: 123ab-5343
+              source: sap
+            subtitle: abc123
+            title: abc123
+        totalPages:
+          type: integer
+          description: Total amount of pages available
+          example: 1
+          format: int64
+        totalRows:
+          type: integer
+          description: The total amount of rows
+          example: 1
+          format: int64
+      example:
+        limit: 1
+        page: 1
+        rows:
+        - archived: false
+          available_contract_terms:
+            can_pay_now: false
+            can_rent: false
+            rent:
+              duration: 1
+          base_rental_price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+          description: abc123
+          ean: abc123
+          list_price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+          manufacturer: abc123
+          mpn: abc123
+          origin: abc123
+          pretty_id: abc123
+          pricing_category: abc123
+          product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          reference: abc123
+          seller_product_references:
+          - reference: 123ab-5343
+            source: sap
+          subtitle: abc123
+          title: abc123
+        totalPages: 1
+        totalRows: 1
+    CartProductRentalOverview:
+      type: object
+      properties:
+        available_rental_terms:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentContractTerm'
+          description: All of the various rental terms topi can provide for this product. Only populated when the product has rental terms.
+          example:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+        can_checkout:
+          type: boolean
+          description: Whether or not this product can be checked out with topi.
+          example: false
+        currency:
+          type: string
+          description: 'Currency code, see ISO 4127 (https://www.iso.org/iso-4217-currency-codes.html) (supported: EUR, GBP, USD)'
+          example: EUR
+        has_rental_terms:
+          type: boolean
+          description: Whether or not this product has rental terms.
+          example: false
+        quantity:
+          type: integer
+          description: The selected quantity of this product included in the seller's cart.
+          example: 1
+          format: int64
+        seller_product_reference:
+          $ref: '#/components/schemas/SellerProductReference'
+        summary:
+          type: string
+          description: A string that can be directly rendered in the page describing how this product can be rented through topi. Only populated when the product has rental terms.
+          example: Rent with topi from €23.45/month
+        total_rental_amount:
+          type: integer
+          description: The total net rental amount for  the product. Only populated when the product has rental terms.
+          example: 1
+          format: int64
+      example:
+        available_rental_terms:
+        - duration: 12
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          monthly_amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+        can_checkout: false
+        currency: EUR
+        has_rental_terms: false
+        quantity: 1
+        seller_product_reference:
+          reference: 123ab-5343
+          source: sap
+        summary: Rent with topi from €23.45/month
+        total_rental_amount: 1
+      required:
+      - seller_product_reference
+      - has_rental_terms
+      - quantity
+    ListRecommendedRentalPricesRequestBody:
+      type: object
+      properties:
+        pricing_requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingRequest'
+          description: List of product pricing to request.
+          example:
+          - base_rental_price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            seller_product_reference:
+              reference: 123ab-5343
+              source: sap
+      example:
+        pricing_requests:
+        - base_rental_price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          seller_product_reference:
+            reference: 123ab-5343
+            source: sap
+      required:
+      - pricing_requests
+    ImportCatalogRequestBody:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddProduct'
+          description: Product payload
+          example:
+          - base_rental_price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+            description: aaa
+            extra_details:
+            - property: memory
+              value: 16GB DDR5
+            image:
+              url: https://example.com/foo
+            is_active: false
+            manufacturer: abc123
+            price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            product_standard_identifiers:
+            - id: 123ab-4567
+              identifier_type: EAN
+            seller_categories:
+            - id: abc123
+              name: abc123
+              parent_category_id: abc123
+            seller_product_references:
+            - reference: 123ab-5343
+              source: sap
+            - reference: 123ab-5343
+              source: sap
+            seller_product_type: software
+            shop_product_description_url: https://example.com/foo
+            subtitle: abc123
+            title: abc123
+          - base_rental_price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+            description: aaa
+            extra_details:
+            - property: memory
+              value: 16GB DDR5
+            image:
+              url: https://example.com/foo
+            is_active: false
+            manufacturer: abc123
+            price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            product_standard_identifiers:
+            - id: 123ab-4567
+              identifier_type: EAN
+            seller_categories:
+            - id: abc123
+              name: abc123
+              parent_category_id: abc123
+            seller_product_references:
+            - reference: 123ab-5343
+              source: sap
+            - reference: 123ab-5343
+              source: sap
+            seller_product_type: software
+            shop_product_description_url: https://example.com/foo
+            subtitle: abc123
+            title: abc123
+          minItems: 1
+      example:
+        products:
+        - base_rental_price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+          description: aaa
+          extra_details:
+          - property: memory
+            value: 16GB DDR5
+          image:
+            url: https://example.com/foo
+          is_active: false
+          manufacturer: abc123
+          price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          product_standard_identifiers:
+          - id: 123ab-4567
+            identifier_type: EAN
+          seller_categories:
+          - id: abc123
+            name: abc123
+            parent_category_id: abc123
+          seller_product_references:
+          - reference: 123ab-5343
+            source: sap
+          - reference: 123ab-5343
+            source: sap
+          seller_product_type: software
+          shop_product_description_url: https://example.com/foo
+          subtitle: abc123
+          title: abc123
+        - base_rental_price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+          description: aaa
+          extra_details:
+          - property: memory
+            value: 16GB DDR5
+          image:
+            url: https://example.com/foo
+          is_active: false
+          manufacturer: abc123
+          price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          product_standard_identifiers:
+          - id: 123ab-4567
+            identifier_type: EAN
+          seller_categories:
+          - id: abc123
+            name: abc123
+            parent_category_id: abc123
+          seller_product_references:
+          - reference: 123ab-5343
+            source: sap
+          - reference: 123ab-5343
+            source: sap
+          seller_product_type: software
+          shop_product_description_url: https://example.com/foo
+          subtitle: abc123
+          title: abc123
+      required:
+      - products
+    ImportResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the import processing
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        status:
+          type: string
+          description: The current import status.
+          example: started
+          enum:
+          - created
+          - started
+          - completed
+          - failed
+        summary:
+          $ref: '#/components/schemas/SummaryInfo'
+      example:
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        status: started
+        summary:
+          sample_products_rejected:
+          - error_code: unsupported_product
+            error_description: the product type is not supported
+            seller_product_reference:
+              reference: 123ab-5343
+              source: sap
+          total_products: 1
+          total_products_imported: 1
+          total_products_rejected: 1
+      required:
+      - id
+      - status
+    CreateImportRequestBody:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: The name of the CSV file to import
+          example: abc123
+      example:
+        filename: abc123
+    CartRentalOverviewRequestBody:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentalOverviewRequest'
+          example:
+          - base_rental_price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            quantity: 1
+            seller_product_reference:
+              reference: 123ab-5343
+              source: sap
+      example:
+        products:
+        - base_rental_price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          quantity: 1
+          seller_product_reference:
+            reference: 123ab-5343
+            source: sap
+      required:
+      - products
+    BaseCalculatePriceSummary:
+      type: object
+      properties:
+        available_contract_types:
+          type: array
+          items:
+            type: string
+            description: Different contracts type
+            example: rent
+            enum:
+            - pay_now
+            - rent
+          description: The available ways in which this product can be checked out via topi.
+          example:
+          - rent
+        is_supported:
+          type: boolean
+          description: Whether the product can be checked out through topi at all
+          example: true
+        pay_now:
+          $ref: '#/components/schemas/PayNowContractTerm'
+        rent:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentContractTerm'
+          description: Details of all rental options available for the product.
+          example:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+        summary:
+          type: string
+          description: A string that can be rendered in the page about whether topi is available.
+          example: Rent with topi for €24.32/month
+      example:
+        available_contract_types:
+        - rent
+        is_supported: true
+        pay_now:
+          amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        rent:
+        - duration: 12
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          monthly_amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+        summary: Rent with topi for €24.32/month
+      required:
+      - summary
+      - is_supported
+      - available_contract_types
+    CatalogImportJob:
+      type: object
+      properties:
+        categorization:
+          $ref: '#/components/schemas/CatalogImportCategorization'
+        created_at:
+          type: string
+          description: ISO 8601 timestamp when the import job was created.
+          example: '1970-01-01T00:00:01Z'
+          format: date-time
+        error:
+          type: string
+          description: Reason the import failed before row processing started (e.g. a required column is missing), populated when status is 'failed'. Row-level failures are reported via 'failed' and 'errors_url' instead.
+          example: abc123
+        errors_url:
+          type: string
+          description: Pre-signed URL to download a CSV file containing rows that failed, populated once the import has finished.
+          example: https://example.com/foo
+          format: uri
+        failed:
+          type: integer
+          description: Number of rows that failed to import.
+          example: 1
+          format: int64
+        filename:
+          type: string
+          description: The original filename of the uploaded CSV.
+          example: abc123
+        id:
+          type: string
+          description: The import job ID.
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        object_path:
+          type: string
+          description: The object path in the storage where the uploaded CSV is located.
+          example: https://example.com/foo
+          format: uri
+        processed:
+          type: integer
+          description: Total number of rows processed so far.
+          example: 1
+          format: int64
+        status:
+          type: string
+          description: 'Current status of the import job.
+
+
+            - pending: job created, waiting for the seller to upload the CSV.
+
+            - queued: CSV uploaded, header validated, waiting for a worker.
+
+            - running: worker is reading rows in chunks and writing them to the DB.
+
+            - ingested: every row has landed in the DB; async categorisation pipeline is running.
+
+            - completed: all products have been categorised (no more ''to_be_categorized'').
+
+            - failed: job hit an unrecoverable error. See the ''error'' field.
+
+            - cancelled: seller cancelled the job via DELETE /imports/:id.'
+          example: queued
+          enum:
+          - pending
+          - queued
+          - running
+          - ingested
+          - completed
+          - failed
+          - cancelled
+        succeeded:
+          type: integer
+          description: Number of rows successfully imported.
+          example: 1
+          format: int64
+        updated_at:
+          type: string
+          description: ISO 8601 timestamp when the import job was last updated.
+          example: '1970-01-01T00:00:01Z'
+          format: date-time
+      example:
+        categorization:
+          done: false
+          pending: 1
+          supported: 1
+          to_be_reviewed: 1
+          total: 1
+          unsupported: 1
+        created_at: '1970-01-01T00:00:01Z'
+        error: abc123
+        errors_url: https://example.com/foo
+        failed: 1
+        filename: abc123
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        object_path: https://example.com/foo
+        processed: 1
+        status: queued
+        succeeded: 1
+        updated_at: '1970-01-01T00:00:01Z'
+      required:
+      - id
+      - status
+      - filename
+      - object_path
+      - processed
+      - succeeded
+      - failed
+      - created_at
+      - updated_at
+    SellerProductReference:
+      type: object
+      properties:
+        reference:
+          type: string
+          description: The ID related with the source. This value should be unique for that source.
+          example: 123ab-5343
+          pattern: '[a-zA-Z0-9._-]'
+          minLength: 1
+        source:
+          type: string
+          description: The seller internal source name for this reference type.
+          example: sap
+          minLength: 1
+      example:
+        reference: 123ab-5343
+        source: sap
+      required:
+      - source
+      - reference
+    PayNowContractTerm:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/MoneyAmountWithRequiredTax'
+        id:
+          type: string
+          description: The internal Id for the contract term
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+      example:
+        amount:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+      required:
+      - amount
+    CartRentalOverviewResult:
+      type: object
+      properties:
+        can_checkout:
+          type: boolean
+          description: Indicates whether the entire collection of products can be checked out with topi or not. If there is an unsupported product, then this will be false
+          example: false
+        currency:
+          type: string
+          description: 'Currency code, see ISO 4127 (https://www.iso.org/iso-4217-currency-codes.html) (supported: EUR, GBP, USD)'
+          example: EUR
+        product_prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartProductRentalOverview'
+          example:
+          - available_rental_terms:
+            - duration: 12
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              monthly_amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+            can_checkout: false
+            currency: EUR
+            has_rental_terms: false
+            quantity: 1
+            seller_product_reference:
+              reference: 123ab-5343
+              source: sap
+            summary: Rent with topi from €23.45/month
+            total_rental_amount: 1
+        total_rental_amount:
+          type: integer
+          description: Sum of all recommended net rental amounts. Only present when all supplied products have rental terms.
+          example: 1
+          format: int64
+        total_rental_summary:
+          type: string
+          description: A string representing the minimum total rental amount for the entire topi basket, which can be directly rendered on the cart page.
+          example: Rent with topi from €123.45/month
+      example:
+        can_checkout: false
+        currency: EUR
+        product_prices:
+        - available_rental_terms:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+          can_checkout: false
+          currency: EUR
+          has_rental_terms: false
+          quantity: 1
+          seller_product_reference:
+            reference: 123ab-5343
+            source: sap
+          summary: Rent with topi from €23.45/month
+          total_rental_amount: 1
+        total_rental_amount: 1
+        total_rental_summary: Rent with topi from €123.45/month
+    ContractTermsSummary:
+      type: object
+      properties:
+        can_pay_now:
+          type: boolean
+          description: Indicates whether pay now contract term option is available.
+          example: false
+        can_rent:
+          type: boolean
+          description: Indicates whether rent contract term option is available.
+          example: false
+        rent:
+          $ref: '#/components/schemas/ProductRentContract'
+      example:
+        can_pay_now: false
+        can_rent: false
+        rent:
+          duration: 1
+      required:
+      - can_pay_now
+      - can_rent
+    Error:
+      type: object
+      properties:
+        fault:
+          type: boolean
+          description: Is the error a server-side fault?
+          example: false
+        id:
+          type: string
+          description: ID is a unique identifier for this particular occurrence of the problem.
+          example: 123abc
+        message:
+          type: string
+          description: Message is a human-readable explanation specific to this occurrence of the problem.
+          example: parameter 'p' must be an integer
+        name:
+          type: string
+          description: Name is the name of this class of errors.
+          example: bad_request
+        temporary:
+          type: boolean
+          description: Is the error temporary?
+          example: false
+        timeout:
+          type: boolean
+          description: Is the error a timeout?
+          example: false
+      example:
+        fault: false
+        id: 123abc
+        message: parameter 'p' must be an integer
+        name: bad_request
+        temporary: false
+        timeout: false
+      required:
+      - name
+      - id
+      - message
+      - temporary
+      - timeout
+      - fault
+    ProductImage:
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL to the hosted image.
+          example: https://example.com/foo
+          format: uri
+      example:
+        url: https://example.com/foo
+    CalculatePriceSummary:
+      type: object
+      properties:
+        available_contract_types:
+          type: array
+          items:
+            type: string
+            description: Different contracts type
+            example: rent
+            enum:
+            - pay_now
+            - rent
+          description: The available ways in which this product can be checked out via topi.
+          example:
+          - rent
+        is_supported:
+          type: boolean
+          description: Whether the product can be checked out through topi at all
+          example: true
+        pay_now:
+          $ref: '#/components/schemas/PayNowContractTerm'
+        rent:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentContractTerm'
+          description: Details of all rental options available for the product.
+          example:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+        sublines:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseCalculatePriceSummary'
+          description: "Pricing summaries for each service item bundled with this main product.\n\t\tSublines provide detailed pricing breakdown for individual services within a bundle.\n\t\t\n\t\tBusiness Rules:\n\t\t- Each subline summary contains complete pricing information for a service component\n\t\t- Sublines inherit contract terms and quantities from the parent product\n\t\t- Pricing calculations include both rental and purchase options where applicable\n\t\t- Sublines maintain separate pricing while contributing to bundle totals\n\t\t- Service-category validation ensures only appropriate products are included\n\t\t\n\t\tExample: Pricing summary for a smartphone bundle showing individual costs for screen protection service, and data migration service"
+          example:
+          - available_contract_types:
+            - rent
+            is_supported: true
+            pay_now:
+              amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            rent:
+            - duration: 12
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              monthly_amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+            summary: Rent with topi for €24.32/month
+        summary:
+          type: string
+          description: A string that can be rendered in the page about whether topi is available.
+          example: Rent with topi for €24.32/month
+      example:
+        available_contract_types:
+        - rent
+        is_supported: true
+        pay_now:
+          amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        rent:
+        - duration: 12
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          monthly_amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+        sublines:
+        - available_contract_types:
+          - rent
+          is_supported: true
+          pay_now:
+            amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          rent:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+          summary: Rent with topi for €24.32/month
+        summary: Rent with topi for €24.32/month
+      required:
+      - summary
+      - is_supported
+      - available_contract_types
+    CalculatePricingRequestBody:
+      type: object
+      properties:
+        pricing_request:
+          $ref: '#/components/schemas/PricingRequest'
+      example:
+        pricing_request:
+          base_rental_price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          seller_product_reference:
+            reference: 123ab-5343
+            source: sap
+      required:
+      - pricing_request
+    RentalOverviewRequest:
+      type: object
+      properties:
+        base_rental_price:
+          $ref: '#/components/schemas/MoneyAmountWithOptionalTax'
+        price:
+          $ref: '#/components/schemas/MoneyAmountWithOptionalTax'
+        quantity:
+          type: integer
+          description: Quantity of this product.
+          example: 1
+          format: int64
+        seller_product_reference:
+          $ref: '#/components/schemas/SellerProductReference'
+      example:
+        base_rental_price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+        price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+        quantity: 1
+        seller_product_reference:
+          reference: 123ab-5343
+          source: sap
+      required:
+      - quantity
+      - seller_product_reference
+    CalculateBasketPricingResponseBody:
+      type: object
+      properties:
+        basket_total_pay_now:
+          $ref: '#/components/schemas/MoneyAmountWithRequiredTax'
+        basket_total_rent:
+          $ref: '#/components/schemas/MoneyAmountWithRequiredTax'
+        summaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketPriceSummary'
+          description: Array of price summaries for each product in the basket
+          example:
+          - available_contract_types:
+            - rent
+            default_tenure: 1
+            identifier: abc123
+            is_supported: true
+            pay_now:
+              amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            pay_now_excluding_sublines:
+              amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            rent:
+            - duration: 12
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              monthly_amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+            rent_excluding_sublines:
+            - duration: 12
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              monthly_amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+            sublines:
+            - available_contract_types:
+              - rent
+              default_tenure: 1
+              identifier: abc123
+              is_supported: true
+              pay_now:
+                amount:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              rent:
+              - duration: 12
+                id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                monthly_amount:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+              summary: Rent with topi for €24.32/month
+              total_pay_now:
+                amount:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+                id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              total_rent:
+              - duration: 12
+                id: 739b63c2-9e58-4964-b38d-4ebb424de242
+                monthly_amount:
+                  currency: EUR
+                  gross: 119000
+                  net: 100000
+                  tax_rate: 1900
+            summary: Rent with topi for €24.32/month
+            total_pay_now:
+              amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            total_rent:
+            - duration: 12
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              monthly_amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+      example:
+        basket_total_pay_now:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+        basket_total_rent:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+        summaries:
+        - available_contract_types:
+          - rent
+          default_tenure: 1
+          identifier: abc123
+          is_supported: true
+          pay_now:
+            amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          pay_now_excluding_sublines:
+            amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          rent:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+          rent_excluding_sublines:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+          sublines:
+          - available_contract_types:
+            - rent
+            default_tenure: 1
+            identifier: abc123
+            is_supported: true
+            pay_now:
+              amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            rent:
+            - duration: 12
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              monthly_amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+            summary: Rent with topi for €24.32/month
+            total_pay_now:
+              amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            total_rent:
+            - duration: 12
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              monthly_amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+          summary: Rent with topi for €24.32/month
+          total_pay_now:
+            amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          total_rent:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+    ProductSummary:
+      type: object
+      properties:
+        available_contract_terms:
+          $ref: '#/components/schemas/ContractTermsSummary'
+        id:
+          type: string
+          description: topi product's ID.
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        is_supported:
+          type: boolean
+          description: Indicates whether the product is supported to be in a topi basket.
+          example: false
+        seller_product_reference:
+          $ref: '#/components/schemas/SellerProductReference'
+      example:
+        available_contract_terms:
+          can_pay_now: false
+          can_rent: false
+          rent:
+            duration: 1
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        is_supported: false
+        seller_product_reference:
+          reference: 123ab-5343
+          source: sap
+      required:
+      - seller_product_reference
+      - id
+      - is_supported
+      - available_contract_terms
+    ExtraProductDetails:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Name of the property.
+          example: abc123
+        value:
+          type: string
+          example: abc123
+      example:
+        property: memory
+        value: 16GB DDR5
+      required:
+      - property
+      - value
+    ProductsSummary:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSummary'
+          description: Array of product summaries, detailing each product's specifications and available contract terms.
+          example:
+          - available_contract_terms:
+              can_pay_now: false
+              can_rent: false
+              rent:
+                duration: 1
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            is_supported: false
+            seller_product_reference:
+              reference: 123ab-5343
+              source: sap
+      example:
+        products:
+        - available_contract_terms:
+            can_pay_now: false
+            can_rent: false
+            rent:
+              duration: 1
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          is_supported: false
+          seller_product_reference:
+            reference: 123ab-5343
+            source: sap
+      required:
+      - products
+    SearchProductResult:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Whether or not the product has been archived by the seller.
+          example: false
+        available_contract_terms:
+          $ref: '#/components/schemas/ContractTermsSummary'
+        base_rental_price:
+          $ref: '#/components/schemas/MoneyAmount'
+        description:
+          type: string
+          description: Detailed description of the product.
+          example: abc123
+        ean:
+          type: string
+          description: The EAN code of the product.
+          example: abc123
+        list_price:
+          $ref: '#/components/schemas/MoneyAmount'
+        manufacturer:
+          type: string
+          description: The manufacturer of the product.
+          example: abc123
+        mpn:
+          type: string
+          description: The MPN code of the product.
+          example: abc123
+        origin:
+          type: string
+          description: The origin of the product, 'manual','automatic' or 'central_catalog'.
+          example: abc123
+        pretty_id:
+          type: string
+          description: The pretty id/reference that the seller filled. Can be a non-unique dummy id.
+          example: abc123
+        pricing_category:
+          type: string
+          description: The pricing category of the product.
+          example: abc123
+        product_id:
+          type: string
+          description: Product ID
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        reference:
+          type: string
+          description: The product reference number that matches a search term.
+          example: abc123
+        seller_product_references:
+          type: array
+          items:
+            $ref: '#/components/schemas/SellerProductReference'
+          description: An array of the seller's unique references for this product.
+          example:
+          - reference: 123ab-5343
+            source: sap
+        subtitle:
+          type: string
+          description: Subtitle of the product.
+          example: abc123
+        title:
+          type: string
+          description: Title of the product.
+          example: abc123
+      example:
+        archived: false
+        available_contract_terms:
+          can_pay_now: false
+          can_rent: false
+          rent:
+            duration: 1
+        base_rental_price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+        description: abc123
+        ean: abc123
+        list_price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+        manufacturer: abc123
+        mpn: abc123
+        origin: abc123
+        pretty_id: abc123
+        pricing_category: abc123
+        product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        reference: abc123
+        seller_product_references:
+        - reference: 123ab-5343
+          source: sap
+        subtitle: abc123
+        title: abc123
+      required:
+      - product_id
+      - list_price
+      - title
+      - seller_product_references
+      - available_contract_terms
+      - reference
+      - origin
+      - manufacturer
+    CheckSupportedRequestBody:
+      type: object
+      properties:
+        seller_product_references:
+          type: array
+          items:
+            $ref: '#/components/schemas/SellerProductReference'
+          description: the ids for obtains the available contract terms.
+          example:
+          - reference: 123ab-5343
+            source: sap
+      example:
+        seller_product_references:
+        - reference: 123ab-5343
+          source: sap
+      required:
+      - seller_product_references
+    MoneyAmountWithRequiredTax:
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 'Currency code, see ISO 4127 (https://www.iso.org/iso-4217-currency-codes.html) (supported: EUR, GBP, USD)'
+          example: EUR
+        gross:
+          type: integer
+          description: Gross amount of money, expressed in the minor unit for the currency
+          example: 119000
+          format: int64
+        net:
+          type: integer
+          description: Net amount of money, expressed in the minor unit for the currency
+          example: 100000
+          format: int64
+        tax_rate:
+          type: integer
+          description: 'Tax rate, expressed in the the rate multiplied by 10,000. Example for 21.5%: `0.215 * 10000 = 2150`'
+          example: 1900
+          format: int64
+      example:
+        currency: EUR
+        gross: 119000
+        net: 100000
+        tax_rate: 1900
+      required:
+      - tax_rate
+      - gross
+      - net
+      - currency
+    BasketPriceSummary:
+      type: object
+      properties:
+        available_contract_types:
+          type: array
+          items:
+            type: string
+            description: Different contracts type
+            example: rent
+            enum:
+            - pay_now
+            - rent
+          description: The available ways in which this product can be checked out via topi.
+          example:
+          - rent
+        default_tenure:
+          type: integer
+          description: The default tenure for the product.
+          example: 1
+          format: int64
+        identifier:
+          type: string
+          description: unique identifier for this pricing request, used to keep track of items and prices in FE
+          example: abc123
+        is_supported:
+          type: boolean
+          description: Whether the product can be checked out through topi at all
+          example: true
+        pay_now:
+          $ref: '#/components/schemas/PayNowContractTerm'
+        pay_now_excluding_sublines:
+          $ref: '#/components/schemas/PayNowContractTerm'
+        rent:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentContractTerm'
+          description: Details of all rental options available for the product.
+          example:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+        rent_excluding_sublines:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentContractTerm'
+          description: The unit rental price for the item excluding sublines
+          example:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+        sublines:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseBasketPriceSummary'
+          description: "Comprehensive pricing summaries for each service item included in this product bundle.\n\t\tSublines provide detailed pricing information for all service components.\n\t\t\n\t\tBusiness Rules:\n\t\t- Contains complete pricing details for each service including rental\n\t\t- Sublines automatically inherit quantity and contract duration from parent product\n\t\t- Pricing calculations support both inclusive and exclusive subline totals\n\t\t- Each subline maintains individual pricing while contributing to overall bundle cost\n\t\t- Service validation ensures only appropriate products are included as sublines\n\t\t\n\t\tExample: Complete pricing breakdown for a laptop bundle showing detailed costs for software installation, data migration, and setup services"
+          example:
+          - available_contract_types:
+            - rent
+            default_tenure: 1
+            identifier: abc123
+            is_supported: true
+            pay_now:
+              amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            rent:
+            - duration: 12
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              monthly_amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+            summary: Rent with topi for €24.32/month
+            total_pay_now:
+              amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            total_rent:
+            - duration: 12
+              id: 739b63c2-9e58-4964-b38d-4ebb424de242
+              monthly_amount:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+        summary:
+          type: string
+          description: A string that can be rendered in the page about whether topi is available.
+          example: Rent with topi for €24.32/month
+        total_pay_now:
+          $ref: '#/components/schemas/PayNowContractTerm'
+        total_rent:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentContractTerm'
+          description: The total rent price for the item including sublines multiplied by the quantity
+          example:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+      example:
+        available_contract_types:
+        - rent
+        default_tenure: 1
+        identifier: abc123
+        is_supported: true
+        pay_now:
+          amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        pay_now_excluding_sublines:
+          amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        rent:
+        - duration: 12
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          monthly_amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+        rent_excluding_sublines:
+        - duration: 12
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          monthly_amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+        sublines:
+        - available_contract_types:
+          - rent
+          default_tenure: 1
+          identifier: abc123
+          is_supported: true
+          pay_now:
+            amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          rent:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+          summary: Rent with topi for €24.32/month
+          total_pay_now:
+            amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          total_rent:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+        summary: Rent with topi for €24.32/month
+        total_pay_now:
+          amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        total_rent:
+        - duration: 12
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          monthly_amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+      required:
+      - summary
+      - is_supported
+      - available_contract_types
+      - default_tenure
+    BaseBasketPriceSummary:
+      type: object
+      properties:
+        available_contract_types:
+          type: array
+          items:
+            type: string
+            description: Different contracts type
+            example: rent
+            enum:
+            - pay_now
+            - rent
+          description: The available ways in which this product can be checked out via topi.
+          example:
+          - rent
+        default_tenure:
+          type: integer
+          description: The default tenure for the product.
+          example: 1
+          format: int64
+        identifier:
+          type: string
+          description: unique identifier for this pricing request, used to keep track of items and prices in FE
+          example: abc123
+        is_supported:
+          type: boolean
+          description: Whether the product can be checked out through topi at all
+          example: true
+        pay_now:
+          $ref: '#/components/schemas/PayNowContractTerm'
+        rent:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentContractTerm'
+          description: Details of all rental options available for the product.
+          example:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+        summary:
+          type: string
+          description: A string that can be rendered in the page about whether topi is available.
+          example: Rent with topi for €24.32/month
+        total_pay_now:
+          $ref: '#/components/schemas/PayNowContractTerm'
+        total_rent:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentContractTerm'
+          description: The total rent price for the item including sublines multiplied by the quantity
+          example:
+          - duration: 12
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            monthly_amount:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+      example:
+        available_contract_types:
+        - rent
+        default_tenure: 1
+        identifier: abc123
+        is_supported: true
+        pay_now:
+          amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        rent:
+        - duration: 12
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          monthly_amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+        summary: Rent with topi for €24.32/month
+        total_pay_now:
+          amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        total_rent:
+        - duration: 12
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          monthly_amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+      required:
+      - summary
+      - is_supported
+      - available_contract_types
+      - default_tenure
+    ProductSellerCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the category in the seller's system
+          example: abc123
+        name:
+          type: string
+          description: The name of the category
+          example: abc123
+        parent_category_id:
+          type: string
+          description: The ID of the parent category, if it exists.
+          example: abc123
+      example:
+        id: abc123
+        name: abc123
+        parent_category_id: abc123
+      required:
+      - name
+      - id
+    PricingRequest:
+      type: object
+      properties:
+        base_rental_price:
+          $ref: '#/components/schemas/MoneyAmountWithOptionalTax'
+        price:
+          $ref: '#/components/schemas/MoneyAmountWithOptionalTax'
+        seller_product_reference:
+          $ref: '#/components/schemas/SellerProductReference'
+      example:
+        base_rental_price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+        price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+        seller_product_reference:
+          reference: 123ab-5343
+          source: sap
+      required:
+      - seller_product_reference
+    CatalogImportCategorization:
+      type: object
+      properties:
+        done:
+          type: boolean
+          description: True once total > 0 and pending == 0. Mirrors the import.status flip from `ingested` to `completed`.
+          example: false
+        pending:
+          type: integer
+          description: Products still in to_be_categorized (async pipeline hasn't reached them yet).
+          example: 1
+          format: int64
+        supported:
+          type: integer
+          description: Products successfully categorised (review_status = supported).
+          example: 1
+          format: int64
+        to_be_reviewed:
+          type: integer
+          description: Products where the categoriser was uncertain — manual review needed.
+          example: 1
+          format: int64
+        total:
+          type: integer
+          description: Total products linked to this import.
+          example: 1
+          format: int64
+        unsupported:
+          type: integer
+          description: Products explicitly marked unsupported by the categoriser.
+          example: 1
+          format: int64
+      description: 'Per-import categorisation progress.
+
+
+        Populated once products from the import are in the database (status >= ingested).
+
+        While the import is still processing CSV rows the counts will lag behind the
+
+        final totals; treat them as best-effort snapshots.
+
+
+        The pipeline runs asynchronously after ingestion: products start in ''to_be_categorized''
+
+        (counted as pending) and move to either ''supported'' (counted as supported) or
+
+        ''to_be_reviewed'' (LLM judge was uncertain — needs human review).'
+      example:
+        done: false
+        pending: 1
+        supported: 1
+        to_be_reviewed: 1
+        total: 1
+        unsupported: 1
+      required:
+      - total
+      - pending
+      - supported
+      - to_be_reviewed
+      - unsupported
+      - done
+    SummaryInfo:
+      type: object
+      properties:
+        sample_products_rejected:
+          type: array
+          items:
+            $ref: '#/components/schemas/SummaryProductRejected'
+          description: 'Deprecated: unused'
+          example:
+          - error_code: unsupported_product
+            error_description: the product type is not supported
+            seller_product_reference:
+              reference: 123ab-5343
+              source: sap
+        total_products:
+          type: integer
+          description: Total number of products processed up to the current request.
+          example: 1
+          format: int64
+        total_products_imported:
+          type: integer
+          description: Number of products successfully processed and imported.
+          example: 1
+          format: int64
+        total_products_rejected:
+          type: integer
+          description: 'Deprecated: unused'
+          example: 1
+          format: int64
+      example:
+        sample_products_rejected:
+        - error_code: unsupported_product
+          error_description: the product type is not supported
+          seller_product_reference:
+            reference: 123ab-5343
+            source: sap
+        total_products: 1
+        total_products_imported: 1
+        total_products_rejected: 1
+      required:
+      - total_products
+      - total_products_imported
+      - total_products_rejected
+      - sample_products_rejected
+    SearchAndFilterProductsPaginatedRequestBody:
+      type: object
+      properties:
+        filtering_logic:
+          type: string
+          description: The logic to use for filtering the products. Can be 'and' or 'or'.
+          example: OR
+          enum:
+          - AND
+          - OR
+        filtering_options:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilteringOption'
+          description: Filtering options for the search
+          example:
+          - operation: '>'
+            property: abc123
+            value: abc123
+      example:
+        filtering_logic: OR
+        filtering_options:
+        - operation: '>'
+          property: abc123
+          value: abc123
+    CalculateBasketPricingRequestBody:
+      type: object
+      properties:
+        pricing_requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketPricingRequest'
+          description: The pricing to request
+          example:
+          - base_rental_price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            identifier: abc123
+            price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            quantity: 1
+            seller_product_reference:
+              reference: 123ab-5343
+              source: sap
+            sublines:
+            - base_rental_price:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+              price:
+                currency: EUR
+                gross: 119000
+                net: 100000
+                tax_rate: 1900
+              seller_product_reference:
+                reference: 123ab-5343
+                source: sap
+      example:
+        pricing_requests:
+        - base_rental_price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          identifier: abc123
+          price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          quantity: 1
+          seller_product_reference:
+            reference: 123ab-5343
+            source: sap
+          sublines:
+          - base_rental_price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            seller_product_reference:
+              reference: 123ab-5343
+              source: sap
+      required:
+      - pricing_requests
+    SummaryProductRejected:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: The error code
+          example: unsupported_product
+        error_description:
+          type: string
+          description: The error description
+          example: the product type is not supported
+        seller_product_reference:
+          $ref: '#/components/schemas/SellerProductReference'
+      example:
+        error_code: unsupported_product
+        error_description: the product type is not supported
+        seller_product_reference:
+          reference: 123ab-5343
+          source: sap
+      required:
+      - error_code
+      - seller_product_reference
+    ProductRentContract:
+      type: object
+      properties:
+        duration:
+          type: integer
+          description: Duration of the rental contract in months.
+          example: 1
+          format: int64
+      example:
+        duration: 1
+      required:
+      - duration
+    ProductRentalPricingDetails:
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 'Currency code, see ISO 4127 (https://www.iso.org/iso-4217-currency-codes.html) (supported: EUR, GBP, USD)'
+          example: EUR
+        has_rental_terms:
+          type: boolean
+          description: Does the product have rental terms.
+          example: false
+        monthly_rental_amount:
+          type: integer
+          description: The Net monthly rental amount, in cents. This amount is exclusive of tax.
+          example: 100000
+          format: int64
+        monthly_rental_terms:
+          $ref: '#/components/schemas/RentContractTerm'
+        seller_product_reference:
+          $ref: '#/components/schemas/SellerProductReference'
+        summary:
+          type: string
+          description: A string that can be directly rendered in the page about whether topi is available.
+          example: Rent with topi from €23.45/month
+      example:
+        currency: EUR
+        has_rental_terms: false
+        monthly_rental_amount: 100000
+        monthly_rental_terms:
+          duration: 12
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          monthly_amount:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+        seller_product_reference:
+          reference: 123ab-5343
+          source: sap
+        summary: Rent with topi from €23.45/month
+      required:
+      - seller_product_reference
+      - has_rental_terms
+    BasketPricingRequest:
+      type: object
+      properties:
+        base_rental_price:
+          $ref: '#/components/schemas/MoneyAmountWithOptionalTax'
+        identifier:
+          type: string
+          description: unique identifier for this pricing request, used to keep track of items and prices in FE
+          example: abc123
+        price:
+          $ref: '#/components/schemas/MoneyAmountWithOptionalTax'
+        quantity:
+          type: integer
+          description: Quantity of this product.
+          example: 1
+          format: int64
+        seller_product_reference:
+          $ref: '#/components/schemas/SellerProductReference'
+        sublines:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingRequest'
+          description: "Service products to be priced alongside this main product in the pricing calculation.\n\t\tSublines enable sellers to request pricing for bundled service offerings, allowing for comprehensive cost calculations that include both the main product and its associated services.\n\t\t\n\t\tBusiness Rules:\n\t\t- Sublines are only valid for hardware and accessory main products\n\t\t- Each subline must reference a service-category product\n\t\t- Sublines inherit quantities from the parent product\n\t\t- Pricing engine calculates both individual subline costs and combined bundle totals\n\t\t- Rental durations and contract terms are synchronized across main line and sublines\n\t\t\n\t\tExample: Requesting pricing for a tablet (main product) with device setup (sublines)"
+          example:
+          - base_rental_price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+              tax_rate: 1900
+            seller_product_reference:
+              reference: 123ab-5343
+              source: sap
+      example:
+        base_rental_price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+        identifier: abc123
+        price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+          tax_rate: 1900
+        quantity: 1
+        seller_product_reference:
+          reference: 123ab-5343
+          source: sap
+        sublines:
+        - base_rental_price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+            tax_rate: 1900
+          seller_product_reference:
+            reference: 123ab-5343
+            source: sap
+      required:
+      - quantity
+      - seller_product_reference
+    MoneyAmountWithOptionalTax:
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 'Currency code, see ISO 4127 (https://www.iso.org/iso-4217-currency-codes.html) (supported: EUR, GBP, USD)'
+          example: EUR
+        gross:
+          type: integer
+          description: Gross amount of money, expressed in the minor unit for the currency
+          example: 119000
+          format: int64
+        net:
+          type: integer
+          description: Net amount of money, expressed in the minor unit for the currency
+          example: 100000
+          format: int64
+        tax_rate:
+          type: integer
+          description: 'Tax rate, expressed in the the rate multiplied by 10,000. Example for 21.5%: `0.215 * 10000 = 2150`'
+          example: 1900
+          format: int64
+      example:
+        currency: EUR
+        gross: 119000
+        net: 100000
+        tax_rate: 1900
+      required:
+      - gross
+      - net
+      - currency
+    ProductStandardIdentifier:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The product identifier value
+          example: 123ab-4567
+        identifier_type:
+          type: string
+          description: The kind of identifier standard
+          example: EAN
+      example:
+        id: 123ab-4567
+        identifier_type: EAN
+  securitySchemes:
+    OAuth2Seller_header_Authorization:
+      type: oauth2
+      description: 'Read our [Integration Guide](https://docs.topi.eu/docs/integration-guide/authentication) for detailed instructions on how to authenticate.
+
+        '
+      flows:
+        clientCredentials:
+          tokenUrl: https://identity.topi.eu/oauth2/token
+          refreshUrl: https://identity.topi.eu/oauth2/token
+          scopes:
+            seller-branding:read: read seller branding config
+            seller-catalog:edit: add product to catalog
+            seller-catalog:read: view and search catalog
+            seller-metrics:read: read metrics urls
+            seller-offer:edit: edit offer details
+            seller-offer:read: read offer details
+            seller-order:edit: edit order details
+            seller-order:read: read order details
+            seller-scenario-simulations:run: run scenario simulations
+            seller-shipment:edit: edit shipment details
+            seller-shipping-method:edit: edit seller shipping method details
+            seller-shipping-method:read: read seller shipping method details
+            user-info:read: read user info
