@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/topi-seller-api-openapi-original.yaml
+note: >-
+  Packaged Agent Skills for the topi Seller API, generated from the OpenAPI and
+  the captured conventions/errors/auth artifacts. Every operationId referenced is
+  verbatim from openapi/topi-seller-api-openapi-original.yaml. No provider-published
+  AGENTS.md/skills were found.
+skills:
+  - file: topi-sync-catalog.md
+    name: Sync a product catalog to topi
+    api: openapi/topi-seller-api-openapi-original.yaml
+    operations: [catalog#checkSupported, catalog#importCatalog, catalog#createImport, catalog#getImport, catalog#listRecommendedRentalPrices]
+  - file: topi-create-rental-offer.md
+    name: Create and manage a rental offer
+    api: openapi/topi-seller-api-openapi-original.yaml
+    operations: [catalog#cartRentalOverview, offer#validate, offer#create, offer#show, offer#void]
+  - file: topi-fulfill-order.md
+    name: Accept and fulfill a topi order
+    api: openapi/topi-seller-api-openapi-original.yaml
+    operations: [order#show, order#acceptOrder, order#acknowledgeOrder, shippingMethod#getShippingMethods, shipment#create]

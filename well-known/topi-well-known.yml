@@ -1,0 +1,23 @@
+generated: '2026-07-21'
+method: searched
+source: live probe of /.well-known/* across topi hosts
+note: >-
+  No /.well-known/ discovery documents are published on any topi host. All
+  probed paths returned HTTP 404. Recorded as valid negative data; no WellKnown
+  pointer is emitted since nothing was found.
+hosts_probed:
+  - https://seller-api.topi.eu
+  - https://identity.topi.eu
+  - https://www.topi.eu
+  - https://developer.topi.eu
+documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404

@@ -1,0 +1,88 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/topi-seller-api-openapi-original.yaml
+note: >-
+  Entity-relationship graph for the topi Seller API, derived from OpenAPI schema
+  $ref links and id-reference fields. topi models a hardware-as-a-service rental
+  flow: a seller imports Products into a Catalog, creates an Offer (rental
+  quote), which — once accepted by the buyer — becomes an Order that is
+  fulfilled via Shipments using Shipping Methods.
+entities:
+  - name: Product
+    schemas: [AddProduct, CustomProduct, SearchProductResult, ProductDetails, ProductSummary]
+    key_fields: [reference, product_standard_identifiers, seller_product_type]
+    description: A hardware/software/service item in the seller catalog, priced for rental.
+  - name: CatalogImportJob
+    schemas: [CatalogImportJob, CreateImportResult, ImportResult]
+    description: An asynchronous CSV import job that loads products into the catalog.
+  - name: Offer
+    schemas: [OfferResult, CreateOfferPayload, OfferWithReferenceResult, OfferListResult]
+    key_fields: [id, seller_offer_reference, status, checkout_redirect_url]
+    description: A rental quote presented to a buyer; transitions accepted/declined/voided/pending_review/expired.
+  - name: OfferLine
+    schemas: [OfferLine, OfferLineResult, OfferLinePayload]
+    description: A line item within an offer (a product + contract terms).
+  - name: ContractTerms
+    schemas: [ContractTerms, ContractTerm, RentTenure, PayNow]
+    description: The rental/pay-now terms and tenures attached to an offer line.
+  - name: Order
+    schemas: [OrderResult, FullOrderResult, OrderSummary, OrdersSummaryPaginated]
+    key_fields: [id, status, metadata]
+    description: A confirmed rental created from an accepted offer; seller accepts/acknowledges/rejects it.
+  - name: OrderLineItem
+    schemas: [OrderLineItem, BaseOrderLineItem]
+    description: A line item within an order.
+  - name: Shipment
+    schemas: [Shipment, ShippingInfo]
+    key_fields: [serial numbers by asset]
+    description: A fulfilment shipment against an order, carrying serial numbers per asset.
+  - name: ShippingMethod
+    schemas: [ShippingMethodResult, CreateShippingMethodPayload, PaginatedShippingMethodResult]
+    description: A seller-configured shipping method.
+  - name: Buyer
+    schemas: [CustomerInfo, CompanyInfo, Address, PostalAddress, ShippingAddress]
+    description: The business customer renting the hardware.
+  - name: Seller
+    schemas: [SellerInfo, SellerPayload, SalesAgent, BrandingConfiguration]
+    description: The merchant/retailer using topi, including sales agents and branding config.
+relationships:
+  - from: Product
+    to: CatalogImportJob
+    type: belongs_to
+    via: import job
+  - from: Offer
+    to: OfferLine
+    type: has_many
+    via: lines
+  - from: OfferLine
+    to: Product
+    type: belongs_to
+    via: product reference
+  - from: OfferLine
+    to: ContractTerms
+    type: has_one
+    via: contract_terms
+  - from: Offer
+    to: Seller
+    type: belongs_to
+    via: seller
+  - from: Offer
+    to: Buyer
+    type: has_one
+    via: customer_info
+  - from: Order
+    to: Offer
+    type: belongs_to
+    via: accepted offer
+  - from: Order
+    to: OrderLineItem
+    type: has_many
+    via: line_items
+  - from: Shipment
+    to: Order
+    type: belongs_to
+    via: order id
+  - from: Order
+    to: ShippingMethod
+    type: has_one
+    via: shipping method

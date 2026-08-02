@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/topi-seller-api-openapi-original.yaml
+note: >-
+  Cross-cutting standards conformance for the topi Seller API, derived from the
+  OpenAPI. topi publishes no formal compliance-certification program (SOC 2 / ISO
+  27001 / PCI) on a discoverable trust page, so NO `Compliance` pointer is
+  emitted — only `Conformance`.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: securityScheme type oauth2 with clientCredentials flow (identity.topi.eu/oauth2/token)
+  - id: oauth2-client-credentials
+    conforms: true
+    evidence: machine-to-machine client_credentials grant with 13 seller scopes
+  - id: oidc
+    conforms: false
+    evidence: no openIdConnect scheme and no /.well-known/openid-configuration (404)
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors use Goa media type application/vnd.goa.error, not application/problem+json
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: deprecations signalled via OpenAPI deprecated flag only, no Sunset header
+  - id: pagination
+    conforms: true
+    evidence: offset (page/limit) and cursor (CursorPageMetadata) pagination on list endpoints
+  - id: idempotency
+    conforms: false
+    evidence: no idempotency-key header documented or present in spec
+  - id: localization-rfc2616
+    conforms: true
+    evidence: Accept-Language header honoured for localized response strings
+  - id: openapi-3.0
+    conforms: true
+    evidence: OpenAPI 3.0.3 document published at developer.topi.eu/redocusaurus/plugin-redoc-0.yaml

@@ -1,0 +1,91 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/topi-seller-api-openapi-original.yaml
+docs: https://developer.topi.eu/docs/integration-guide/syncing-your-catalog
+schemes:
+- name: OAuth2Seller_header_Authorization
+  source: openapi/topi-seller-api-openapi-original.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://identity.topi.eu/oauth2/token
+  description: Read our [Integration Guide](https://developer.topi.eu/docs/get-started/introduction)
+    for detailed instructions on how to authenticate.
+scopes:
+- scope: seller-branding:read
+  description: read seller branding config
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-catalog:edit
+  description: add product to catalog
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-catalog:read
+  description: view and search catalog
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-metrics:read
+  description: read metrics urls
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-offer:edit
+  description: edit offer details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-offer:read
+  description: read offer details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-order:edit
+  description: edit order details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-order:read
+  description: read order details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-scenario-simulations:run
+  description: run scenario simulations
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-shipment:edit
+  description: edit shipment details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-shipping-method:edit
+  description: edit seller shipping method details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: seller-shipping-method:read
+  description: read seller shipping method details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml
+- scope: user-info:read
+  description: read user info
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml

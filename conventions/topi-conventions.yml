@@ -1,0 +1,60 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://developer.topi.eu/api and https://developer.topi.eu/docs, plus derived
+  from openapi/topi-seller-api-openapi-original.yaml
+note: >-
+  Cross-cutting request/response semantics for the topi Seller API. Searched the
+  developer portal and derived from the OpenAPI. NOTE: no idempotency-key
+  mechanism is documented or present in the spec, so no Idempotency pointer is
+  emitted.
+authentication:
+  style: oauth2
+  flow: client_credentials
+  token_url: https://identity.topi.eu/oauth2/token
+  header: 'Authorization: Bearer $ACCESS_TOKEN'
+  see: authentication/topi-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No Idempotency-Key header or idempotent-retry contract is documented by topi
+    or declared in the OpenAPI. Retries of write operations are not guaranteed
+    safe; where an operation is naturally idempotent (e.g. offer#void,
+    order#accept) it is by resource state, not by an idempotency key.
+pagination:
+  styles:
+    - style: offset
+      params: [page, limit]
+      response_fields: [page, limit, rows]
+      schema: ProductPaginationResult
+      used_by: [catalog#searchProductsPaginated, catalog#searchAndFilterProductsPaginated]
+    - style: cursor
+      metadata_schema: CursorPageMetadata
+      payload_schema: CursorPagePayload
+      used_by: [offer#listOffersPaginated, order#getBySellerPaginated]
+  note: Prefer the *_paginated / *Paginated endpoints; the non-paginated list endpoints are deprecated.
+localization:
+  header: Accept-Language
+  spec: RFC-2616
+  note: Strings in responses are localized when Accept-Language is provided.
+versioning:
+  scheme: uri-path
+  current: v1
+  note: All paths are prefixed /v1.
+error_envelope:
+  media_type: application/vnd.goa.error
+  schema: Error
+  see: errors/topi-problem-types.yml
+rate_limiting:
+  signal: 'HTTP 429 (too_many_requests)'
+  documented_headers: none
+  note: A 429 status is defined on operations, but no rate-limit response headers are documented.
+money:
+  representation: >-
+    Monetary amounts are integer minor units with an explicit currency (see
+    MoneyAmount / MoneyValue: net, gross, currency). Example EUR gross 119000 = 1190.00 EUR.
+cross_links:
+  errors: errors/topi-problem-types.yml
+  authentication: authentication/topi-authentication.yml
+  scopes: scopes/topi-scopes.yml
+  lifecycle: lifecycle/topi-lifecycle.yml

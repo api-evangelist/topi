@@ -1,7 +1,26 @@
 aid: topi
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/topi.png
 name: Topi
-description: 'Topi is a company surfaced as a portfolio company of creandum and added to the API Evangelist
-  network as a stub for enrichment. Sector: fintech. This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  topi is a European hardware-as-a-service (HaaS) fintech that lets B2B sellers
+  and retailers offer tech devices, IT hardware, and equipment as flexible
+  monthly rental subscriptions instead of one-off purchases, across eCommerce,
+  telesales, and point-of-sale channels. Merchants embed topi rentals into their
+  checkout through the OAuth2-secured topi Seller API (catalog, offers, orders,
+  shipments, and shipping methods) and the topi Elements embeddable web
+  components, with a dedicated sandbox for end-to-end testing. Backed by Creandum.
 url: https://raw.githubusercontent.com/api-evangelist/topi/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,16 +30,166 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Fintech
-apis: []
+- Hardware as a Service
+- Rental
+- Embedded Finance
+- B2B Payments
+- Financing
+- Checkout
+- Germany
+- API
+apis:
+- aid: topi:topi-catalog-api
+  name: Topi catalog API
+  description: Topi catalog for sellers
+  humanURL: https://developer.topi.eu/api
+  baseURL: https://seller-api.topi.eu
+  tags:
+  - catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/topi-catalog-api-openapi.yml
+- aid: topi:topi-offer-api
+  name: Topi offer API
+  description: >-
+    Provides operations to handle offers for end-customers.
+
+
+    ## Webhooks
+
+
+    ### OfferUpdates
+
+
+    We will ping the URL provided whenever an offer has changed its status to: `"accepted"`, `"declined"`,
+    `"voided"`, `"pending_review"` or `"expired"`.
+
+
+    **Payload**:
+
+
+    -  same as [show offer](#tag/offer/operation/offer#show)
+        - `id`: `string`
+        - `created_at`: `string <date-time>`
+        - `status`: `string enum: "accepted" | "declined" | "pending_review" | "voided" | "expired"`
+        - `checkout_redirect_url`: `string <uri>`
+  humanURL: https://developer.topi.eu/api
+  baseURL: https://seller-api.topi.eu
+  tags:
+  - offer
+  properties:
+  - type: OpenAPI
+    url: openapi/topi-offer-api-openapi.yml
+- aid: topi:topi-order-api
+  name: Topi order API
+  description: "Provides operations to handle orders for end-customers.\n\n## Webhooks\n\nWe will ping\
+    \ the URL provided whenever an order has changed its status to: `\"created\"`, `\"completed\"`, or\
+    \ `\"canceled\"`.\n\n**Payload**:\n\n- Available fields:\n    - `id`: `string`\n    - `assets`: `array`\
+    \ of `Asset`\n    - `metadata`: `object`\n    - `offer_id`: `string`\n    - `seller_offer_reference`:\
+    \ `string`\n    - `status`: `string enum`\n    - `shipping_address`: `ShippingAddress` \n    \n  \
+    \  `ShippingAddress` contains this fields:\n    - `name`: `string`\n    - `line1`: `string`\n    -\
+    \ `line2`: `string`\n    - `postal_code`: `string`\n    - `city`: `string`\n    - `region`: `string`\n\
+    \    - `country_code`: `string`"
+  humanURL: https://developer.topi.eu/api
+  baseURL: https://seller-api.topi.eu
+  tags:
+  - order
+  properties:
+  - type: OpenAPI
+    url: openapi/topi-order-api-openapi.yml
+- aid: topi:topi-shipment-api
+  name: Topi shipment API
+  description: >-
+    #### Assets without serial numbers
+
+
+    Some assets might not have a serial number (e.g. accessories). In order to send them with the shipment,
+    explicitly pass an empty string `""` as the `serial_number` for this asset.
+
+
+    > Note, that every asset, that has a **rent option**, requires a serial number even if it has been
+    directly purchased. The request will fail with an according message if such a serial number is missing.
+
+
+    > Also note, that every item of an order has to be shipped for the order to be completed. This can
+    be done in multiple shipments.
+  humanURL: https://developer.topi.eu/api
+  baseURL: https://seller-api.topi.eu
+  tags:
+  - shipment
+  properties:
+  - type: OpenAPI
+    url: openapi/topi-shipment-api-openapi.yml
+- aid: topi:topi-shippingmethod-api
+  name: Topi shippingMethod API
+  description: Provides operations to handle shipping-related tasks.
+  humanURL: https://developer.topi.eu/api
+  baseURL: https://seller-api.topi.eu
+  tags:
+  - shippingMethod
+  properties:
+  - type: OpenAPI
+    url: openapi/topi-shippingmethod-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DeveloperPortal
+  url: https://developer.topi.eu/
+- type: Documentation
+  url: https://developer.topi.eu/docs/get-started/introduction
+- type: APIReference
+  url: https://developer.topi.eu/api
+- type: GettingStarted
+  url: https://developer.topi.eu/docs/get-started/introduction
+- type: Support
+  url: https://www.topi.eu/en/faqs
+- type: PrivacyPolicy
+  url: https://www.topi.eu/en/privacy-policy
+- type: OpenAPI
+  url: openapi/topi-seller-api-openapi-original.yaml
+- type: Authentication
+  url: authentication/topi-authentication.yml
+- type: OAuthScopes
+  url: scopes/topi-scopes.yml
+- type: AgenticAccess
+  url: agentic-access/topi-agentic-access.yml
+- type: DomainSecurity
+  url: security/topi-domain-security.yml
+- type: ErrorCatalog
+  url: errors/topi-problem-types.yml
+- type: Conventions
+  url: conventions/topi-conventions.yml
+- type: Lifecycle
+  url: lifecycle/topi-lifecycle.yml
+- type: Conformance
+  url: conformance/topi-conformance.yml
+- type: DataModel
+  url: data-model/topi-data-model.yml
+- type: Sandbox
+  url: sandbox/topi-sandbox.yml
+- type: Components
+  url: components/topi-components.yml
+- type: Webhooks
+  url: asyncapi/topi-webhooks.yml
+- type: MCPServer
+  url: mcp/topi-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/topi-llms.txt
+- type: Overlay
+  url: overlays/topi-seller-api-overlay.yaml
 - type: Website
   url: https://www.topi.eu/en/
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v1

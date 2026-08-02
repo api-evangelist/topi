@@ -1,0 +1,58 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/topi-seller-api-openapi-original.yaml
+format: goa
+note: >-
+  topi returns errors using the Goa framework error media type
+  `application/vnd.goa.error` (NOT RFC 9457 problem+json). The error envelope is
+  the `Error` schema. Validation failures (422) use `ValidationError` /
+  `ValidationErrorList`. Derived from the OpenAPI response objects; titles
+  reflect the Goa `name` class of error.
+error_envelope:
+  media_type: application/vnd.goa.error
+  schema: Error
+  fields:
+    - name: name          # class of error, e.g. bad_request
+    - name: id            # unique id for this occurrence
+    - name: message       # human-readable explanation
+    - name: temporary     # bool: is the error temporary
+    - name: timeout       # bool: is the error a timeout
+    - name: fault         # bool: is it a server-side fault
+  validation_envelope:
+    schema: ValidationErrorList
+    item_schema: ValidationError
+problems:
+  - status: 400
+    name: bad_request
+    title: Bad request
+    description: The request was malformed or a parameter was invalid.
+  - status: 401
+    name: unauthorized
+    title: Unauthorized
+    description: Missing or invalid OAuth2 bearer access token.
+  - status: 403
+    name: forbidden
+    title: Forbidden
+    description: The token lacks the scope required for this operation.
+  - status: 404
+    name: not_found
+    title: Resource not found
+    description: The requested offer, order, product, or import job does not exist.
+  - status: 413
+    name: payload_too_large
+    title: Payload too large
+    description: The request body exceeds the allowed size (e.g. catalog import limits).
+  - status: 422
+    name: unprocessable_entity
+    title: Validation failed
+    description: >-
+      The request was well-formed but failed business validation; details are
+      returned as a ValidationErrorList.
+  - status: 429
+    name: too_many_requests
+    title: Too many requests
+    description: Rate limit exceeded; retry after backing off.
+  - status: 503
+    name: service_unavailable
+    title: Service unavailable
+    description: Temporary upstream/service outage; the error is typically marked temporary.

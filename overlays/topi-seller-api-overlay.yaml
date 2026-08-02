@@ -1,0 +1,29 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for topi Seller API
+  version: 1.0.0
+extends: openapi/topi-seller-api-openapi-original.yaml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-rating: 4
+      x-apievangelist-notes: >-
+        Rich OAuth2 client-credentials API (31 ops, 13 scopes) for
+        hardware-as-a-service rental. Errors use the Goa media type
+        application/vnd.goa.error rather than RFC 9457 problem+json; no
+        idempotency-key contract; deprecations are flag-only (no Sunset header).
+      x-topi-error-media-type: application/vnd.goa.error
+      x-topi-elements: web-components (x-topi-checkout-button, x-topi-rental-summary-label, x-topi-rental-overview)
+  - target: $.info
+    update:
+      x-artifact-index:
+        authentication: authentication/topi-authentication.yml
+        scopes: scopes/topi-scopes.yml
+        errors: errors/topi-problem-types.yml
+        conventions: conventions/topi-conventions.yml
+        lifecycle: lifecycle/topi-lifecycle.yml
+        data-model: data-model/topi-data-model.yml
+        sandbox: sandbox/topi-sandbox.yml
+        webhooks: asyncapi/topi-webhooks.yml
+        components: components/topi-components.yml
+        mcp: mcp/topi-mcp.yml

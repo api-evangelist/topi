@@ -1,0 +1,25 @@
+generated: '2026-07-21'
+method: searched
+source: https://developer.topi.eu/docs/topi-elements/what-is-topi-elements
+note: >-
+  topi Elements is topi's first-party JavaScript library of custom HTML elements
+  (web components) for embedding rental pricing, carts, and checkout into a
+  storefront. It wraps the topi Seller API and is opinionated in the spirit of
+  Bootstrap / Material UI — developers pass data to elements declaratively rather
+  than constructing API requests by hand. Distinct from server-side SDKs.
+family: topi Elements
+type: web-components
+delivery: custom HTML elements (client-side JavaScript library)
+components:
+  - element: <x-topi-checkout-button>
+    name: Checkout Button
+    purpose: Renders a rental checkout button that launches the topi checkout flow.
+  - element: <x-topi-rental-summary-label>
+    name: Rental Summary Label
+    purpose: Displays product rental summary information.
+  - element: <x-topi-rental-overview>
+    name: Rental Overview
+    purpose: Shows rental options across different tenure periods.
+  - name: Learn More Info
+    purpose: Provides additional rental details to the shopper.
+docs: https://developer.topi.eu/docs/topi-elements/what-is-topi-elements

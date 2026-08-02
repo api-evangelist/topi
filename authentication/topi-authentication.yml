@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/topi-seller-api-openapi-original.yaml
+docs: https://developer.topi.eu/docs/get-started/introduction
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: OAuth2Seller_header_Authorization
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://identity.topi.eu/oauth2/token
+    scopes: 13
+  description: Read our [Integration Guide](https://developer.topi.eu/docs/get-started/introduction)
+    for detailed instructions on how to authenticate.
+  sources:
+  - openapi/topi-seller-api-openapi-original.yaml

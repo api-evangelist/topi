@@ -1,0 +1,39 @@
+generated: '2026-07-21'
+method: searched
+source: https://developer.topi.eu/docs/sandbox/introduction
+note: >-
+  topi provides a dedicated sandbox environment for running end-to-end test
+  orders without touching production data. Credentials (CLIENT_ID / CLIENT_SECRET)
+  are shared by a topi point of contact — there is no self-serve test key. Values
+  below are published verbatim in the sandbox docs; none are invented.
+environments:
+  - mode: sandbox
+    api_base_url: https://seller-api-sandbox.topi-sandbox.eu
+    identity_token_url: https://identity.topi-sandbox.eu/oauth2/token
+  - mode: sandbox-staging
+    api_base_url: https://seller-api-sandbox.topi-sandbox-staging.eu
+  - mode: production
+    api_base_url: https://seller-api.topi.eu
+    identity_token_url: https://identity.topi.eu/oauth2/token
+  - mode: staging
+    api_base_url: https://seller-api.topi-staging.eu
+authentication:
+  grant: client_credentials
+  example: >-
+    curl -u $CLIENT_ID:$CLIENT_SECRET
+    -d 'grant_type=client_credentials&scope=client'
+    'https://identity.topi-sandbox.eu/oauth2/token'
+  note: Sandbox auth mirrors production; credentials are provided by your topi contact.
+limits:
+  catalog_import_max_items: 10000
+behavior:
+  products_supported_by_default: true
+  note: In sandbox all imported products are marked as supported by default.
+simulation_scenarios:
+  mechanism: >-
+    Scenario simulations are triggered in sandbox using the
+    seller-scenario-simulations:run scope (SimulateScenarioRequestBody).
+  scenarios:
+    - name: mark_product_unsupported
+      purpose: Simulate a product being unsupported to test the unsupported-product path.
+  reference: https://developer.topi.eu/docs/integration-guide (Simulating Scenarios)

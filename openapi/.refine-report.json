@@ -1,0 +1,22 @@
+{
+  "provider": "topi",
+  "sources": [
+    "topi-catalog-api-openapi.yml",
+    "topi-offer-api-openapi.yml",
+    "topi-order-api-openapi.yml",
+    "topi-shipment-api-openapi.yml",
+    "topi-shippingmethod-api-openapi.yml"
+  ],
+  "outputs": [
+    "topi-catalog-api-openapi.yml",
+    "topi-offer-api-openapi.yml",
+    "topi-order-api-openapi.yml",
+    "topi-shipment-api-openapi.yml",
+    "topi-shippingmethod-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

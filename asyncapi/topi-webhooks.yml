@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: https://developer.topi.eu/api
+spec_type: Webhooks
+note: >-
+  topi does not publish a full AsyncAPI document, but the Seller API reference
+  documents an event/webhook surface. Sellers receive webhooks for offer and
+  order state changes. The OpenAPI also carries EventPayload / MessagePayload /
+  PubSubPayload schemas backing the event delivery. Captured as a webhook catalog
+  (type: Webhooks); no AsyncAPI spec is fabricated.
+event_schemas: [EventPayload, MessagePayload, PubSubPayload]
+webhooks:
+  - name: Offer Updates
+    trigger: Fired when an offer's status changes.
+    statuses: [accepted, declined, voided, pending_review, expired]
+    payload:
+      matches: Offer response structure
+      fields: [id, created_at, status, checkout_redirect_url]
+  - name: Order Events
+    trigger: Fired on order lifecycle events (created / confirmed / updated).
+    note: Documented as webhook support for order operations in the API reference.
+subscription:
+  mechanism: >-
+    Webhook endpoints are configured with topi (sandbox supports webhook
+    configuration for end-to-end testing); there is no self-serve webhook
+    registration operation in the Seller API spec.

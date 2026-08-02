@@ -1,0 +1,32 @@
+# topi
+
+> topi is a European hardware-as-a-service (HaaS) fintech that lets B2B sellers offer tech devices and equipment as monthly rental subscriptions instead of outright purchases, across eCommerce, telesales, and point-of-sale channels. Merchants integrate via the topi Seller API and the topi Elements web components. Backed by Creandum.
+
+## API
+- [topi Seller API reference](https://developer.topi.eu/api): 31 operations across catalog, offers, orders, shipments, and shipping methods.
+- [OpenAPI 3.0.3 spec](https://developer.topi.eu/redocusaurus/plugin-redoc-0.yaml): machine-readable definition of the Seller API.
+
+## Authentication
+- OAuth2 client_credentials grant. Token endpoint: https://identity.topi.eu/oauth2/token (sandbox: https://identity.topi-sandbox.eu/oauth2/token).
+- Header: `Authorization: Bearer $ACCESS_TOKEN`. 13 seller-* scopes (catalog, offer, order, shipment, shipping-method, branding, metrics, scenario-simulations, user-info).
+
+## Docs
+- [Getting started](https://developer.topi.eu/docs/get-started/introduction)
+- [Integration guide](https://developer.topi.eu/docs/integration-guide/syncing-your-catalog)
+- [Sandbox / testing](https://developer.topi.eu/docs/sandbox/introduction)
+- [topi Elements (web components)](https://developer.topi.eu/docs/topi-elements/what-is-topi-elements)
+
+## Conventions
+- Base URLs: production https://seller-api.topi.eu ; sandbox https://seller-api-sandbox.topi-sandbox.eu
+- Versioning: URI-path, current v1.
+- Pagination: offset (page/limit) and cursor styles; prefer the *_paginated endpoints.
+- Errors: Goa media type `application/vnd.goa.error` (Error envelope: name, id, message, temporary, timeout, fault).
+- Localization: `Accept-Language` header (RFC-2616).
+- Webhooks: Offer Updates (accepted/declined/voided/pending_review/expired) and Order Events.
+- No idempotency-key contract is documented.
+
+## Company
+- [Website](https://www.topi.eu/en/)
+- [For merchants](https://www.topi.eu/en/merchant)
+- [Privacy policy](https://www.topi.eu/en/privacy-policy)
+- [Imprint](https://www.topi.eu/en/imprint)

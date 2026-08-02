@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://developer.topi.eu/api + derived from
+  openapi/topi-seller-api-openapi-original.yaml
+note: >-
+  Versioning and deprecation posture for the topi Seller API. Versioning is
+  URI-path based (all paths /v1). Several operations are marked deprecated in the
+  OpenAPI in favour of newer replacements. No public status page or formal SLA
+  page was found.
+versioning:
+  scheme: uri-path
+  current: v1
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    Deprecations are signalled in-spec via the OpenAPI `deprecated` flag and in
+    the operation descriptions, which name the replacement endpoints. No RFC 8594
+    Sunset/Deprecation response headers or dated sunset policy were found.
+status_page: null
+sla:
+  url: null
+deprecated_operations:
+  - operation: catalog#calculateBasketPricing
+    path: POST /v1/catalog/basket/pricing
+    replaced_by: [catalog#listRecommendedRentalPrices, catalog#cartRentalOverview]
+  - operation: catalog#calculatePricing
+    path: POST /v1/catalog/pricing
+    replaced_by: [catalog#listRecommendedRentalPrices, catalog#cartRentalOverview]
+  - operation: offer#listOffers
+    path: GET /v1/offers
+    replaced_by: [offer#listOffersPaginated]
+  - operation: order#getBySeller
+    path: GET /v1/orders
+    replaced_by: [order#getBySellerPaginated]

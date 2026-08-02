@@ -1,0 +1,521 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/topi-seller-api-openapi-original.yaml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 31
+  by_action_class:
+    acting: 20
+    connected: 11
+  by_consequence:
+    write: 14
+    read: 11
+    physical: 6
+  human_in_the_loop_required: 0
+operations:
+- path: /v1/catalog/basket/pricing
+  method: post
+  operationId: catalog#calculateBasketPricing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-catalog:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/catalog/carts/rental-overview
+  method: post
+  operationId: catalog#cartRentalOverview
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-catalog:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/catalog/check-supported
+  method: post
+  operationId: catalog#checkSupported
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-catalog:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/catalog/import
+  method: post
+  operationId: catalog#importCatalog
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-catalog:edit
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/catalog/imports
+  method: post
+  operationId: catalog#createImport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-catalog:edit
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/catalog/imports/{id}
+  method: delete
+  operationId: catalog#cancelImport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-catalog:edit
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/catalog/imports/{id}
+  method: get
+  operationId: catalog#getImport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-catalog:edit
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/catalog/list-recommended-rental-prices
+  method: post
+  operationId: catalog#listRecommendedRentalPrices
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-catalog:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/catalog/pricing
+  method: post
+  operationId: catalog#calculatePricing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-catalog:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/catalog/products
+  method: get
+  operationId: catalog#searchProducts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-catalog:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/catalog/products_paginated
+  method: get
+  operationId: catalog#searchProductsPaginated
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-catalog:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/catalog/products_paginated
+  method: post
+  operationId: catalog#searchAndFilterProductsPaginated
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-catalog:read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/offers
+  method: get
+  operationId: offer#listOffers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-offer:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/offers
+  method: post
+  operationId: offer#create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-offer:edit
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/offers/{id}
+  method: get
+  operationId: offer#show
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-offer:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/offers/{id}
+  method: put
+  operationId: offer#edit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-offer:edit
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/offers/{id}/void
+  method: post
+  operationId: offer#void
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-offer:edit
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/offers/paginated
+  method: get
+  operationId: offer#listOffersPaginated
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-offer:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/offers/partners
+  method: post
+  operationId: offer#createForPartner
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-offer:edit
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/offers/ref/{seller_offer_reference}
+  method: get
+  operationId: offer#showByReference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-offer:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/offers/validate
+  method: post
+  operationId: offer#validate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - seller-offer:edit
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/orders
+  method: get
+  operationId: order#getBySeller
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-order:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/orders/{id}
+  method: get
+  operationId: order#show
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-order:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/orders/{id}
+  method: patch
+  operationId: order#setMetadata
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - seller-order:edit
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/orders/{id}/accept
+  method: post
+  operationId: order#acceptOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - seller-order:edit
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/orders/{id}/acknowledge
+  method: post
+  operationId: order#acknowledgeOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - seller-order:edit
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/orders/{id}/reject
+  method: post
+  operationId: order#rejectOrder
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - seller-order:edit
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/orders/paginated
+  method: get
+  operationId: order#getBySellerPaginated
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-order:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/shipment
+  method: post
+  operationId: shipment#create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - seller-shipment:edit
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/shipping-method
+  method: get
+  operationId: shippingMethod#getShippingMethods
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - seller-shipping-method:read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/shipping-method/method
+  method: post
+  operationId: shippingMethod#create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - seller-shipping-method:edit
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
