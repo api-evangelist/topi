@@ -153,7 +153,7 @@ common:
 - type: PrivacyPolicy
   url: https://www.topi.eu/en/privacy-policy
 - type: OpenAPI
-  url: openapi/topi-seller-api-openapi-original.yaml
+  url: openapi/_original/topi-seller-api-openapi-original.yaml
 - type: Authentication
   url: authentication/topi-authentication.yml
 - type: OAuthScopes
