@@ -1,0 +1,361 @@
+{
+  "item": [
+    {
+      "id": "76c671c4-e19a-48d9-87cc-87fecf02903b",
+      "name": "shipment",
+      "description": {
+        "content": "#### Assets without serial numbers\n\nSome assets might not have a serial number (e.g. accessories). In order to send them with the shipment, explicitly pass an empty string `\"\"` as the `serial_number` for this asset.\n\n> Note, that every asset, that has a **rent option**, requires a serial number even if it has been directly purchased. The request will fail with an according message if such a serial number is missing.\n\n> Also note, that every item of an order has to be shipped for the order to be completed. This can be done in multiple shipments.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c79bfd17-1a08-4530-a5a1-f05b67b1d025",
+          "name": "Create a shipment",
+          "request": {
+            "name": "Create a shipment",
+            "description": {
+              "content": "Add shipment info for an order. Partial shipments are allowed and will update the order status to \"partially_fulfilled\". All items must have shipment info before an order is considered \"completed\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "shipment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<regexp>\",\n  \"serial_numbers\": [\n    {\n      \"seller_product_reference\": {\n        \"source\": \"<string>\",\n        \"reference\": \"<string>\"\n      },\n      \"serial_number\": \"<string>\"\n    },\n    {\n      \"seller_product_reference\": {\n        \"source\": \"<string>\",\n        \"reference\": \"<string>\"\n      },\n      \"serial_number\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"tracking_url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a2a4671-e605-4817-b825-3dd2805f6336",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"order_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"serial_numbers\": [\n    {\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"serial_number\": \"BA-3456786-334-9\"\n    }\n  ],\n  \"tracking_url\": \"https://example.com/foo\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"serial_numbers\": [\n    {\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"serial_number\": \"BA-3456786-334-9\"\n    }\n  ],\n  \"tracking_url\": \"https://example.com/foo\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1ee1345-2b28-4084-8108-a4e19583eb33",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"order_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"serial_numbers\": [\n    {\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"serial_number\": \"BA-3456786-334-9\"\n    }\n  ],\n  \"tracking_url\": \"https://example.com/foo\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98ffc1dc-fb77-46d1-a752-eec3d1c4ee93",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"order_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"serial_numbers\": [\n    {\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"serial_number\": \"BA-3456786-334-9\"\n    }\n  ],\n  \"tracking_url\": \"https://example.com/foo\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c106a8c-379e-4749-a4bf-68bc5cc7f547",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"order_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"serial_numbers\": [\n    {\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"serial_number\": \"BA-3456786-334-9\"\n    }\n  ],\n  \"tracking_url\": \"https://example.com/foo\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68b2d638-b8ea-4184-b976-4d90e5d6ad46",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"order_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"serial_numbers\": [\n    {\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"serial_number\": \"BA-3456786-334-9\"\n    }\n  ],\n  \"tracking_url\": \"https://example.com/foo\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://seller-api-sandbox.topi-sandbox.eu",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8e56a7e1-02c5-4bfd-a560-0e2739f935f9",
+    "name": "topi Seller catalog shipment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Localization\n\nStrings returned can be localized when the _Accept-Language_ header is provided in the request. It should follow the [RFC-2616 convention](http://www.ietf.org/rfc/rfc2616.txt).\n",
+      "type": "text/plain"
+    }
+  }
+}

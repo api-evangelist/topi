@@ -1,0 +1,314 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "topi Seller catalog order API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all orders (deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/orders",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query. It can be a string or a number or both"
+              },
+              {
+                "name": "created_by",
+                "value": "sales-agent@example.com,anothergreatone@example.com",
+                "type": "query",
+                "description": "a comma-separated list of sales agents emails"
+              },
+              {
+                "name": "partners_only",
+                "value": "false",
+                "type": "query",
+                "description": "a boolean indicating whether to retrieve orders from partner sellers only"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a list of created orders, filterable by `query` or `created_by`. (deprecated)\n\nThis method is deprecated. Please use [List all orders with pagination](#/order/getBySellerPaginated) instead."
+        },
+        {
+          "info": {
+            "name": "Retrieve an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "739b63c2-9e58-4964-b38d-4ebb424de242",
+                "type": "path",
+                "description": "topi order ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a single order.\n\n### When using in the Sandbox\n\nUse the following ID's to get different fixtures. Remember that the URL must\nbe encoded:\n\n- Status `\"created\"`: `\"52c1e8ec-a592-48a9-b574-ab88b0937b38\"`\n- Status `\"confirmed\"`: `\"aac1e833-3391-134a-c567-acd8b0937ad3\"`\n- Status `\"partially_fulfilled\"`: `\"b3a64e36-6fa2-40a6-9402-e949c47feb87\"`\n- Status `\"completed\"`: `\"aa6a50f4-c2d4-4961-9689-ebd0f0f92a9e\"`\n- Status `\"canceled\"`: `\"17c45c3d-cd61-4e2f-a562-ff8f349067de\"`\n\nAny other ID will ret"
+        },
+        {
+          "info": {
+            "name": "Set metadata on an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "739b63c2-9e58-4964-b38d-4ebb424de242",
+                "type": "path",
+                "description": "topi order ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Sets arbitrary JSON metadata on an order."
+        },
+        {
+          "info": {
+            "name": "Confirm an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/orders/:id/accept",
+            "params": [
+              {
+                "name": "id",
+                "value": "739b63c2-9e58-4964-b38d-4ebb424de242",
+                "type": "path",
+                "description": "topi order ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Sets the status of an existing order to \"confirmed\". You can only accept orders that have been in the status \"created\" or \"acknowledged\"."
+        },
+        {
+          "info": {
+            "name": "Acknowledge an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/orders/:id/acknowledge",
+            "params": [
+              {
+                "name": "id",
+                "value": "739b63c2-9e58-4964-b38d-4ebb424de242",
+                "type": "path",
+                "description": "topi order ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Sets the status of an existing order to \"acknowledged\". You can only acknowledge orders that have been in the status \"created\"."
+        },
+        {
+          "info": {
+            "name": "Reject an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/orders/:id/reject",
+            "params": [
+              {
+                "name": "id",
+                "value": "739b63c2-9e58-4964-b38d-4ebb424de242",
+                "type": "path",
+                "description": "topi order ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Sets the status of an existing order to \"rejected\". You can only reject orders that have been in the status \"created\" or \"acknowledged\"."
+        },
+        {
+          "info": {
+            "name": "List all orders with pagination",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/orders/paginated",
+            "params": [
+              {
+                "name": "limit",
+                "value": "1",
+                "type": "query",
+                "description": "the size of the page"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "the index of the page"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query. It can be a string or a number or both"
+              },
+              {
+                "name": "created_by",
+                "value": "sales-agent@example.com,anothergreatone@example.com",
+                "type": "query",
+                "description": "a comma-separated list of sales agents emails"
+              },
+              {
+                "name": "partners_only",
+                "value": "false",
+                "type": "query",
+                "description": "a boolean indicating whether to retrieve orders from partner sellers only"
+              },
+              {
+                "name": "sort_by",
+                "value": "created_at",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "sort_order",
+                "value": "desc",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "id_gt",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "query",
+                "description": "Filter: order ID > value (UUID)"
+              },
+              {
+                "name": "id_gte",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "query",
+                "description": "Filter: order ID >= value (UUID)"
+              },
+              {
+                "name": "id_lt",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "query",
+                "description": "Filter: order ID < value (UUID)"
+              },
+              {
+                "name": "id_lte",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "query",
+                "description": "Filter: order ID <= value (UUID)"
+              },
+              {
+                "name": "created_at_gt",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filter: order created_at > value (RFC3339)"
+              },
+              {
+                "name": "created_at_gte",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filter: order created_at >= value (RFC3339)"
+              },
+              {
+                "name": "created_at_lt",
+                "value": "2025-12-31T23:59:59Z",
+                "type": "query",
+                "description": "Filter: order created_at < value (RFC3339)"
+              },
+              {
+                "name": "created_at_lte",
+                "value": "2025-12-31T23:59:59Z",
+                "type": "query",
+                "description": "Filter: order created_at <= value (RFC3339)"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a list of created orders with pagination, filterable by `query` or `created_by`. Supports offset-based pagination (page/limit) and range filters for efficient data traversal. \n\n**Recommended approach for paginating over all data:** Use ID range filters with limit=100. The ID range filter (id_gt) works like cursor-based pagination, providing the most efficient way to iterate through the complete dataset. Pass the last ID from the previous page as id_gt to fetch the next batch. \n\nExamples:"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "topi Seller catalog shippingMethod API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "shippingMethod",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all shipping methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/shipping-method",
+            "params": [
+              {
+                "name": "page",
+                "value": "0",
+                "type": "query",
+                "description": "Which page number to fetch (zero-indexed)"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get all shipping methods"
+        },
+        {
+          "info": {
+            "name": "Create shipping method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/shipping-method/method",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a shipping method. This is global for all the offers.\n\nReturns HTTP 200 plus basic information about the newly created shipping method.\n\nThe request returns an HTTP Unprocessable Entity when the provided `\"seller_shipping_method_reference\"` is not unique.\n\n## When using in the Sandbox\n\nThe following seller shipping method references are considered to be available and will make the API return an HTTP Unprocessable Entity error.\n\n- `\"Bridges\"`\n\nNote: The sandbox will always return the same"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

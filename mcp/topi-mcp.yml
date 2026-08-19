@@ -2,94 +2,98 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/topi-seller-api-openapi-original.yaml
-note: >-
-  No official hosted/remote topi MCP server was found (checked docs, npm
-  @modelcontextprotocol, MCP registries). This is a DERIVED candidate tool list,
-  one tool per OpenAPI operation, as a starting point for an agent-facing MCP
-  wrapper of the topi Seller API. Deprecated operations are omitted.
+note: No official hosted/remote topi MCP server was found (checked docs, npm @modelcontextprotocol, MCP
+  registries). This is a DERIVED candidate tool list, one tool per OpenAPI operation, as a starting point
+  for an agent-facing MCP wrapper of the topi Seller API. Deprecated operations are omitted.
 server:
   name: topi-seller-api
   transport: http
   auth: oauth2 client_credentials (https://identity.topi.eu/oauth2/token)
 tools:
-  - name: catalog_cart_rental_overview
-    description: Get rental overview for products in a cart
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#cartRentalOverview
-  - name: catalog_check_supported
-    description: Check whether products are supported for rental
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#checkSupported
-  - name: catalog_import
-    description: Import products into the topi catalog
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#importCatalog
-  - name: catalog_create_import
-    description: Create a CSV catalog import job
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#createImport
-  - name: catalog_get_import
-    description: Get CSV import job details
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#getImport
-  - name: catalog_cancel_import
-    description: Cancel a CSV import job
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#cancelImport
-  - name: catalog_list_recommended_rental_prices
-    description: List recommended rental prices for products
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#listRecommendedRentalPrices
-  - name: catalog_search_products
-    description: Search products by term
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#searchProducts
-  - name: catalog_search_products_paginated
-    description: Paginated product search
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#searchProductsPaginated
-  - name: catalog_search_and_filter_products_paginated
-    description: Paginated product search with filtering
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#searchAndFilterProductsPaginated
-  - name: offer_create
-    description: Create a rental offer
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#create
-  - name: offer_show
-    description: Retrieve an offer by id
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#show
-  - name: offer_edit
-    description: Edit an existing offer
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#edit
-  - name: offer_void
-    description: Void an offer
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#void
-  - name: offer_list_paginated
-    description: List offers with pagination
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#listOffersPaginated
-  - name: offer_create_for_partner
-    description: Create an offer for a partner
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#createForPartner
-  - name: offer_show_by_reference
-    description: Retrieve an offer by seller reference
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#showByReference
-  - name: offer_validate
-    description: Validate an offer payload
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#validate
-  - name: order_show
-    description: Retrieve an order by id
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#order#show
-  - name: order_set_metadata
-    description: Set metadata on an order
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#order#setMetadata
-  - name: order_accept
-    description: Accept an order
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#order#acceptOrder
-  - name: order_acknowledge
-    description: Acknowledge an order
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#order#acknowledgeOrder
-  - name: order_reject
-    description: Reject an order
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#order#rejectOrder
-  - name: order_list_paginated
-    description: List orders with pagination
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#order#getBySellerPaginated
-  - name: shipment_create
-    description: Create a shipment for an order
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#shipment#create
-  - name: shipping_method_list
-    description: Get all shipping methods
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#shippingMethod#getShippingMethods
-  - name: shipping_method_create
-    description: Create a shipping method
-    source_operation: openapi/topi-seller-api-openapi-original.yaml#shippingMethod#create
+- name: catalog_cart_rental_overview
+  description: Get rental overview for products in a cart
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#cartRentalOverview
+- name: catalog_check_supported
+  description: Check whether products are supported for rental
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#checkSupported
+- name: catalog_import
+  description: Import products into the topi catalog
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#importCatalog
+- name: catalog_create_import
+  description: Create a CSV catalog import job
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#createImport
+- name: catalog_get_import
+  description: Get CSV import job details
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#getImport
+- name: catalog_cancel_import
+  description: Cancel a CSV import job
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#cancelImport
+- name: catalog_list_recommended_rental_prices
+  description: List recommended rental prices for products
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#listRecommendedRentalPrices
+- name: catalog_search_products
+  description: Search products by term
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#searchProducts
+- name: catalog_search_products_paginated
+  description: Paginated product search
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#searchProductsPaginated
+- name: catalog_search_and_filter_products_paginated
+  description: Paginated product search with filtering
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#catalog#searchAndFilterProductsPaginated
+- name: offer_create
+  description: Create a rental offer
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#create
+- name: offer_show
+  description: Retrieve an offer by id
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#show
+- name: offer_edit
+  description: Edit an existing offer
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#edit
+- name: offer_void
+  description: Void an offer
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#void
+- name: offer_list_paginated
+  description: List offers with pagination
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#listOffersPaginated
+- name: offer_create_for_partner
+  description: Create an offer for a partner
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#createForPartner
+- name: offer_show_by_reference
+  description: Retrieve an offer by seller reference
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#showByReference
+- name: offer_validate
+  description: Validate an offer payload
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#offer#validate
+- name: order_show
+  description: Retrieve an order by id
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#order#show
+- name: order_set_metadata
+  description: Set metadata on an order
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#order#setMetadata
+- name: order_accept
+  description: Accept an order
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#order#acceptOrder
+- name: order_acknowledge
+  description: Acknowledge an order
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#order#acknowledgeOrder
+- name: order_reject
+  description: Reject an order
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#order#rejectOrder
+- name: order_list_paginated
+  description: List orders with pagination
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#order#getBySellerPaginated
+- name: shipment_create
+  description: Create a shipment for an order
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#shipment#create
+- name: shipping_method_list
+  description: Get all shipping methods
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#shippingMethod#getShippingMethods
+- name: shipping_method_create
+  description: Create a shipping method
+  source_operation: openapi/topi-seller-api-openapi-original.yaml#shippingMethod#create
+deployment:
+  mode: none
+  verified: derived
+  tools: 27
+  checked: '2026-08-12'
+  source: catalog MCP census

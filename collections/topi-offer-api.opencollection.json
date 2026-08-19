@@ -1,0 +1,362 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "topi Seller catalog offer API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "offer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all offers (deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/offers",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query. It can be a string or a number or both"
+              },
+              {
+                "name": "created_by",
+                "value": "sales-agent@example.com,anothergreatone@example.com",
+                "type": "query",
+                "description": "a comma-separated list of sales agents emails"
+              },
+              {
+                "name": "partners_only",
+                "value": "false",
+                "type": "query",
+                "description": "a boolean indicating whether to retrieve offers from partner sellers only"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Lists the offers created by the calling seller, with filters or query. (deprecated)\n\nThis method is deprecated. Please use [List all offers with pagination](#/offer/listOffersPaginated) instead."
+        },
+        {
+          "info": {
+            "name": "Create an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/offers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a topi offer.\n\nReturns HTTP 200 plus basic information about the offer on success.\n\nThe request returns an HTTP Unprocessable Entity in the following scenarios:\n\n- When `\"lines\"` is an empty array.\n- When `\"lines\"` contains any products that are not available in the topi catalog\n- When the `\"seller_offer_reference\"` is reusing a value of an offer that is currently active\n\n## When using in the Sandbox\n\nThe following seller offer references are considered to be \"active\":\n\n- `\"ref-1234\"`\n\nT"
+        },
+        {
+          "info": {
+            "name": "Retrieve an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/offers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "739b63c2-9e58-4964-b38d-4ebb424de242",
+                "type": "path",
+                "description": "topi offer ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a single offer.\n\n### When using in the Sandbox\n\nUse the following ID's to get different fixtures. Remember that the URL must\nbe encoded:\n\n- Status `\"created\"`: `\"739b63c2-9e58-4964-b38d-4ebb424de242\"`\n- Status `\"voided\"`: `\"ddd454b6-f23b-4f9c-a36d-74964766c3d6\"`\n- Status `\"expired\"`: `\"3beec7f7-a258-4260-8713-6c2635e5eea5\"`\n- Status `\"accepted\"`: `\"60412bcf-8213-4804-841e-f3c36ce46394\"`\n\nAny other ID will return an HTTP 404 error.\n"
+        },
+        {
+          "info": {
+            "name": "Edit an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/offers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "739b63c2-9e58-4964-b38d-4ebb424de242",
+                "type": "path",
+                "description": "Offer ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Edits an offer by voiding it and creating a new offer superseding it with the provided details.\n\n*Note:* Offer details will be replaced with the validated payload passed to this endpoint. Make sure to send the full offer details information.\n"
+        },
+        {
+          "info": {
+            "name": "Void an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/offers/:id/void",
+            "params": [
+              {
+                "name": "id",
+                "value": "739b63c2-9e58-4964-b38d-4ebb424de242",
+                "type": "path",
+                "description": "topi offer ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Voids an offer. Optionally, marks an existing offer as superseding this one.\n\nAll offers can be voided except those with status `accepted`. A HTTP 402 Unprocesssable Entity error will be returned in this case.\n\nIf the **superseding offer** ID does not exist or has the same ID has the voided offer, HTTP 402 Unprocessable Entity will be returned.\n\n## When using in the Sandbox\n\nYou can use the following IDs to refer to different offer fixtures and test this endpoint. Remember that URL's must be enc"
+        },
+        {
+          "info": {
+            "name": "List all offers with pagination",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/offers/paginated",
+            "params": [
+              {
+                "name": "limit",
+                "value": "1",
+                "type": "query",
+                "description": "the size of the page"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "the index of the page"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query. It can be a string or a number or both"
+              },
+              {
+                "name": "created_by",
+                "value": "sales-agent@example.com,anothergreatone@example.com",
+                "type": "query",
+                "description": "a comma-separated list of sales agents emails"
+              },
+              {
+                "name": "partners_only",
+                "value": "false",
+                "type": "query",
+                "description": "a boolean indicating whether to retrieve offers from partner sellers only"
+              },
+              {
+                "name": "sort_by",
+                "value": "status",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "sort_order",
+                "value": "desc",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "id_gt",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "query",
+                "description": "Filter: offer ID > value (UUID)"
+              },
+              {
+                "name": "id_gte",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "query",
+                "description": "Filter: offer ID >= value (UUID)"
+              },
+              {
+                "name": "id_lt",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "query",
+                "description": "Filter: offer ID < value (UUID)"
+              },
+              {
+                "name": "id_lte",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "query",
+                "description": "Filter: offer ID <= value (UUID)"
+              },
+              {
+                "name": "created_at_gt",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filter: offer created_at > value (RFC3339)"
+              },
+              {
+                "name": "created_at_gte",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filter: offer created_at >= value (RFC3339)"
+              },
+              {
+                "name": "created_at_lt",
+                "value": "2025-12-31T23:59:59Z",
+                "type": "query",
+                "description": "Filter: offer created_at < value (RFC3339)"
+              },
+              {
+                "name": "created_at_lte",
+                "value": "2025-12-31T23:59:59Z",
+                "type": "query",
+                "description": "Filter: offer created_at <= value (RFC3339)"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Lists the offers created by the calling seller, with pagination and filters. Supports offset-based pagination (page/limit) and range filters for efficient data traversal. \n\n**Recommended approach for paginating over all data:** Use ID range filters with limit=100. The ID range filter (id_gt) works like cursor-based pagination, providing the most efficient way to iterate through the complete dataset. Pass the last ID from the previous page as id_gt to fetch the next batch. \n\nExamples:\n- First pag"
+        },
+        {
+          "info": {
+            "name": "Create an offer for a partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/offers/partners",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a topi offer.\n\nReturns HTTP 200 plus basic information about the offer on success.\n\nThe request returns an HTTP Unprocessable Entity in the following scenarios:\n\n- When `\"lines\"` is an empty array.\n- When `\"lines\"` contains any products that are not available in the topi catalog\n- When the `\"seller_offer_reference\"` is reusing a value of an offer that is currently active\n\n## When using in the Sandbox\n\nThe following seller offer references are considered to be \"active\":\n\n- `\"ref-1234\"`\n\nT"
+        },
+        {
+          "info": {
+            "name": "Retrieve an offer by seller reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/offers/ref/:seller_offer_reference",
+            "params": [
+              {
+                "name": "seller_offer_reference",
+                "value": "ref-1234",
+                "type": "path",
+                "description": "Seller's own reference for the offer"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a single offer, fetched by the seller's own reference.\n\n### When using in the Sandbox\n\nUse the following references to get different offer fixtures:\n\n- Status `\"created\"`: `\"ref-created\"`\n- Status `\"voided\"`: `\"ref-voided\"`\n- Status `\"expired\"`: `\"ref-expired\"`\n- Status `\"accepted\"`: `\"ref-accepted\"`\n\nAny other ID will return an HTTP 404 error.\n"
+        },
+        {
+          "info": {
+            "name": "Validate an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/offers/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Validates the input for creating a topi offer. This endpoint **does not** create an offer. It can be used to check in advance if an offer can be created with certain products in the cart or if a shipping method is supported, etc.\n\nReturns a HTTP 200 on success.\n\nThe request returns an HTTP Unprocessable Entity in the following scenarios:\n\n- When `\"lines\"` is an empty array.\n- When `\"lines\"` contains any products that are not available in the topi catalog\n- When the `\"seller_offer_reference\"` is "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

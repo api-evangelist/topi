@@ -1,0 +1,2790 @@
+{
+  "item": [
+    {
+      "id": "f486208e-604e-4b93-84f5-bc3a64a28086",
+      "name": "order",
+      "description": {
+        "content": "Provides operations to handle orders for end-customers.\n\n## Webhooks\n\nWe will ping the URL provided whenever an order has changed its status to: `\"created\"`, `\"completed\"`, or `\"canceled\"`.\n\n**Payload**:\n\n- Available fields:\n    - `id`: `string`\n    - `assets`: `array` of `Asset`\n    - `metadata`: `object`\n    - `offer_id`: `string`\n    - `seller_offer_reference`: `string`\n    - `status`: `string enum`\n    - `shipping_address`: `ShippingAddress` \n    \n    `ShippingAddress` contains this fields:\n    - `name`: `string`\n    - `line1`: `string`\n    - `line2`: `string`\n    - `postal_code`: `string`\n    - `city`: `string`\n    - `region`: `string`\n    - `country_code`: `string`\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a830763d-3754-479a-bf2d-eaeb1c6eff08",
+          "name": "List all orders (deprecated)",
+          "request": {
+            "name": "List all orders (deprecated)",
+            "description": {
+              "content": "Returns a list of created orders, filterable by `query` or `created_by`. (deprecated)\n\nThis method is deprecated. Please use [List all orders with pagination](#/order/getBySellerPaginated) instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Search query. It can be a string or a number or both"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by",
+                  "value": "<string>",
+                  "description": "a comma-separated list of sales agents emails"
+                },
+                {
+                  "disabled": false,
+                  "key": "partners_only",
+                  "value": "<boolean>",
+                  "description": "a boolean indicating whether to retrieve orders from partner sellers only"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "077c14a5-4d37-4c22-9ac8-713b4a5689e1",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "status"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "sales-agent@example.com,anothergreatone@example.com"
+                    },
+                    {
+                      "key": "partners_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orders\": [\n    {\n      \"agent_name\": \"abc123\",\n      \"company_name\": \"abc123\",\n      \"created_at\": \"1970-01-01T00:00:01Z\",\n      \"full_name\": \"abc123\",\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"offer_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"seller_offer_reference\": \"abc123\",\n      \"status\": \"confirmed\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6004736-5edc-448f-ada8-457a64956c40",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "status"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "sales-agent@example.com,anothergreatone@example.com"
+                    },
+                    {
+                      "key": "partners_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "68446ce1-9235-4d9d-83be-3b28a679c93f",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "status"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "sales-agent@example.com,anothergreatone@example.com"
+                    },
+                    {
+                      "key": "partners_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecf68ba4-2bef-4c60-8f84-1a8eb2e51647",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "status"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "sales-agent@example.com,anothergreatone@example.com"
+                    },
+                    {
+                      "key": "partners_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29511b49-76da-4d3d-90ac-c1ed304984a2",
+          "name": "Retrieve an order",
+          "request": {
+            "name": "Retrieve an order",
+            "description": {
+              "content": "Returns a single order.\n\n### When using in the Sandbox\n\nUse the following ID's to get different fixtures. Remember that the URL must\nbe encoded:\n\n- Status `\"created\"`: `\"52c1e8ec-a592-48a9-b574-ab88b0937b38\"`\n- Status `\"confirmed\"`: `\"aac1e833-3391-134a-c567-acd8b0937ad3\"`\n- Status `\"partially_fulfilled\"`: `\"b3a64e36-6fa2-40a6-9402-e949c47feb87\"`\n- Status `\"completed\"`: `\"aa6a50f4-c2d4-4961-9689-ebd0f0f92a9e\"`\n- Status `\"canceled\"`: `\"17c45c3d-cd61-4e2f-a562-ff8f349067de\"`\n\nAny other ID will return an HTTP 404 error.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<regexp>",
+                  "key": "id",
+                  "description": "(Required) topi order ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "457f6c67-2862-42b5-b93d-1be61e1e9e3a",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"product_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"serial_number\": \"BA-3456786-334-9\",\n      \"status\": \"shipped\",\n      \"title\": \"Pro Laptop 64GB\",\n      \"tracking_url\": \"abc123\"\n    }\n  ],\n  \"canceled_at\": \"1970-01-01T00:00:01Z\",\n  \"created_at\": \"1970-01-01T00:00:01Z\",\n  \"customer_info\": {\n    \"company\": {\n      \"billing_address\": {\n        \"city\": \"Munich\",\n        \"country_code\": \"DE\",\n        \"line1\": \"10 Downing Street\",\n        \"line2\": \"Flat 42\",\n        \"postal_code\": \"10243\",\n        \"region\": \"Bavaria\"\n      },\n      \"name\": \"Unicorn Corp\",\n      \"tax_number\": \"123456789\",\n      \"vat_number\": \"DE123456789\"\n    },\n    \"customer_group\": \"education\",\n    \"email\": \"alice@example.com\",\n    \"full_name\": \"John Butler\",\n    \"phone_number\": \"abc123\"\n  },\n  \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"offer_created_at\": \"1970-01-01T00:00:01Z\",\n  \"offer_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"order_lines\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"contract_type\": \"rent\",\n      \"duration\": 6,\n      \"monthly_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"pretty_id\": \"abc123\",\n      \"product_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"quantity\": 1,\n      \"selected_first_party_services\": [\n        {\n          \"additional_values\": {\n            \"accessory_type\": \"experiment_charger\"\n          },\n          \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n          \"monthly_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000\n          },\n          \"type\": \"topi_replace\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"sublines\": [\n        {\n          \"base_rental_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000\n          },\n          \"contract_type\": \"rent\",\n          \"duration\": 6,\n          \"monthly_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000\n          },\n          \"pretty_id\": \"abc123\",\n          \"product_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n          \"quantity\": 1,\n          \"selected_first_party_services\": [\n            {\n              \"additional_values\": {\n                \"accessory_type\": \"experiment_charger\"\n              },\n              \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n              \"monthly_price\": {\n                \"currency\": \"EUR\",\n                \"gross\": 119000,\n                \"net\": 100000\n              },\n              \"type\": \"topi_replace\"\n            }\n          ],\n          \"seller_product_references\": [\n            {\n              \"reference\": \"123ab-5343\",\n              \"source\": \"sap\"\n            }\n          ],\n          \"subtitle\": \"abc123\",\n          \"title\": \"abc123\",\n          \"unit_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000\n          }\n        }\n      ],\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\",\n      \"unit_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      }\n    }\n  ],\n  \"sales_agent\": {\n    \"email\": \"alice@example.com\",\n    \"external_agent_id\": \"abc123\",\n    \"name\": \"abc123\",\n    \"phone\": \"abc123\"\n  },\n  \"seller_info\": {\n    \"address\": {\n      \"city\": \"abc123\",\n      \"country_code\": \"DE\",\n      \"line1\": \"abc123\",\n      \"line2\": \"aaa\",\n      \"postal_code\": \"abc123\",\n      \"region\": \"abc123\"\n    },\n    \"capability_add_custom_products\": false,\n    \"capability_anonymized_pricing\": false,\n    \"capability_anonymous_ecom_offer_creation\": false,\n    \"capability_bundles\": false,\n    \"capability_chatbot_id\": \"abc123\",\n    \"capability_dual_pricing\": false,\n    \"capability_hide_buy_now\": false,\n    \"capability_international_shipment\": false,\n    \"currency\": \"abc123\",\n    \"email\": \"abc123\",\n    \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n    \"logo_url\": \"abc123\",\n    \"name\": \"abc123\",\n    \"parent_seller_id\": \"abc123\",\n    \"pdf_reader_assistant_id\": \"abc123\",\n    \"pretty_name\": \"abc123\",\n    \"product_reference_source\": \"abc123\"\n  },\n  \"seller_offer_reference\": \"abc123\",\n  \"shipping_address\": {\n    \"city\": \"Munich\",\n    \"country_code\": \"DE\",\n    \"line1\": \"10 Downing Street\",\n    \"line2\": \"Flat 42\",\n    \"postal_code\": \"10243\",\n    \"recipient_name\": \"Felix Wolf\",\n    \"region\": \"Bavaria\"\n  },\n  \"shipping_info\": {\n    \"is_in_store_pickup\": false,\n    \"price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000\n    },\n    \"seller_shipping_reference\": \"Sandbox Shipping Service\"\n  },\n  \"status\": \"confirmed\",\n  \"tracking_urls\": [\n    \"abc123\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79f9b5d9-0e83-4dfd-b33c-f12184e53e3b",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ec761c14-e380-4a80-a6b8-844841c6b410",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7989f17e-082b-43da-a6ce-534b69acd27c",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b99ec10-bac4-47c9-bda1-77b7fa3f953c",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8cb2fac-3b8b-40a4-be3d-9a894f5696ae",
+          "name": "Set metadata on an order",
+          "request": {
+            "name": "Set metadata on an order",
+            "description": {
+              "content": "Sets arbitrary JSON metadata on an order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<regexp>",
+                  "key": "id",
+                  "description": "(Required) topi order ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fa7e67d9-8d86-4808-8418-b60388efb068",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"product_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"serial_number\": \"BA-3456786-334-9\",\n      \"status\": \"shipped\",\n      \"title\": \"Pro Laptop 64GB\",\n      \"tracking_url\": \"abc123\"\n    }\n  ],\n  \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"offer_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"seller_offer_reference\": \"abc123\",\n  \"status\": \"confirmed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3369c089-b4b0-485a-8e08-3ded0630b2a3",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8ed7787c-6f71-4482-bab2-19101ee0a714",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "286b2bb1-9766-4aab-b640-c7e1e8c357ef",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18ddaa23-01af-41a1-a1f5-d6c0a4438776",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b67eb90-113b-414d-a446-7c48b7217a4b",
+          "name": "Confirm an order",
+          "request": {
+            "name": "Confirm an order",
+            "description": {
+              "content": "Sets the status of an existing order to \"confirmed\". You can only accept orders that have been in the status \"created\" or \"acknowledged\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":id",
+                "accept"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<regexp>",
+                  "key": "id",
+                  "description": "(Required) topi order ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d000bcc7-c3ac-4179-86a8-616f63b8c517",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"product_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"serial_number\": \"BA-3456786-334-9\",\n      \"status\": \"shipped\",\n      \"title\": \"Pro Laptop 64GB\",\n      \"tracking_url\": \"abc123\"\n    }\n  ],\n  \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"offer_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"seller_offer_reference\": \"abc123\",\n  \"status\": \"confirmed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e89c75ed-257c-4cee-a4c2-0392d657157e",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c70ee70a-9d7e-464f-b80a-281f3037275a",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8557d104-df4f-4d88-a100-95c25026d6e6",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de9c09ae-7289-4454-a08d-fa223b834466",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5263c126-a66f-4e2c-a6ee-6106f8a7505c",
+              "name": "InvalidStatus: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8fe5d54-a7c0-49f2-8bc2-845864794163",
+          "name": "Acknowledge an order",
+          "request": {
+            "name": "Acknowledge an order",
+            "description": {
+              "content": "Sets the status of an existing order to \"acknowledged\". You can only acknowledge orders that have been in the status \"created\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":id",
+                "acknowledge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<regexp>",
+                  "key": "id",
+                  "description": "(Required) topi order ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3a0c3d33-fca2-49d8-ba3e-9aaaaad26c96",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "acknowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"product_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"serial_number\": \"BA-3456786-334-9\",\n      \"status\": \"shipped\",\n      \"title\": \"Pro Laptop 64GB\",\n      \"tracking_url\": \"abc123\"\n    }\n  ],\n  \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"offer_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"seller_offer_reference\": \"abc123\",\n  \"status\": \"confirmed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e3358fd-edfa-434d-b9c3-2e3ee4ac5d96",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "acknowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "601336e9-a453-491d-a388-eb70e79b6398",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "acknowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f701a214-07c1-4c65-b117-e6364b897869",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "acknowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "819d5053-fd0b-4f4c-9557-f57d7c90041e",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "acknowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c746cbfe-e06c-4320-be3b-0f509a44367e",
+              "name": "InvalidStatus: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "acknowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95f65862-8c4c-4c42-9881-0470eb477c25",
+          "name": "Reject an order",
+          "request": {
+            "name": "Reject an order",
+            "description": {
+              "content": "Sets the status of an existing order to \"rejected\". You can only reject orders that have been in the status \"created\" or \"acknowledged\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":id",
+                "reject"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<regexp>",
+                  "key": "id",
+                  "description": "(Required) topi order ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8331760b-3a5d-47ad-a3de-c4b87515727a",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "reject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"product_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"serial_number\": \"BA-3456786-334-9\",\n      \"status\": \"shipped\",\n      \"title\": \"Pro Laptop 64GB\",\n      \"tracking_url\": \"abc123\"\n    }\n  ],\n  \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"offer_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"seller_offer_reference\": \"abc123\",\n  \"status\": \"confirmed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c78fb6e-0b23-4f3e-ae4d-92c24436842d",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "reject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "008d0b47-4725-4da5-bd28-b28cd21050dc",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "reject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55d2dfc4-e3ed-4bef-9a4c-0772168be235",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "reject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93cdc680-2484-48e9-86c4-9ff43d4b00c6",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "reject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15f02ea4-4c80-46a9-8f8e-061715e9ca2a",
+              "name": "InvalidStatus: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id",
+                    "reject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<regexp>",
+                      "key": "id",
+                      "description": "(Required) topi order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82e26231-5eb2-4e87-9202-2d556d6aa445",
+          "name": "List all orders with pagination",
+          "request": {
+            "name": "List all orders with pagination",
+            "description": {
+              "content": "Returns a list of created orders with pagination, filterable by `query` or `created_by`. Supports offset-based pagination (page/limit) and range filters for efficient data traversal. \n\n**Recommended approach for paginating over all data:** Use ID range filters with limit=100. The ID range filter (id_gt) works like cursor-based pagination, providing the most efficient way to iterate through the complete dataset. Pass the last ID from the previous page as id_gt to fetch the next batch. \n\nExamples:\n- First page: ?limit=100\n- Next page: ?id_gt=<last_id_from_previous_page>&limit=100\n- Time-based sync: ?created_at_gt=<last_sync_time>&limit=100",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                "paginated"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<long>",
+                  "description": "the size of the page"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<long>",
+                  "description": "the index of the page"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Search query. It can be a string or a number or both"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by",
+                  "value": "<string>",
+                  "description": "a comma-separated list of sales agents emails"
+                },
+                {
+                  "disabled": false,
+                  "key": "partners_only",
+                  "value": "<boolean>",
+                  "description": "a boolean indicating whether to retrieve orders from partner sellers only"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "created_at",
+                  "description": "Field to sort by"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "asc",
+                  "description": "Sort direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "id_gt",
+                  "value": "<uuid>",
+                  "description": "Filter: order ID > value (UUID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "id_gte",
+                  "value": "<uuid>",
+                  "description": "Filter: order ID >= value (UUID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "id_lt",
+                  "value": "<uuid>",
+                  "description": "Filter: order ID < value (UUID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "id_lte",
+                  "value": "<uuid>",
+                  "description": "Filter: order ID <= value (UUID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_gt",
+                  "value": "<dateTime>",
+                  "description": "Filter: order created_at > value (RFC3339)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_gte",
+                  "value": "<dateTime>",
+                  "description": "Filter: order created_at >= value (RFC3339)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_lt",
+                  "value": "<dateTime>",
+                  "description": "Filter: order created_at < value (RFC3339)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_lte",
+                  "value": "<dateTime>",
+                  "description": "Filter: order created_at <= value (RFC3339)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1d0d6eaf-abd6-4261-81d3-de627ada1774",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "query",
+                      "value": "status"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "sales-agent@example.com,anothergreatone@example.com"
+                    },
+                    {
+                      "key": "partners_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "created_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "id_gt",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_gte",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_lt",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_lte",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "created_at_gt",
+                      "value": "2025-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_at_gte",
+                      "value": "2025-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_at_lt",
+                      "value": "2025-12-31T23:59:59Z"
+                    },
+                    {
+                      "key": "created_at_lte",
+                      "value": "2025-12-31T23:59:59Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orders\": [\n    {\n      \"agent_name\": \"abc123\",\n      \"company_name\": \"abc123\",\n      \"created_at\": \"1970-01-01T00:00:01Z\",\n      \"full_name\": \"abc123\",\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"offer_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"seller_offer_reference\": \"abc123\",\n      \"status\": \"confirmed\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 1,\n    \"page_size\": 1,\n    \"total_count\": 1,\n    \"total_pages\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a31569c0-424e-489a-946c-d18d4556398d",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "query",
+                      "value": "status"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "sales-agent@example.com,anothergreatone@example.com"
+                    },
+                    {
+                      "key": "partners_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "created_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "id_gt",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_gte",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_lt",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_lte",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "created_at_gt",
+                      "value": "2025-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_at_gte",
+                      "value": "2025-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_at_lt",
+                      "value": "2025-12-31T23:59:59Z"
+                    },
+                    {
+                      "key": "created_at_lte",
+                      "value": "2025-12-31T23:59:59Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "55597be1-306e-4210-8560-ffdb2f7715bd",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "query",
+                      "value": "status"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "sales-agent@example.com,anothergreatone@example.com"
+                    },
+                    {
+                      "key": "partners_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "created_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "id_gt",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_gte",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_lt",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_lte",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "created_at_gt",
+                      "value": "2025-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_at_gte",
+                      "value": "2025-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_at_lt",
+                      "value": "2025-12-31T23:59:59Z"
+                    },
+                    {
+                      "key": "created_at_lte",
+                      "value": "2025-12-31T23:59:59Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4edc623a-8cbb-4ed7-a8f5-f48ac36d64fa",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "query",
+                      "value": "status"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "sales-agent@example.com,anothergreatone@example.com"
+                    },
+                    {
+                      "key": "partners_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "created_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "id_gt",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_gte",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_lt",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "id_lte",
+                      "value": "550e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                      "key": "created_at_gt",
+                      "value": "2025-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_at_gte",
+                      "value": "2025-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_at_lt",
+                      "value": "2025-12-31T23:59:59Z"
+                    },
+                    {
+                      "key": "created_at_lte",
+                      "value": "2025-12-31T23:59:59Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://seller-api-sandbox.topi-sandbox.eu",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "98edf568-6f0f-45e3-b0be-25eda9161685",
+    "name": "topi Seller catalog order API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Localization\n\nStrings returned can be localized when the _Accept-Language_ header is provided in the request. It should follow the [RFC-2616 convention](http://www.ietf.org/rfc/rfc2616.txt).\n",
+      "type": "text/plain"
+    }
+  }
+}

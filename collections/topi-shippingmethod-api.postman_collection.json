@@ -1,0 +1,626 @@
+{
+  "item": [
+    {
+      "id": "ccc7db0d-3b64-4884-b443-0384e82615f8",
+      "name": "shippingMethod",
+      "description": {
+        "content": "Provides operations to handle shipping-related tasks.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f24c60e6-6351-47ef-a686-c13dcb1390b6",
+          "name": "Get all shipping methods",
+          "request": {
+            "name": "Get all shipping methods",
+            "description": {
+              "content": "Get all shipping methods",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "shipping-method"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Which page number to fetch (zero-indexed)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2b0d387d-0b15-4bc5-886e-db6a311ebc72",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipping-method"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"is_in_store_pickup\": true,\n      \"name\": \"United Parcel Service\",\n      \"seller_shipping_method_reference\": \"Sandbox Shipping Service\",\n      \"supported\": true\n    }\n  ],\n  \"pagination\": {\n    \"has_more\": false,\n    \"page\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccca7438-9c43-4449-82cb-0832b3487a37",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipping-method"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c3a960b-c097-4843-8c86-87d7cd544dbc",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipping-method"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21612b96-8371-4ec6-8338-b0b1cea62d88",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipping-method"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "426934db-a21a-4749-a405-da2516dcd8d5",
+          "name": "Create shipping method",
+          "request": {
+            "name": "Create shipping method",
+            "description": {
+              "content": "Creates a shipping method. This is global for all the offers.\n\nReturns HTTP 200 plus basic information about the newly created shipping method.\n\nThe request returns an HTTP Unprocessable Entity when the provided `\"seller_shipping_method_reference\"` is not unique.\n\n## When using in the Sandbox\n\nThe following seller shipping method references are considered to be available and will make the API return an HTTP Unprocessable Entity error.\n\n- `\"Bridges\"`\n\nNote: The sandbox will always return the same fixture regardless of the payload provided.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "shipping-method",
+                "method"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"seller_shipping_method_reference\": \"<string>\",\n  \"is_in_store_pickup\": \"<boolean>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a6b93b6b-7504-4866-acfe-41c3991235b2",
+              "name": "Created response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipping-method",
+                    "method"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_in_store_pickup\": true,\n  \"name\": \"United Parcel Service\",\n  \"seller_shipping_method_reference\": \"Sandbox Shipping Service\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"is_in_store_pickup\": true,\n  \"name\": \"United Parcel Service\",\n  \"seller_shipping_method_reference\": \"Sandbox Shipping Service\",\n  \"supported\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52ae47b2-e222-4771-b69a-a6cf7297e898",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipping-method",
+                    "method"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_in_store_pickup\": true,\n  \"name\": \"United Parcel Service\",\n  \"seller_shipping_method_reference\": \"Sandbox Shipping Service\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc4cd755-6eaf-4ab0-8901-caef734da04b",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipping-method",
+                    "method"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_in_store_pickup\": true,\n  \"name\": \"United Parcel Service\",\n  \"seller_shipping_method_reference\": \"Sandbox Shipping Service\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6dfb685-53b8-4fd1-84c8-9044b341b60e",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipping-method",
+                    "method"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_in_store_pickup\": true,\n  \"name\": \"United Parcel Service\",\n  \"seller_shipping_method_reference\": \"Sandbox Shipping Service\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98505553-0098-4610-9cb2-4507a491e784",
+              "name": "Unprocessable: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "shipping-method",
+                    "method"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_in_store_pickup\": true,\n  \"name\": \"United Parcel Service\",\n  \"seller_shipping_method_reference\": \"Sandbox Shipping Service\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://seller-api-sandbox.topi-sandbox.eu",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cec65dbd-1a46-4c71-8b10-c8e9bb89cc8d",
+    "name": "topi Seller catalog shippingMethod API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Localization\n\nStrings returned can be localized when the _Accept-Language_ header is provided in the request. It should follow the [RFC-2616 convention](http://www.ietf.org/rfc/rfc2616.txt).\n",
+      "type": "text/plain"
+    }
+  }
+}

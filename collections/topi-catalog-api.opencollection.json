@@ -1,0 +1,354 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "topi Seller catalog API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate pricing for a whole basket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/basket/pricing",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "## <span style=\"color:#cc3333\">*Deprecated*</span>\n\nCalculate pricing endpoint is being replaced by two other endpoints:\n- listRecommendedRentalPrices\n- cartRentalOverview\n\nPlease make sure to migrate to one of the above endpoints based on your use case.\n\n\n### Description\n\ncalculate the price for a product"
+        },
+        {
+          "info": {
+            "name": "Get rental overview for products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/carts/rental-overview",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get rental overview for products"
+        },
+        {
+          "info": {
+            "name": "Check if products are supported",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/check-supported",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Checks whether the products with the given references are supported or not.\n\n### When using in the Sandbox\n\nReturns the requested products with their available contract terms, depending on the combination of the supplied Source and Reference values:\n\n- To get a product with `PayNow` contract terms : The supplied `source` should be `SAP` with `reference` specified as `1234-5678`.\n- To get a product with `Rent` contract terms : There are two ways to get this value either when the supplied `source`"
+        },
+        {
+          "info": {
+            "name": "Import products into the catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add a batch of products to the catalog.\n\n### When using in the Sandbox\n\nUse the following scenarios to get different fixtures:\n\n- Status `\"completed\"`: `Send a catalog with less than 10 products`\n- Status `\"created\"`: `Send a catalog with 10 products or more`\n- Status `\"failed\"`: `Send a product inside the catalog with the \"source\" or the \"reference\" in the \"seller_product_reference\" as empty string`\n"
+        },
+        {
+          "info": {
+            "name": "Create a CSV import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/imports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a new CSV import job and returns the created import id and a pre-signed upload URL.\n\n## Upload flow\n\n1. Call `POST /imports` with the `filename` of your CSV file. The response contains the import\n   `id` and an `upload_url` — a temporary link to upload the file to.\n2. Upload the file with an HTTP `PUT` request to `upload_url`. The request must include two\n   headers: `Content-Type: text/csv` and `x-goog-content-length-range: 0,262144000`. Uploads\n   without them are rejected. The file ma"
+        },
+        {
+          "info": {
+            "name": "Get CSV import job details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/imports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "The import job ID."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves the details of a CSV import job.\n\n## Failure reporting\n\nThere are two distinct failure surfaces:\n\n- **`error`** — set when the import fails before any rows are processed, e.g. a required\n  column is missing from the header, the uploaded file is not a valid CSV, or the upload\n  has the wrong content type. The job status is `failed`, the row counters stay at 0, and\n  no error CSV is produced. Fix the file and create a new import.\n- **`failed` / `errors_url`** — row-level failures during "
+        },
+        {
+          "info": {
+            "name": "Cancel a CSV import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/imports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "The import job ID to cancel."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Cancels a CSV import job.\n\nOnly imports in `pending`, `queued`, and `running`  status can be cancelled. Cancelling a completed or already-cancelled import returns an error.\n\n"
+        },
+        {
+          "info": {
+            "name": "List recommended rental prices for products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/list-recommended-rental-prices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Given a list of products, retrieve information about the recommended monthly rental price and term, if applicable, for each of the requested products."
+        },
+        {
+          "info": {
+            "name": "Calculate pricing for a single product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/pricing",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "## <span style=\"color:#cc3333\">*Deprecated*</span>\n\nCalculate pricing endpoint is being replaced by two other endpoints:\n- listRecommendedRentalPrices\n- cartRentalOverview\n\nPlease make sure to migrate to one of the above endpoints based on your use case.\n\n\n### Description\n\ncalculate the price for a product"
+        },
+        {
+          "info": {
+            "name": "Search products by term",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/products",
+            "params": [
+              {
+                "name": "term",
+                "value": "abc123",
+                "type": "query",
+                "description": "The Seller Product Reference"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "get products that match a search term"
+        },
+        {
+          "info": {
+            "name": "Paginated product search by term, note: this method will not support any filtering, please refer to the POST endpoint for filtering.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/products_paginated",
+            "params": [
+              {
+                "name": "term",
+                "value": "abc123",
+                "type": "query",
+                "description": "The Seller Product Reference"
+              },
+              {
+                "name": "limit",
+                "value": "1",
+                "type": "query",
+                "description": "the size of the page"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "the index of the page"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "get paginated products that match a search term, note: this method will not support any filtering."
+        },
+        {
+          "info": {
+            "name": "Paginated product search by term, filtering by provided options",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://seller-api-sandbox.topi-sandbox.eu/v1/catalog/products_paginated",
+            "params": [
+              {
+                "name": "term",
+                "value": "abc123",
+                "type": "query",
+                "description": "The Seller Product Reference"
+              },
+              {
+                "name": "limit",
+                "value": "1",
+                "type": "query",
+                "description": "the size of the page"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "the index of the page"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://identity.topi.eu/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "get paginated products that match a search term and the provided filters"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

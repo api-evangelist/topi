@@ -1,0 +1,3886 @@
+{
+  "item": [
+    {
+      "id": "d2bfb74c-3ef0-4908-9869-ca73cb1a5746",
+      "name": "catalog",
+      "description": {
+        "content": "Topi catalog for sellers",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8376dc3b-5986-4ead-bee1-203ec395888d",
+          "name": "Calculate pricing for a whole basket",
+          "request": {
+            "name": "Calculate pricing for a whole basket",
+            "description": {
+              "content": "## <span style=\"color:#cc3333\">*Deprecated*</span>\n\nCalculate pricing endpoint is being replaced by two other endpoints:\n- listRecommendedRentalPrices\n- cartRentalOverview\n\nPlease make sure to migrate to one of the above endpoints based on your use case.\n\n\n### Description\n\ncalculate the price for a product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "basket",
+                "pricing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pricing_requests\": [\n    {\n      \"quantity\": \"<long>\",\n      \"seller_product_reference\": {\n        \"source\": \"<string>\",\n        \"reference\": \"<string>\"\n      },\n      \"base_rental_price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      },\n      \"identifier\": \"<string>\",\n      \"price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      },\n      \"sublines\": [\n        {\n          \"seller_product_reference\": {\n            \"source\": \"<string>\",\n            \"reference\": \"<string>\"\n          },\n          \"base_rental_price\": {\n            \"gross\": \"<long>\",\n            \"net\": \"<long>\",\n            \"currency\": \"<string>\",\n            \"tax_rate\": \"<long>\"\n          },\n          \"price\": {\n            \"gross\": \"<long>\",\n            \"net\": \"<long>\",\n            \"currency\": \"<string>\",\n            \"tax_rate\": \"<long>\"\n          }\n        },\n        {\n          \"seller_product_reference\": {\n            \"source\": \"<string>\",\n            \"reference\": \"<string>\"\n          },\n          \"base_rental_price\": {\n            \"gross\": \"<long>\",\n            \"net\": \"<long>\",\n            \"currency\": \"<string>\",\n            \"tax_rate\": \"<long>\"\n          },\n          \"price\": {\n            \"gross\": \"<long>\",\n            \"net\": \"<long>\",\n            \"currency\": \"<string>\",\n            \"tax_rate\": \"<long>\"\n          }\n        }\n      ]\n    },\n    {\n      \"quantity\": \"<long>\",\n      \"seller_product_reference\": {\n        \"source\": \"<string>\",\n        \"reference\": \"<string>\"\n      },\n      \"base_rental_price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      },\n      \"identifier\": \"<string>\",\n      \"price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      },\n      \"sublines\": [\n        {\n          \"seller_product_reference\": {\n            \"source\": \"<string>\",\n            \"reference\": \"<string>\"\n          },\n          \"base_rental_price\": {\n            \"gross\": \"<long>\",\n            \"net\": \"<long>\",\n            \"currency\": \"<string>\",\n            \"tax_rate\": \"<long>\"\n          },\n          \"price\": {\n            \"gross\": \"<long>\",\n            \"net\": \"<long>\",\n            \"currency\": \"<string>\",\n            \"tax_rate\": \"<long>\"\n          }\n        },\n        {\n          \"seller_product_reference\": {\n            \"source\": \"<string>\",\n            \"reference\": \"<string>\"\n          },\n          \"base_rental_price\": {\n            \"gross\": \"<long>\",\n            \"net\": \"<long>\",\n            \"currency\": \"<string>\",\n            \"tax_rate\": \"<long>\"\n          },\n          \"price\": {\n            \"gross\": \"<long>\",\n            \"net\": \"<long>\",\n            \"currency\": \"<string>\",\n            \"tax_rate\": \"<long>\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f0a38860-9c22-4ef7-850e-ba5029f5ab2e",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "basket",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"identifier\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"sublines\": [\n        {\n          \"base_rental_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"seller_product_reference\": {\n            \"reference\": \"123ab-5343\",\n            \"source\": \"sap\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"basket_total_pay_now\": {\n    \"currency\": \"EUR\",\n    \"gross\": 119000,\n    \"net\": 100000,\n    \"tax_rate\": 1900\n  },\n  \"basket_total_rent\": {\n    \"currency\": \"EUR\",\n    \"gross\": 119000,\n    \"net\": 100000,\n    \"tax_rate\": 1900\n  },\n  \"summaries\": [\n    {\n      \"available_contract_types\": [\n        \"rent\"\n      ],\n      \"default_tenure\": 1,\n      \"identifier\": \"abc123\",\n      \"is_supported\": true,\n      \"pay_now\": {\n        \"amount\": {\n          \"currency\": \"EUR\",\n          \"gross\": 119000,\n          \"net\": 100000,\n          \"tax_rate\": 1900\n        },\n        \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\"\n      },\n      \"pay_now_excluding_sublines\": {\n        \"amount\": {\n          \"currency\": \"EUR\",\n          \"gross\": 119000,\n          \"net\": 100000,\n          \"tax_rate\": 1900\n        },\n        \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\"\n      },\n      \"rent\": [\n        {\n          \"duration\": 12,\n          \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n          \"monthly_amount\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          }\n        }\n      ],\n      \"rent_excluding_sublines\": [\n        {\n          \"duration\": 12,\n          \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n          \"monthly_amount\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          }\n        }\n      ],\n      \"sublines\": [\n        {\n          \"available_contract_types\": [\n            \"rent\"\n          ],\n          \"default_tenure\": 1,\n          \"identifier\": \"abc123\",\n          \"is_supported\": true,\n          \"pay_now\": {\n            \"amount\": {\n              \"currency\": \"EUR\",\n              \"gross\": 119000,\n              \"net\": 100000,\n              \"tax_rate\": 1900\n            },\n            \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\"\n          },\n          \"rent\": [\n            {\n              \"duration\": 12,\n              \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n              \"monthly_amount\": {\n                \"currency\": \"EUR\",\n                \"gross\": 119000,\n                \"net\": 100000,\n                \"tax_rate\": 1900\n              }\n            }\n          ],\n          \"summary\": \"Rent with topi for €24.32/month\",\n          \"total_pay_now\": {\n            \"amount\": {\n              \"currency\": \"EUR\",\n              \"gross\": 119000,\n              \"net\": 100000,\n              \"tax_rate\": 1900\n            },\n            \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\"\n          },\n          \"total_rent\": [\n            {\n              \"duration\": 12,\n              \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n              \"monthly_amount\": {\n                \"currency\": \"EUR\",\n                \"gross\": 119000,\n                \"net\": 100000,\n                \"tax_rate\": 1900\n              }\n            }\n          ]\n        }\n      ],\n      \"summary\": \"Rent with topi for €24.32/month\",\n      \"total_pay_now\": {\n        \"amount\": {\n          \"currency\": \"EUR\",\n          \"gross\": 119000,\n          \"net\": 100000,\n          \"tax_rate\": 1900\n        },\n        \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\"\n      },\n      \"total_rent\": [\n        {\n          \"duration\": 12,\n          \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n          \"monthly_amount\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c26b1887-106b-47c9-8da2-f8a04eda172f",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "basket",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"identifier\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"sublines\": [\n        {\n          \"base_rental_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"seller_product_reference\": {\n            \"reference\": \"123ab-5343\",\n            \"source\": \"sap\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6075e404-861e-4004-8e06-54988e8a9436",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "basket",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"identifier\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"sublines\": [\n        {\n          \"base_rental_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"seller_product_reference\": {\n            \"reference\": \"123ab-5343\",\n            \"source\": \"sap\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "370fca32-ed21-449f-af46-ab4b6a072a9b",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "basket",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"identifier\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"sublines\": [\n        {\n          \"base_rental_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"seller_product_reference\": {\n            \"reference\": \"123ab-5343\",\n            \"source\": \"sap\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec0c3ef0-4113-4504-9b2d-2f094fa1de92",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "basket",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"identifier\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"sublines\": [\n        {\n          \"base_rental_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"seller_product_reference\": {\n            \"reference\": \"123ab-5343\",\n            \"source\": \"sap\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "330b6196-2115-445d-a5ca-79e10b622a3f",
+              "name": "Unprocessable: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "basket",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"identifier\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"sublines\": [\n        {\n          \"base_rental_price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"price\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          },\n          \"seller_product_reference\": {\n            \"reference\": \"123ab-5343\",\n            \"source\": \"sap\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3de994c6-c6ab-4223-a7dc-0d7631d51984",
+          "name": "Get rental overview for products",
+          "request": {
+            "name": "Get rental overview for products",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "carts",
+                "rental-overview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"products\": [\n    {\n      \"quantity\": \"<long>\",\n      \"seller_product_reference\": {\n        \"source\": \"<string>\",\n        \"reference\": \"<string>\"\n      },\n      \"base_rental_price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      },\n      \"price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      }\n    },\n    {\n      \"quantity\": \"<long>\",\n      \"seller_product_reference\": {\n        \"source\": \"<string>\",\n        \"reference\": \"<string>\"\n      },\n      \"base_rental_price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      },\n      \"price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79a963f5-bc53-421e-b4af-bf4721aa3f40",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "carts",
+                    "rental-overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"can_checkout\": false,\n  \"currency\": \"EUR\",\n  \"product_prices\": [\n    {\n      \"available_rental_terms\": [\n        {\n          \"duration\": 12,\n          \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n          \"monthly_amount\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          }\n        }\n      ],\n      \"can_checkout\": false,\n      \"currency\": \"EUR\",\n      \"has_rental_terms\": false,\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"summary\": \"Rent with topi from €23.45/month\",\n      \"total_rental_amount\": 1\n    }\n  ],\n  \"total_rental_amount\": 1,\n  \"total_rental_summary\": \"Rent with topi from €123.45/month\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c99ffc10-9a47-49b6-a18d-441515720a92",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "carts",
+                    "rental-overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9b2f518-49e6-405c-8914-f8eec5beb366",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "carts",
+                    "rental-overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"quantity\": 1,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37738599-6630-459e-b516-9345a0b1658a",
+          "name": "Check if products are supported",
+          "request": {
+            "name": "Check if products are supported",
+            "description": {
+              "content": "Checks whether the products with the given references are supported or not.\n\n### When using in the Sandbox\n\nReturns the requested products with their available contract terms, depending on the combination of the supplied Source and Reference values:\n\n- To get a product with `PayNow` contract terms : The supplied `source` should be `SAP` with `reference` specified as `1234-5678`.\n- To get a product with `Rent` contract terms : There are two ways to get this value either when the supplied `source` is `SAP` and the `reference` is `1111-1111` or with `source` set to `B6` and `reference` specified as `2222-2222`.\n- To get a product that is not topi supported: Specify the `source` as `SAP` and `reference` should be `8765-4321`.\n\nIn other cases this method will return an empty array.\n\nThis method has been defined as POST because the size of the input values could grow fast.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "check-supported"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"seller_product_references\": [\n    {\n      \"source\": \"<string>\",\n      \"reference\": \"<string>\"\n    },\n    {\n      \"source\": \"<string>\",\n      \"reference\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fdc9c2dc-2ba5-4d13-9284-82a090b29a76",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "check-supported"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"seller_product_references\": [\n    {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"products\": [\n    {\n      \"available_contract_terms\": {\n        \"can_pay_now\": false,\n        \"can_rent\": false,\n        \"rent\": {\n          \"duration\": 1\n        }\n      },\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"is_supported\": false,\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54b60fff-04e0-4c35-a44b-da0efb14a808",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "check-supported"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"seller_product_references\": [\n    {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77ad4246-551c-45d3-94b0-8cd9458c7ac2",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "check-supported"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"seller_product_references\": [\n    {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57d44b88-d2c7-4baf-b154-051e4ef36181",
+          "name": "Import products into the catalog",
+          "request": {
+            "name": "Import products into the catalog",
+            "description": {
+              "content": "Add a batch of products to the catalog.\n\n### When using in the Sandbox\n\nUse the following scenarios to get different fixtures:\n\n- Status `\"completed\"`: `Send a catalog with less than 10 products`\n- Status `\"created\"`: `Send a catalog with 10 products or more`\n- Status `\"failed\"`: `Send a product inside the catalog with the \"source\" or the \"reference\" in the \"seller_product_reference\" as empty string`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"products\": [\n    {\n      \"title\": \"<string>\",\n      \"seller_product_references\": [\n        {\n          \"source\": \"<string>\",\n          \"reference\": \"<string>\"\n        }\n      ],\n      \"price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      },\n      \"is_active\": \"<boolean>\",\n      \"base_rental_price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\"\n      },\n      \"description\": \"<string>\",\n      \"extra_details\": [\n        {\n          \"property\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"property\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"<uri>\"\n      },\n      \"manufacturer\": \"<string>\",\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"<string>\",\n          \"identifier_type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"identifier_type\": \"<string>\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"name\": \"<string>\",\n          \"id\": \"<string>\",\n          \"parent_category_id\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"id\": \"<string>\",\n          \"parent_category_id\": \"<string>\"\n        }\n      ],\n      \"seller_product_type\": \"<string>\",\n      \"shop_product_description_url\": \"<uri>\",\n      \"subtitle\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a917c8dd-140b-4fe4-88c6-e5e3d0232dea",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    },\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"status\": \"started\",\n  \"summary\": {\n    \"sample_products_rejected\": [\n      {\n        \"error_code\": \"unsupported_product\",\n        \"error_description\": \"the product type is not supported\",\n        \"seller_product_reference\": {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      }\n    ],\n    \"total_products\": 1,\n    \"total_products_imported\": 1,\n    \"total_products_rejected\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77ca16da-f0e4-4ab9-9eb3-fa047c9cae15",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    },\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dd9efdc-21a2-4d15-b342-3a5ccbea9bd3",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    },\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "058ee759-f2cf-4e99-880d-9bda106f81f7",
+              "name": "TooManyProducts: Request Entity Too Large response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    },\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e77ce80c-4bcf-48c2-ae97-b1897bcd3ed3",
+              "name": "Unprocessable: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    },\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"aaa\",\n      \"extra_details\": [\n        {\n          \"property\": \"memory\",\n          \"value\": \"16GB DDR5\"\n        }\n      ],\n      \"image\": {\n        \"url\": \"https://example.com/foo\"\n      },\n      \"is_active\": false,\n      \"manufacturer\": \"abc123\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"product_standard_identifiers\": [\n        {\n          \"id\": \"123ab-4567\",\n          \"identifier_type\": \"EAN\"\n        }\n      ],\n      \"seller_categories\": [\n        {\n          \"id\": \"abc123\",\n          \"name\": \"abc123\",\n          \"parent_category_id\": \"abc123\"\n        }\n      ],\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        },\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"seller_product_type\": \"software\",\n      \"shop_product_description_url\": \"https://example.com/foo\",\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4203b164-306b-4d13-b14e-1fea5ffccf94",
+          "name": "Create a CSV import job",
+          "request": {
+            "name": "Create a CSV import job",
+            "description": {
+              "content": "Creates a new CSV import job and returns the created import id and a pre-signed upload URL.\n\n## Upload flow\n\n1. Call `POST /imports` with the `filename` of your CSV file. The response contains the import\n   `id` and an `upload_url` — a temporary link to upload the file to.\n2. Upload the file with an HTTP `PUT` request to `upload_url`. The request must include two\n   headers: `Content-Type: text/csv` and `x-goog-content-length-range: 0,262144000`. Uploads\n   without them are rejected. The file may be at most **250 MB**.\n3. The file is then checked and processed in the background. Call `GET /imports/{id}` to follow\n   progress. When some rows could not be imported, the response links to a downloadable CSV\n   listing each failed row and the reason. If the file fails the initial check (for example a\n   required column is missing), the import status becomes `failed` and the `error` field\n   explains why.\n\nA seller can have at most **5 imports running** at the same time. Starting a sixth returns a\n`TooManyRequests` error — wait for an earlier import to finish and try again.\n\n## CSV format\n\nThe first line of the file must be a header row with column names. Column names are not\ncase-sensitive and surrounding spaces are ignored; any column not listed below is simply skipped.\n\nRe-uploading a product you imported before (same `reference`) updates that product instead of\ncreating a duplicate. Leaving an optional cell empty on re-import keeps the product's existing\nvalue for that field.\n\n### Required columns\n\nThe import is rejected if any of these are missing from the header.\n\n| Column | Description | Format |\n|---|---|---|\n| `title` | Product name shown to customers | Non-empty text |\n| `reference` | Your product identifier(s) | One or more values joined by `\\|`; count must match `reference_source` |\n| `reference_source` | Source/type of each reference (e.g. `sku`, `ean`) | `\\|`-separated, same count as `reference` |\n| `is_active` | Whether the product is sellable | `true`/`false`, `1`/`0`, `yes`/`no`, `y`/`n` (case-insensitive) |\n| `price_gross` | Sale price incl. VAT | Number > 0, must be >= `price_net` |\n| `price_net` | Sale price excl. VAT | Number > 0 |\n\n### Optional columns\n\n| Column | Description | Format |\n|---|---|---|\n| `currency` | Currency code, e.g. `EUR` | Defaults to the seller currency if blank |\n| `manufacturer` | Brand / maker | Text |\n| `subtitle` | Short tagline under the title | Text |\n| `description` | Long product description | Text, max 2000 characters |\n| `base_rental_price_gross` | Monthly rental price incl. VAT | Number > 0, must be >= net if both set |\n| `base_rental_price_net` | Monthly rental price excl. VAT | Number > 0 |\n| `ean` | EAN barcode | Text |\n| `mpn` | Manufacturer part number | Text |\n| `image_url` | Product image | Valid URL |\n| `seller_category_id` | Your category ID | Text |\n| `seller_category_name` | Your category name | Text |\n| `seller_category_parent_id` | Parent category ID | Text |\n| `seller_product_type` | Product type | One of `hardware`, `software`, `service`, `hardware_built_to_order`, or blank |\n| `shop_product_description_url` | Link to the product page on your shop | Valid URL |\n| `extra_details` | Custom key/value attributes | `key=value` pairs joined by `\\|` |\n\n### Prices\n\n- Prices are written in whole currency units, not cents: `2499.00` means 2,499 euros.\n- `price_gross` (with VAT) must be greater than or equal to `price_net` (without VAT).\n- Both decimal styles are accepted: a point (`1999.99`) or a comma (`1999,99`) before the\n  decimals. Thousands separators are also fine in either style: `1,234.56` and `1.234,56` both\n  mean one thousand two hundred thirty-four euros and 56 cents.\n- One shape cannot be told apart: a value like `1,234` could mean `1.234` or `1234`, so that\n  row is rejected with an error. To avoid this, always write the cents explicitly — `1234.00`\n  (or `1.234,00`) for one thousand two hundred thirty-four euros, `1.23` (or `1,23`) for one\n  euro and 23 cents.\n\n### Notes\n\n- **Multiple references**: a product can carry several identifiers — pipe-separate them in\n  `reference` (e.g. `MBP14-001|0719726100000`) with matching kinds in `reference_source`\n  (e.g. `sku|ean`). The two columns must have an equal number of `|`-separated values.\n- **Duplicate references** within the same file are rejected per row; the rest of the file still\n  imports.\n- A row that fails validation does not stop the import: valid rows still import, and every\n  failed row is listed with its reason in the downloadable error CSV.\n\n### Example\n\n```csv\ntitle,reference,reference_source,is_active,price_gross,price_net,currency,manufacturer,seller_product_type,extra_details\nApple MacBook Pro 14,MBP14-001,sku,true,2499.00,2099.16,EUR,Apple,hardware,color=Space Black|warranty=24 months\nDell UltraSharp Monitor,DELL-U2724|0719726100000,sku|ean,1,649.00,545.38,EUR,Dell,hardware,resolution=3840x2160|panel=IPS\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9695ab41-1926-4f32-b38d-dba5d08f1c47",
+              "name": "Created response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"upload_url\": \"https://example.com/foo\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27f83568-7cf5-4341-944f-4f1bc6b675ee",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7bde4016-b346-4493-8b14-10c9e69843cc",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f6f6dec-0e7b-4e71-99fc-c6b99da05488",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84573b33-2783-47e1-a3df-ba0e789952d9",
+              "name": "TooManyRequests: Too Many Requests response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd7aa6b6-3e3c-473e-bf15-dac62d533025",
+          "name": "Cancel a CSV import job",
+          "request": {
+            "name": "Cancel a CSV import job",
+            "description": {
+              "content": "Cancels a CSV import job.\n\nOnly imports in `pending`, `queued`, and `running`  status can be cancelled. Cancelling a completed or already-cancelled import returns an error.\n\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "imports",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The import job ID to cancel."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "29083b71-f1c3-4875-b4c6-ee6094aa653a",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The import job ID to cancel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d0bc0f8-3243-4848-bda8-b512f6a636aa",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The import job ID to cancel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01daae8c-f552-4fc1-85dd-7d883a5167f3",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The import job ID to cancel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bea2a675-71f5-4c79-a26e-1c8deb640e41",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The import job ID to cancel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b41d1ce-12cb-4ed3-a225-9d757d520648",
+              "name": "Unprocessable: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The import job ID to cancel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffedb518-c39d-4b88-97eb-d11623e9842d",
+          "name": "Get CSV import job details",
+          "request": {
+            "name": "Get CSV import job details",
+            "description": {
+              "content": "Retrieves the details of a CSV import job.\n\n## Failure reporting\n\nThere are two distinct failure surfaces:\n\n- **`error`** — set when the import fails before any rows are processed, e.g. a required\n  column is missing from the header, the uploaded file is not a valid CSV, or the upload\n  has the wrong content type. The job status is `failed`, the row counters stay at 0, and\n  no error CSV is produced. Fix the file and create a new import.\n- **`failed` / `errors_url`** — row-level failures during processing. The import keeps\n  going; rows that failed are counted in `failed` and detailed in the downloadable CSV at\n  `errors_url`. The `error` field stays empty in this case.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "imports",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The import job ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ae892a94-b385-4789-a4b8-21486d1fde34",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The import job ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categorization\": {\n    \"done\": false,\n    \"pending\": 1,\n    \"supported\": 1,\n    \"to_be_reviewed\": 1,\n    \"total\": 1,\n    \"unsupported\": 1\n  },\n  \"created_at\": \"1970-01-01T00:00:01Z\",\n  \"error\": \"abc123\",\n  \"errors_url\": \"https://example.com/foo\",\n  \"failed\": 1,\n  \"filename\": \"abc123\",\n  \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"object_path\": \"https://example.com/foo\",\n  \"processed\": 1,\n  \"status\": \"queued\",\n  \"succeeded\": 1,\n  \"updated_at\": \"1970-01-01T00:00:01Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94792887-ff02-4200-af3c-7897ad195f42",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The import job ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61b1cfce-013e-4e65-b3db-d2b3ad63512d",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The import job ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14ff97e6-50bf-4545-acba-91d3d964f41b",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The import job ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bef6a564-37dc-4ff2-96cb-2ab427304482",
+          "name": "List recommended rental prices for products",
+          "request": {
+            "name": "List recommended rental prices for products",
+            "description": {
+              "content": "Given a list of products, retrieve information about the recommended monthly rental price and term, if applicable, for each of the requested products.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "list-recommended-rental-prices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pricing_requests\": [\n    {\n      \"seller_product_reference\": {\n        \"source\": \"<string>\",\n        \"reference\": \"<string>\"\n      },\n      \"base_rental_price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      },\n      \"price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      }\n    },\n    {\n      \"seller_product_reference\": {\n        \"source\": \"<string>\",\n        \"reference\": \"<string>\"\n      },\n      \"base_rental_price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      },\n      \"price\": {\n        \"gross\": \"<long>\",\n        \"net\": \"<long>\",\n        \"currency\": \"<string>\",\n        \"tax_rate\": \"<long>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2dc8fb18-e89e-42eb-8257-772dc51b2369",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "list-recommended-rental-prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"currency\": \"EUR\",\n    \"has_rental_terms\": false,\n    \"monthly_rental_amount\": 100000,\n    \"monthly_rental_terms\": {\n      \"duration\": 12,\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"monthly_amount\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      }\n    },\n    \"seller_product_reference\": {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    },\n    \"summary\": \"Rent with topi from €23.45/month\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c628cb4c-eb67-4198-9dc4-981e5670fc8f",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "list-recommended-rental-prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40d741cd-17e7-4bf8-9540-f9a7a9551550",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "list-recommended-rental-prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_requests\": [\n    {\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      },\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9502d3e8-3e8d-4916-ae9e-5a0b793d2d6c",
+          "name": "Calculate pricing for a single product",
+          "request": {
+            "name": "Calculate pricing for a single product",
+            "description": {
+              "content": "## <span style=\"color:#cc3333\">*Deprecated*</span>\n\nCalculate pricing endpoint is being replaced by two other endpoints:\n- listRecommendedRentalPrices\n- cartRentalOverview\n\nPlease make sure to migrate to one of the above endpoints based on your use case.\n\n\n### Description\n\ncalculate the price for a product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "pricing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pricing_request\": {\n    \"seller_product_reference\": {\n      \"source\": \"<string>\",\n      \"reference\": \"<string>\"\n    },\n    \"base_rental_price\": {\n      \"gross\": \"<long>\",\n      \"net\": \"<long>\",\n      \"currency\": \"<string>\",\n      \"tax_rate\": \"<long>\"\n    },\n    \"price\": {\n      \"gross\": \"<long>\",\n      \"net\": \"<long>\",\n      \"currency\": \"<string>\",\n      \"tax_rate\": \"<long>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "77d66354-06a1-4119-b81c-9789788f25a7",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_request\": {\n    \"base_rental_price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"seller_product_reference\": {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"available_contract_types\": [\n    \"rent\"\n  ],\n  \"is_supported\": true,\n  \"pay_now\": {\n    \"amount\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\"\n  },\n  \"rent\": [\n    {\n      \"duration\": 12,\n      \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"monthly_amount\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000,\n        \"tax_rate\": 1900\n      }\n    }\n  ],\n  \"sublines\": [\n    {\n      \"available_contract_types\": [\n        \"rent\"\n      ],\n      \"is_supported\": true,\n      \"pay_now\": {\n        \"amount\": {\n          \"currency\": \"EUR\",\n          \"gross\": 119000,\n          \"net\": 100000,\n          \"tax_rate\": 1900\n        },\n        \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\"\n      },\n      \"rent\": [\n        {\n          \"duration\": 12,\n          \"id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n          \"monthly_amount\": {\n            \"currency\": \"EUR\",\n            \"gross\": 119000,\n            \"net\": 100000,\n            \"tax_rate\": 1900\n          }\n        }\n      ],\n      \"summary\": \"Rent with topi for €24.32/month\"\n    }\n  ],\n  \"summary\": \"Rent with topi for €24.32/month\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "858c1ab6-9f2a-4d55-b259-79521789838b",
+              "name": "BadRequest: Bad Request response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_request\": {\n    \"base_rental_price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"seller_product_reference\": {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b9c43bde-3046-4940-872a-c0dc8376d91f",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_request\": {\n    \"base_rental_price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"seller_product_reference\": {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5dcb757-b706-4cc2-88a4-16096c273f68",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_request\": {\n    \"base_rental_price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"seller_product_reference\": {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bed76cb-ef07-4d9d-88ab-a961617871b1",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_request\": {\n    \"base_rental_price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"seller_product_reference\": {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "59e19dae-93bd-42bf-bb76-0897528773e0",
+              "name": "Unprocessable: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pricing_request\": {\n    \"base_rental_price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000,\n      \"tax_rate\": 1900\n    },\n    \"seller_product_reference\": {\n      \"reference\": \"123ab-5343\",\n      \"source\": \"sap\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abb82bed-7203-48af-b9d6-61a6da860e8e",
+          "name": "Search products by term",
+          "request": {
+            "name": "Search products by term",
+            "description": {
+              "content": "get products that match a search term",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "term",
+                  "value": "<string>",
+                  "description": "The Seller Product Reference"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "38bf2194-4154-4e40-9836-25080b6580d5",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"archived\": false,\n    \"available_contract_terms\": {\n      \"can_pay_now\": false,\n      \"can_rent\": false,\n      \"rent\": {\n        \"duration\": 1\n      }\n    },\n    \"base_rental_price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000\n    },\n    \"description\": \"abc123\",\n    \"ean\": \"abc123\",\n    \"list_price\": {\n      \"currency\": \"EUR\",\n      \"gross\": 119000,\n      \"net\": 100000\n    },\n    \"manufacturer\": \"abc123\",\n    \"mpn\": \"abc123\",\n    \"origin\": \"abc123\",\n    \"pretty_id\": \"abc123\",\n    \"pricing_category\": \"abc123\",\n    \"product_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n    \"reference\": \"abc123\",\n    \"seller_product_references\": [\n      {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      }\n    ],\n    \"subtitle\": \"abc123\",\n    \"title\": \"abc123\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4733c11-7130-40aa-86b7-99cd9437e06b",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6f70ff3-8a86-47d1-9942-f7a48049f8a8",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10491a29-198e-48b5-ae8f-e4b8ac4d4f4b",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e2ce6a3b-9aba-43f9-b8cb-77c9cfab2d47",
+              "name": "Unprocessable: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b4b580c-ea77-47d7-95ea-353d8afa8ef4",
+          "name": "Paginated product search by term, note: this method will not support any filtering, please refer to the POST endpoint for filtering.",
+          "request": {
+            "name": "Paginated product search by term, note: this method will not support any filtering, please refer to the POST endpoint for filtering.",
+            "description": {
+              "content": "get paginated products that match a search term, note: this method will not support any filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "products_paginated"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "term",
+                  "value": "<string>",
+                  "description": "The Seller Product Reference"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<long>",
+                  "description": "the size of the page"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<long>",
+                  "description": "the index of the page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9d4b40b2-699e-4ba1-9cbf-3a7c0aff038a",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products_paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 1,\n  \"page\": 1,\n  \"rows\": [\n    {\n      \"archived\": false,\n      \"available_contract_terms\": {\n        \"can_pay_now\": false,\n        \"can_rent\": false,\n        \"rent\": {\n          \"duration\": 1\n        }\n      },\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"abc123\",\n      \"ean\": \"abc123\",\n      \"list_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"manufacturer\": \"abc123\",\n      \"mpn\": \"abc123\",\n      \"origin\": \"abc123\",\n      \"pretty_id\": \"abc123\",\n      \"pricing_category\": \"abc123\",\n      \"product_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"reference\": \"abc123\",\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    }\n  ],\n  \"totalPages\": 1,\n  \"totalRows\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "888f047b-03c7-4747-8b55-714d2874cfab",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products_paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "414ea913-4137-4b7f-9acf-133c465ba018",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products_paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "582c0dc5-9d12-4cd2-b00f-c65e1cab3a68",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products_paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4fc2e86-8162-4e20-8c76-de3bf7dd7e05",
+              "name": "Unprocessable: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products_paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1381125b-b4d7-4ac1-b74d-e4f56c972a38",
+          "name": "Paginated product search by term, filtering by provided options",
+          "request": {
+            "name": "Paginated product search by term, filtering by provided options",
+            "description": {
+              "content": "get paginated products that match a search term and the provided filters",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                "products_paginated"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "term",
+                  "value": "<string>",
+                  "description": "The Seller Product Reference"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<long>",
+                  "description": "the size of the page"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<long>",
+                  "description": "the index of the page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "seller-branding:read seller-catalog:edit seller-catalog:read seller-metrics:read seller-offer:edit seller-offer:read seller-order:edit seller-order:read seller-scenario-simulations:run seller-shipment:edit seller-shipping-method:edit seller-shipping-method:read user-info:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://identity.topi.eu/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filtering_logic\": \"<string>\",\n  \"filtering_options\": [\n    {\n      \"property\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"property\": \"<string>\",\n      \"operation\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "faa13c4e-fd1f-476c-bf1a-cfcbeef54f00",
+              "name": "OK response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products_paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filtering_logic\": \"OR\",\n  \"filtering_options\": [\n    {\n      \"operation\": \">\",\n      \"property\": \"abc123\",\n      \"value\": \"abc123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 1,\n  \"page\": 1,\n  \"rows\": [\n    {\n      \"archived\": false,\n      \"available_contract_terms\": {\n        \"can_pay_now\": false,\n        \"can_rent\": false,\n        \"rent\": {\n          \"duration\": 1\n        }\n      },\n      \"base_rental_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"description\": \"abc123\",\n      \"ean\": \"abc123\",\n      \"list_price\": {\n        \"currency\": \"EUR\",\n        \"gross\": 119000,\n        \"net\": 100000\n      },\n      \"manufacturer\": \"abc123\",\n      \"mpn\": \"abc123\",\n      \"origin\": \"abc123\",\n      \"pretty_id\": \"abc123\",\n      \"pricing_category\": \"abc123\",\n      \"product_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n      \"reference\": \"abc123\",\n      \"seller_product_references\": [\n        {\n          \"reference\": \"123ab-5343\",\n          \"source\": \"sap\"\n        }\n      ],\n      \"subtitle\": \"abc123\",\n      \"title\": \"abc123\"\n    }\n  ],\n  \"totalPages\": 1,\n  \"totalRows\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "953265ec-0d42-41a3-b019-e78a3e720041",
+              "name": "Unauthorized: Unauthorized response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products_paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filtering_logic\": \"OR\",\n  \"filtering_options\": [\n    {\n      \"operation\": \">\",\n      \"property\": \"abc123\",\n      \"value\": \"abc123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aee8dab6-d51c-4b15-b989-d1836a18eb9a",
+              "name": "InvalidScopes: Forbidden response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products_paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filtering_logic\": \"OR\",\n  \"filtering_options\": [\n    {\n      \"operation\": \">\",\n      \"property\": \"abc123\",\n      \"value\": \"abc123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"abc123\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c986cd0d-ae83-40c6-adba-220f1c14ecad",
+              "name": "NotFound: Not Found response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products_paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filtering_logic\": \"OR\",\n  \"filtering_options\": [\n    {\n      \"operation\": \">\",\n      \"property\": \"abc123\",\n      \"value\": \"abc123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "378c60ba-e711-4b07-af62-8dfb7d1e0216",
+              "name": "Unprocessable: Unprocessable Entity response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    "products_paginated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "abc123"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.goa.error"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filtering_logic\": \"OR\",\n  \"filtering_options\": [\n    {\n      \"operation\": \">\",\n      \"property\": \"abc123\",\n      \"value\": \"abc123\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.goa.error"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://seller-api-sandbox.topi-sandbox.eu",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dcf8b59d-286a-4ba5-9342-66373e12d696",
+    "name": "topi Seller catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Localization\n\nStrings returned can be localized when the _Accept-Language_ header is provided in the request. It should follow the [RFC-2616 convention](http://www.ietf.org/rfc/rfc2616.txt).\n",
+      "type": "text/plain"
+    }
+  }
+}
