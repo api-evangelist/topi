@@ -153,18 +153,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/topi-shipment-api-openapi.yml
-- aid: topi:topi-shippingmethod-api
-  name: Topi shippingMethod API
+- aid: topi:topi-shipping-method-api
+  name: Topi Shipping Method API
   description: Provides operations to handle shipping-related tasks.
   humanURL: https://developer.topi.eu/api
   baseURL: https://seller-api.topi.eu
   tags:
   - Shipping Method
-  tags_raw:
-  - shippingMethod
   properties:
   - type: OpenAPI
-    url: openapi/topi-shippingmethod-api-openapi.yml
+    url: openapi/topi-shipping-method-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
