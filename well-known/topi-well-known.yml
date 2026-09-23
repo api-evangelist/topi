@@ -1,16 +1,16 @@
 generated: '2026-07-21'
 method: searched
 source: live probe of /.well-known/* across topi hosts
-note: >-
-  No /.well-known/ discovery documents are published on any topi host. All
-  probed paths returned HTTP 404. Recorded as valid negative data; no WellKnown
-  pointer is emitted since nothing was found.
+note: No /.well-known/ discovery documents are published on any topi host. All probed paths returned HTTP
+  404. Recorded as valid negative data; no WellKnown pointer is emitted since nothing was found.
 hosts_probed:
-  - https://seller-api.topi.eu
-  - https://identity.topi.eu
-  - https://www.topi.eu
-  - https://developer.topi.eu
-documents:
+- https://seller-api.topi.eu
+- https://identity.topi.eu
+- https://www.topi.eu
+- https://developer.topi.eu
+hosts:
+- host: ''
+  documents:
   - path: /.well-known/security.txt
     status: 404
   - path: /.well-known/openid-configuration
@@ -21,3 +21,8 @@ documents:
     status: 404
   - path: /.well-known/ai-plugin.json
     status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

@@ -1,11 +1,7 @@
 {
   "provider": "topi",
   "sources": [
-    "topi-catalog-api-openapi.yml",
-    "topi-offer-api-openapi.yml",
-    "topi-order-api-openapi.yml",
-    "topi-shipment-api-openapi.yml",
-    "topi-shippingmethod-api-openapi.yml"
+    "_original/topi-seller-api-openapi-original.yaml"
   ],
   "outputs": [
     "topi-catalog-api-openapi.yml",
@@ -14,9 +10,22 @@
     "topi-shipment-api-openapi.yml",
     "topi-shippingmethod-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "topi-seller-api-openapi-original.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "superseded outputs removed: topi-shipping-method-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 5 total)"
+  ],
+  "skipped": [
+    "topi-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "topi-offer-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "topi-order-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "topi-shipment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "topi-shipping-method-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
