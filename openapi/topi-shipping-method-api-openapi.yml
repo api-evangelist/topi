@@ -227,6 +227,27 @@ components:
       required:
       - page
       - has_more
+    CreateShippingMethodPayload:
+      type: object
+      properties:
+        is_in_store_pickup:
+          type: boolean
+          description: Is this shipping method in store pickup
+          example: true
+        name:
+          type: string
+          description: Name for the shipping method.
+          example: United Parcel Service
+        seller_shipping_method_reference:
+          type: string
+          description: Seller's own reference for this shipping method.
+          example: Sandbox Shipping Service
+      example:
+        is_in_store_pickup: true
+        name: United Parcel Service
+        seller_shipping_method_reference: Sandbox Shipping Service
+      required:
+      - seller_shipping_method_reference
     PaginatedShippingMethodResult:
       type: object
       properties:
@@ -297,27 +318,6 @@ components:
       - temporary
       - timeout
       - fault
-    CreateShippingMethodPayload:
-      type: object
-      properties:
-        is_in_store_pickup:
-          type: boolean
-          description: Is this shipping method in store pickup
-          example: true
-        name:
-          type: string
-          description: Name for the shipping method.
-          example: United Parcel Service
-        seller_shipping_method_reference:
-          type: string
-          description: Seller's own reference for this shipping method.
-          example: Sandbox Shipping Service
-      example:
-        is_in_store_pickup: true
-        name: United Parcel Service
-        seller_shipping_method_reference: Sandbox Shipping Service
-      required:
-      - seller_shipping_method_reference
   securitySchemes:
     OAuth2Seller_header_Authorization:
       type: oauth2

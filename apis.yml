@@ -65,7 +65,7 @@ tags_raw:
 - API
 apis:
 - aid: topi:topi-catalog-api
-  name: Topi catalog API
+  name: Topi Catalog API
   description: Topi catalog for sellers
   humanURL: https://developer.topi.eu/api
   baseURL: https://seller-api.topi.eu
@@ -77,7 +77,7 @@ apis:
   - type: OpenAPI
     url: openapi/topi-catalog-api-openapi.yml
 - aid: topi:topi-offer-api
-  name: Topi offer API
+  name: Topi Offer API
   description: >-
     Provides operations to handle offers for end-customers.
 
@@ -110,7 +110,7 @@ apis:
   - type: OpenAPI
     url: openapi/topi-offer-api-openapi.yml
 - aid: topi:topi-order-api
-  name: Topi order API
+  name: Topi Order API
   description: "Provides operations to handle orders for end-customers.\n\n## Webhooks\n\nWe will ping\
     \ the URL provided whenever an order has changed its status to: `\"created\"`, `\"completed\"`, or\
     \ `\"canceled\"`.\n\n**Payload**:\n\n- Available fields:\n    - `id`: `string`\n    - `assets`: `array`\
@@ -129,7 +129,7 @@ apis:
   - type: OpenAPI
     url: openapi/topi-order-api-openapi.yml
 - aid: topi:topi-shipment-api
-  name: Topi shipment API
+  name: Topi Shipment API
   description: >-
     #### Assets without serial numbers
 
