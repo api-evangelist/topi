@@ -97,6 +97,44 @@ paths:
         source: "const response = await fetch('https://seller-api.topi.eu/v1/shipment', {\n  method: 'POST',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`,\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n  \"metadata\": {\n    \"tracking_number\": \"123456\"\n  },\n  \"order_id\": \"739b63c2-9e58-4964-b38d-4ebb424de242\",\n  \"serial_numbers\": [\n    {\n      \"seller_product_reference\": {\n        \"reference\": \"123ab-5343\",\n        \"source\": \"sap\"\n      },\n      \"serial_number\": \"BA-3456786-334-9\"\n    }\n  ],\n  \"tracking_url\": \"https://example.com/foo\"\n})\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
 components:
   schemas:
+    Shipment:
+      type: object
+      properties:
+        metadata:
+          type: object
+          description: Metadata that you can attach to an order. You can store any JSON information.
+          example:
+            tracking_number: '123456'
+          additionalProperties:
+            type: string
+            example: aaa
+            maxLength: 400
+        serial_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SerialNumberByAsset'
+          description: The products' serial numbers to register
+          example:
+          - seller_product_reference:
+              reference: 123ab-5343
+              source: sap
+            serial_number: BA-3456786-334-9
+        tracking_url:
+          type: string
+          description: The tracking URL of the asset
+          example: https://example.com/foo
+          format: uri
+      example:
+        metadata:
+          tracking_number: '123456'
+        serial_numbers:
+        - seller_product_reference:
+            reference: 123ab-5343
+            source: sap
+          serial_number: BA-3456786-334-9
+        tracking_url: https://example.com/foo
+      required:
+      - serial_numbers
     Error:
       type: object
       properties:
@@ -138,61 +176,6 @@ components:
       - temporary
       - timeout
       - fault
-    SerialNumberByAsset:
-      type: object
-      properties:
-        seller_product_reference:
-          $ref: '#/components/schemas/SellerProductReference'
-        serial_number:
-          type: string
-          description: The serial number given by the device manufacturer, usually found on the packaging
-          example: BA-3456786-334-9
-      example:
-        seller_product_reference:
-          reference: 123ab-5343
-          source: sap
-        serial_number: BA-3456786-334-9
-      required:
-      - seller_product_reference
-      - serial_number
-    Shipment:
-      type: object
-      properties:
-        metadata:
-          type: object
-          description: Metadata that you can attach to an order. You can store any JSON information.
-          example:
-            tracking_number: '123456'
-          additionalProperties:
-            type: string
-            example: aaa
-            maxLength: 400
-        serial_numbers:
-          type: array
-          items:
-            $ref: '#/components/schemas/SerialNumberByAsset'
-          description: The products' serial numbers to register
-          example:
-          - seller_product_reference:
-              reference: 123ab-5343
-              source: sap
-            serial_number: BA-3456786-334-9
-        tracking_url:
-          type: string
-          description: The tracking URL of the asset
-          example: https://example.com/foo
-          format: uri
-      example:
-        metadata:
-          tracking_number: '123456'
-        serial_numbers:
-        - seller_product_reference:
-            reference: 123ab-5343
-            source: sap
-          serial_number: BA-3456786-334-9
-        tracking_url: https://example.com/foo
-      required:
-      - serial_numbers
     SellerProductReference:
       type: object
       properties:
@@ -213,6 +196,23 @@ components:
       required:
       - source
       - reference
+    SerialNumberByAsset:
+      type: object
+      properties:
+        seller_product_reference:
+          $ref: '#/components/schemas/SellerProductReference'
+        serial_number:
+          type: string
+          description: The serial number given by the device manufacturer, usually found on the packaging
+          example: BA-3456786-334-9
+      example:
+        seller_product_reference:
+          reference: 123ab-5343
+          source: sap
+        serial_number: BA-3456786-334-9
+      required:
+      - seller_product_reference
+      - serial_number
     CreateRequestBody:
       type: object
       properties:
