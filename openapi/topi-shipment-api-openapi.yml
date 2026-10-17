@@ -135,6 +135,43 @@ components:
         tracking_url: https://example.com/foo
       required:
       - serial_numbers
+    SellerProductReference:
+      type: object
+      properties:
+        reference:
+          type: string
+          description: The ID related with the source. This value should be unique for that source.
+          example: 123ab-5343
+          pattern: '[a-zA-Z0-9._-]'
+          minLength: 1
+        source:
+          type: string
+          description: The seller internal source name for this reference type.
+          example: sap
+          minLength: 1
+      example:
+        reference: 123ab-5343
+        source: sap
+      required:
+      - source
+      - reference
+    SerialNumberByAsset:
+      type: object
+      properties:
+        seller_product_reference:
+          $ref: '#/components/schemas/SellerProductReference'
+        serial_number:
+          type: string
+          description: The serial number given by the device manufacturer, usually found on the packaging
+          example: BA-3456786-334-9
+      example:
+        seller_product_reference:
+          reference: 123ab-5343
+          source: sap
+        serial_number: BA-3456786-334-9
+      required:
+      - seller_product_reference
+      - serial_number
     Error:
       type: object
       properties:
@@ -176,43 +213,6 @@ components:
       - temporary
       - timeout
       - fault
-    SellerProductReference:
-      type: object
-      properties:
-        reference:
-          type: string
-          description: The ID related with the source. This value should be unique for that source.
-          example: 123ab-5343
-          pattern: '[a-zA-Z0-9._-]'
-          minLength: 1
-        source:
-          type: string
-          description: The seller internal source name for this reference type.
-          example: sap
-          minLength: 1
-      example:
-        reference: 123ab-5343
-        source: sap
-      required:
-      - source
-      - reference
-    SerialNumberByAsset:
-      type: object
-      properties:
-        seller_product_reference:
-          $ref: '#/components/schemas/SellerProductReference'
-        serial_number:
-          type: string
-          description: The serial number given by the device manufacturer, usually found on the packaging
-          example: BA-3456786-334-9
-      example:
-        seller_product_reference:
-          reference: 123ab-5343
-          source: sap
-        serial_number: BA-3456786-334-9
-      required:
-      - seller_product_reference
-      - serial_number
     CreateRequestBody:
       type: object
       properties:

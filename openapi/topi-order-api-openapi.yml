@@ -920,253 +920,6 @@ paths:
         source: "const response = await fetch('https://seller-api.topi.eu/v1/orders/paginated', {\n  method: 'GET',\n  headers: {\n    'Authorization': `Bearer ${ACCESS_TOKEN}`\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);\n"
 components:
   schemas:
-    PaginationMetadata:
-      type: object
-      properties:
-        page:
-          type: integer
-          description: Current page number
-          example: 1
-          format: int64
-        page_size:
-          type: integer
-          description: Number of items per page
-          example: 1
-          format: int64
-        total_count:
-          type: integer
-          description: Total number of items
-          example: 1
-          format: int64
-        total_pages:
-          type: integer
-          description: Total number of pages
-          example: 1
-          format: int64
-      example:
-        page: 1
-        page_size: 1
-        total_count: 1
-        total_pages: 1
-    BaseOrderLineItem:
-      type: object
-      properties:
-        base_rental_price:
-          $ref: '#/components/schemas/MoneyAmount'
-        contract_type:
-          type: string
-          description: Different contracts type
-          example: rent
-          enum:
-          - pay_now
-          - rent
-        duration:
-          type: integer
-          description: The duration in months
-          example: 6
-          enum:
-          - 0
-          - 6
-          - 12
-          - 24
-          - 30
-          - 36
-          - 48
-          format: int64
-        monthly_price:
-          $ref: '#/components/schemas/MoneyAmount'
-        pretty_id:
-          type: string
-          description: The pretty ID of the product
-          example: abc123
-        product_id:
-          type: string
-          description: Product ID inside Topi catalog
-          example: 739b63c2-9e58-4964-b38d-4ebb424de242
-          format: regexp
-          pattern: ^[0-9A-Za-z\-]+$
-        quantity:
-          type: integer
-          description: Amount of products
-          example: 1
-          format: int64
-        selected_first_party_services:
-          type: array
-          items:
-            $ref: '#/components/schemas/FirstPartyService'
-          description: Available first party services for the product
-          example:
-          - additional_values:
-              accessory_type: experiment_charger
-            id: 739b63c2-9e58-4964-b38d-4ebb424de242
-            monthly_price:
-              currency: EUR
-              gross: 119000
-              net: 100000
-            type: topi_replace
-        seller_product_references:
-          type: array
-          items:
-            $ref: '#/components/schemas/SellerProductReference'
-          description: Partner's own reference for this product
-          example:
-          - reference: 123ab-5343
-            source: sap
-        subtitle:
-          type: string
-          description: The product subtitle
-          example: abc123
-        title:
-          type: string
-          description: The product name
-          example: abc123
-        unit_price:
-          $ref: '#/components/schemas/MoneyAmount'
-      example:
-        base_rental_price:
-          currency: EUR
-          gross: 119000
-          net: 100000
-        contract_type: rent
-        duration: 6
-        monthly_price:
-          currency: EUR
-          gross: 119000
-          net: 100000
-        pretty_id: abc123
-        product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
-        quantity: 1
-        selected_first_party_services:
-        - additional_values:
-            accessory_type: experiment_charger
-          id: 739b63c2-9e58-4964-b38d-4ebb424de242
-          monthly_price:
-            currency: EUR
-            gross: 119000
-            net: 100000
-          type: topi_replace
-        seller_product_references:
-        - reference: 123ab-5343
-          source: sap
-        subtitle: abc123
-        title: abc123
-        unit_price:
-          currency: EUR
-          gross: 119000
-          net: 100000
-      required:
-      - quantity
-      - title
-      - subtitle
-      - seller_product_references
-      - monthly_price
-      - contract_type
-      - duration
-      - selected_first_party_services
-    OrderSummary:
-      type: object
-      properties:
-        agent_name:
-          type: string
-          description: Agent owner of the order
-          example: abc123
-        company_name:
-          type: string
-          description: name of the customer company
-          example: abc123
-        created_at:
-          type: string
-          example: '1970-01-01T00:00:01Z'
-          format: date-time
-        full_name:
-          type: string
-          description: Full name of the customer
-          example: abc123
-        id:
-          type: string
-          description: topi order ID
-          example: 739b63c2-9e58-4964-b38d-4ebb424de242
-          format: regexp
-          pattern: ^[0-9A-Za-z\-]+$
-        offer_id:
-          type: string
-          description: Reference to the topi offer ID
-          example: 739b63c2-9e58-4964-b38d-4ebb424de242
-          format: regexp
-          pattern: ^[0-9A-Za-z\-]+$
-        seller_offer_reference:
-          type: string
-          description: Agent owner of the order
-          example: abc123
-        status:
-          type: string
-          example: confirmed
-          enum:
-          - created
-          - confirmed
-          - acknowledged
-          - accepted
-          - partially_fulfilled
-          - completed
-          - canceled
-          - rejected
-      description: Summary info about an order
-      example:
-        agent_name: abc123
-        company_name: abc123
-        created_at: '1970-01-01T00:00:01Z'
-        full_name: abc123
-        id: 739b63c2-9e58-4964-b38d-4ebb424de242
-        offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
-        seller_offer_reference: abc123
-        status: confirmed
-      required:
-      - id
-      - offer_id
-      - created_at
-      - agent_name
-      - seller_offer_reference
-      - status
-      - company_name
-      - full_name
-    OrdersSummaryPaginated:
-      type: object
-      properties:
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderSummary'
-          description: an array with the orders requested
-          example:
-          - agent_name: abc123
-            company_name: abc123
-            created_at: '1970-01-01T00:00:01Z'
-            full_name: abc123
-            id: 739b63c2-9e58-4964-b38d-4ebb424de242
-            offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
-            seller_offer_reference: abc123
-            status: confirmed
-        pagination:
-          $ref: '#/components/schemas/PaginationMetadata'
-      description: Orders list with pagination metadata
-      example:
-        orders:
-        - agent_name: abc123
-          company_name: abc123
-          created_at: '1970-01-01T00:00:01Z'
-          full_name: abc123
-          id: 739b63c2-9e58-4964-b38d-4ebb424de242
-          offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
-          seller_offer_reference: abc123
-          status: confirmed
-        pagination:
-          page: 1
-          page_size: 1
-          total_count: 1
-          total_pages: 1
-      required:
-      - orders
-      - pagination
     Address:
       type: object
       properties:
@@ -1207,6 +960,98 @@ components:
       - postal_code
       - city
       - country_code
+    PaginationMetadata:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Current page number
+          example: 1
+          format: int64
+        page_size:
+          type: integer
+          description: Number of items per page
+          example: 1
+          format: int64
+        total_count:
+          type: integer
+          description: Total number of items
+          example: 1
+          format: int64
+        total_pages:
+          type: integer
+          description: Total number of pages
+          example: 1
+          format: int64
+      example:
+        page: 1
+        page_size: 1
+        total_count: 1
+        total_pages: 1
+    CustomerInfo:
+      type: object
+      properties:
+        company:
+          $ref: '#/components/schemas/CompanyInfo'
+        customer_group:
+          type: string
+          description: The name of the customer group if the customer is assigned to any.
+          example: education
+        email:
+          type: string
+          description: Customer e-mail that will be used to retrieve the offer
+          example: alice@example.com
+          format: email
+        full_name:
+          type: string
+          description: The full name of the person doing the checkout operation.
+          example: John Butler
+        phone_number:
+          type: string
+          description: Phone number associated to the offer.
+          example: abc123
+      description: Customer information
+      example:
+        company:
+          billing_address:
+            city: Munich
+            country_code: DE
+            line1: 10 Downing Street
+            line2: Flat 42
+            postal_code: '10243'
+            region: Bavaria
+          name: Unicorn Corp
+          tax_number: '123456789'
+          vat_number: DE123456789
+        customer_group: education
+        email: alice@example.com
+        full_name: John Butler
+        phone_number: abc123
+    MoneyAmount:
+      type: object
+      properties:
+        currency:
+          type: string
+          description: 'Currency code, see ISO 4127 (https://www.iso.org/iso-4217-currency-codes.html) (supported: EUR, GBP, USD)'
+          example: EUR
+        gross:
+          type: integer
+          description: Gross amount of money, expressed in the minor unit for the currency
+          example: 119000
+          format: int64
+        net:
+          type: integer
+          description: Net amount of money, expressed in the minor unit for the currency
+          example: 100000
+          format: int64
+      example:
+        currency: EUR
+        gross: 119000
+        net: 100000
+      required:
+      - gross
+      - net
+      - currency
     SellerInfo:
       type: object
       properties:
@@ -1321,62 +1166,180 @@ components:
       - capability_international_shipment
       - capability_add_custom_products
       - currency
-    ShippingAddress:
+    Asset:
       type: object
       properties:
-        city:
+        id:
           type: string
-          description: City
-          example: Munich
-        country_code:
+          description: asset ID
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        product_id:
           type: string
-          description: Country code (ISO 3166-1 alpha-2)
-          example: DE
-        line1:
+          description: product id inside the topi catalog
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        seller_product_references:
+          type: array
+          items:
+            $ref: '#/components/schemas/SellerProductReference'
+          description: All seller's own references for this asset
+          example:
+          - reference: 123ab-5343
+            source: sap
+        serial_number:
           type: string
-          description: First line (street, number, etc.)
-          example: 10 Downing Street
-        line2:
+          description: This is an id that identifies this asset as unique
+          example: BA-3456786-334-9
+        status:
           type: string
-          description: Second line (flat number, etc.)
-          example: Flat 42
-          maxLength: 40
-        postal_code:
+          example: shipped
+          enum:
+          - created
+          - shipped
+          - returned
+          - completed
+          - rejected
+        title:
           type: string
-          description: Postal code
-          example: '10243'
-        recipient_name:
+          description: The name of the asset
+          example: Pro Laptop 64GB
+        tracking_url:
           type: string
-          description: Name of the recipient
-          example: Felix Wolf
-        region:
-          type: string
-          description: Region, county, province, etc.
-          example: Bavaria
-      description: Shipping Address. If the sales_channel is ecommerce, this field will be required
+          description: the tracking url of this specific asset
+          example: abc123
+      description: An item included in an order
       example:
-        city: Munich
-        country_code: DE
-        line1: 10 Downing Street
-        line2: Flat 42
-        postal_code: '10243'
-        recipient_name: Felix Wolf
-        region: Bavaria
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        seller_product_references:
+        - reference: 123ab-5343
+          source: sap
+        serial_number: BA-3456786-334-9
+        status: shipped
+        title: Pro Laptop 64GB
+        tracking_url: abc123
       required:
-      - line1
-      - postal_code
-      - city
-      - country_code
-    FirstPartyServiceAdditionalValues:
+      - id
+      - product_id
+      - title
+      - seller_product_references
+      - status
+    SalesAgent:
       type: object
       properties:
-        accessory_type:
+        email:
           type: string
-          description: if the first party service is an accessory, this value is the kind of the accessory
-          example: experiment_charger
-      description: Additional values for specific first party types.
+          description: E-mail
+          example: alice@example.com
+          format: email
+        external_agent_id:
+          type: string
+          description: Id number used to identify the sales agent in the seller's internal system
+          example: abc123
+        name:
+          type: string
+          description: Name of the agent
+          example: abc123
+        phone:
+          type: string
+          description: Phone number
+          example: abc123
+      description: Sales agent related to an offer
       example:
-        accessory_type: experiment_charger
+        email: alice@example.com
+        external_agent_id: abc123
+        name: abc123
+        phone: abc123
+      required:
+      - name
+      - phone
+      - email
+    OrderSummary:
+      type: object
+      properties:
+        agent_name:
+          type: string
+          description: Agent owner of the order
+          example: abc123
+        company_name:
+          type: string
+          description: name of the customer company
+          example: abc123
+        created_at:
+          type: string
+          example: '1970-01-01T00:00:01Z'
+          format: date-time
+        full_name:
+          type: string
+          description: Full name of the customer
+          example: abc123
+        id:
+          type: string
+          description: topi order ID
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        offer_id:
+          type: string
+          description: Reference to the topi offer ID
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        seller_offer_reference:
+          type: string
+          description: Agent owner of the order
+          example: abc123
+        status:
+          type: string
+          example: confirmed
+          enum:
+          - created
+          - confirmed
+          - acknowledged
+          - accepted
+          - partially_fulfilled
+          - completed
+          - canceled
+          - rejected
+      description: Summary info about an order
+      example:
+        agent_name: abc123
+        company_name: abc123
+        created_at: '1970-01-01T00:00:01Z'
+        full_name: abc123
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        seller_offer_reference: abc123
+        status: confirmed
+      required:
+      - id
+      - offer_id
+      - created_at
+      - agent_name
+      - seller_offer_reference
+      - status
+      - company_name
+      - full_name
+    SetMetadataRequestBody:
+      type: object
+      properties:
+        metadata:
+          type: object
+          description: Metadata to attach. You can store any JSON information.
+          example:
+            tracking_number: '123456'
+          additionalProperties:
+            type: string
+            example: aaa
+            maxLength: 400
+      example:
+        metadata:
+          tracking_number: '123456'
+      required:
+      - metadata
     OrderLineItem:
       type: object
       properties:
@@ -1585,85 +1548,111 @@ components:
       required:
       - seller_shipping_reference
       - price
-    OrderResult:
+    PostalAddress:
       type: object
       properties:
-        assets:
+        city:
+          type: string
+          description: City
+          example: Munich
+        country_code:
+          type: string
+          description: Country code (ISO 3166-1 alpha-2)
+          example: DE
+        line1:
+          type: string
+          description: First line (street, number, etc.)
+          example: 10 Downing Street
+        line2:
+          type: string
+          description: Second line (flat number, etc.)
+          example: Flat 42
+          maxLength: 40
+        postal_code:
+          type: string
+          description: Postal code
+          example: '10243'
+        region:
+          type: string
+          description: Region, county, province, etc.
+          example: Bavaria
+      example:
+        city: Munich
+        country_code: DE
+        line1: 10 Downing Street
+        line2: Flat 42
+        postal_code: '10243'
+        region: Bavaria
+      required:
+      - line1
+      - postal_code
+      - city
+      - country_code
+    OrdersSummaryPaginated:
+      type: object
+      properties:
+        orders:
           type: array
           items:
-            $ref: '#/components/schemas/Asset'
-          description: A list of assets in an offer
+            $ref: '#/components/schemas/OrderSummary'
+          description: an array with the orders requested
           example:
-          - id: 739b63c2-9e58-4964-b38d-4ebb424de242
-            product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
-            seller_product_references:
-            - reference: 123ab-5343
-              source: sap
-            serial_number: BA-3456786-334-9
-            status: shipped
-            title: Pro Laptop 64GB
-            tracking_url: abc123
-        id:
-          type: string
-          description: topi order ID
-          example: 739b63c2-9e58-4964-b38d-4ebb424de242
-          format: regexp
-          pattern: ^[0-9A-Za-z\-]+$
-        metadata:
-          type: object
-          description: Metadata you can attach to and order. You can store here any JSON information
-          example:
-            tracking_number: '123456'
-          additionalProperties:
-            type: string
-            example: aaa
-            maxLength: 400
-        offer_id:
-          type: string
-          description: Reference to the topi offer ID
-          example: 739b63c2-9e58-4964-b38d-4ebb424de242
-          format: regexp
-          pattern: ^[0-9A-Za-z\-]+$
-        seller_offer_reference:
-          type: string
-          description: Seller's own reference for this order
-          example: abc123
-        status:
-          type: string
-          example: confirmed
-          enum:
-          - created
-          - confirmed
-          - acknowledged
-          - accepted
-          - partially_fulfilled
-          - completed
-          - canceled
-          - rejected
-      description: Basic information about an order
+          - agent_name: abc123
+            company_name: abc123
+            created_at: '1970-01-01T00:00:01Z'
+            full_name: abc123
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            seller_offer_reference: abc123
+            status: confirmed
+        pagination:
+          $ref: '#/components/schemas/PaginationMetadata'
+      description: Orders list with pagination metadata
       example:
-        assets:
-        - id: 739b63c2-9e58-4964-b38d-4ebb424de242
-          product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
-          seller_product_references:
-          - reference: 123ab-5343
-            source: sap
-          serial_number: BA-3456786-334-9
-          status: shipped
-          title: Pro Laptop 64GB
-          tracking_url: abc123
-        id: 739b63c2-9e58-4964-b38d-4ebb424de242
-        metadata:
-          tracking_number: '123456'
-        offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
-        seller_offer_reference: abc123
-        status: confirmed
+        orders:
+        - agent_name: abc123
+          company_name: abc123
+          created_at: '1970-01-01T00:00:01Z'
+          full_name: abc123
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          seller_offer_reference: abc123
+          status: confirmed
+        pagination:
+          page: 1
+          page_size: 1
+          total_count: 1
+          total_pages: 1
       required:
-      - id
-      - offer_id
-      - seller_offer_reference
-      - status
-      - assets
+      - orders
+      - pagination
+    OrdersSummary:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderSummary'
+          description: an array with the orders requested
+          example:
+          - agent_name: abc123
+            company_name: abc123
+            created_at: '1970-01-01T00:00:01Z'
+            full_name: abc123
+            id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            seller_offer_reference: abc123
+            status: confirmed
+      example:
+        orders:
+        - agent_name: abc123
+          company_name: abc123
+          created_at: '1970-01-01T00:00:01Z'
+          full_name: abc123
+          id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          seller_offer_reference: abc123
+          status: confirmed
     CompanyInfo:
       type: object
       properties:
@@ -1694,92 +1683,6 @@ components:
         name: Unicorn Corp
         tax_number: '123456789'
         vat_number: DE123456789
-    Asset:
-      type: object
-      properties:
-        id:
-          type: string
-          description: asset ID
-          example: 739b63c2-9e58-4964-b38d-4ebb424de242
-          format: regexp
-          pattern: ^[0-9A-Za-z\-]+$
-        product_id:
-          type: string
-          description: product id inside the topi catalog
-          example: 739b63c2-9e58-4964-b38d-4ebb424de242
-          format: regexp
-          pattern: ^[0-9A-Za-z\-]+$
-        seller_product_references:
-          type: array
-          items:
-            $ref: '#/components/schemas/SellerProductReference'
-          description: All seller's own references for this asset
-          example:
-          - reference: 123ab-5343
-            source: sap
-        serial_number:
-          type: string
-          description: This is an id that identifies this asset as unique
-          example: BA-3456786-334-9
-        status:
-          type: string
-          example: shipped
-          enum:
-          - created
-          - shipped
-          - returned
-          - completed
-          - rejected
-        title:
-          type: string
-          description: The name of the asset
-          example: Pro Laptop 64GB
-        tracking_url:
-          type: string
-          description: the tracking url of this specific asset
-          example: abc123
-      description: An item included in an order
-      example:
-        id: 739b63c2-9e58-4964-b38d-4ebb424de242
-        product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
-        seller_product_references:
-        - reference: 123ab-5343
-          source: sap
-        serial_number: BA-3456786-334-9
-        status: shipped
-        title: Pro Laptop 64GB
-        tracking_url: abc123
-      required:
-      - id
-      - product_id
-      - title
-      - seller_product_references
-      - status
-    MoneyAmount:
-      type: object
-      properties:
-        currency:
-          type: string
-          description: 'Currency code, see ISO 4127 (https://www.iso.org/iso-4217-currency-codes.html) (supported: EUR, GBP, USD)'
-          example: EUR
-        gross:
-          type: integer
-          description: Gross amount of money, expressed in the minor unit for the currency
-          example: 119000
-          format: int64
-        net:
-          type: integer
-          description: Net amount of money, expressed in the minor unit for the currency
-          example: 100000
-          format: int64
-      example:
-        currency: EUR
-        gross: 119000
-        net: 100000
-      required:
-      - gross
-      - net
-      - currency
     FullOrderResult:
       type: object
       properties:
@@ -2095,83 +1998,6 @@ components:
       - seller_offer_reference
       - status
       - assets
-    CustomerInfo:
-      type: object
-      properties:
-        company:
-          $ref: '#/components/schemas/CompanyInfo'
-        customer_group:
-          type: string
-          description: The name of the customer group if the customer is assigned to any.
-          example: education
-        email:
-          type: string
-          description: Customer e-mail that will be used to retrieve the offer
-          example: alice@example.com
-          format: email
-        full_name:
-          type: string
-          description: The full name of the person doing the checkout operation.
-          example: John Butler
-        phone_number:
-          type: string
-          description: Phone number associated to the offer.
-          example: abc123
-      description: Customer information
-      example:
-        company:
-          billing_address:
-            city: Munich
-            country_code: DE
-            line1: 10 Downing Street
-            line2: Flat 42
-            postal_code: '10243'
-            region: Bavaria
-          name: Unicorn Corp
-          tax_number: '123456789'
-          vat_number: DE123456789
-        customer_group: education
-        email: alice@example.com
-        full_name: John Butler
-        phone_number: abc123
-    FirstPartyService:
-      type: object
-      properties:
-        additional_values:
-          $ref: '#/components/schemas/FirstPartyServiceAdditionalValues'
-        id:
-          type: string
-          description: The internal Id for the first party service
-          example: 739b63c2-9e58-4964-b38d-4ebb424de242
-          format: regexp
-          pattern: ^[0-9A-Za-z\-]+$
-        monthly_price:
-          $ref: '#/components/schemas/MoneyAmount'
-        type:
-          type: string
-          example: topi_replace
-          enum:
-          - topi_repair
-          - topi_replace
-          - demo_first_party_service
-          - topi_accessory
-          - topi_data_deletion_certificate
-          - topi_care_plus_synaxon
-          - topi_care_plus_michaelag
-      description: Info for first party service
-      example:
-        additional_values:
-          accessory_type: experiment_charger
-        id: 739b63c2-9e58-4964-b38d-4ebb424de242
-        monthly_price:
-          currency: EUR
-          gross: 119000
-          net: 100000
-        type: topi_replace
-      required:
-      - id
-      - type
-      - monthly_price
     Error:
       type: object
       properties:
@@ -2213,6 +2039,85 @@ components:
       - temporary
       - timeout
       - fault
+    OrderResult:
+      type: object
+      properties:
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+          description: A list of assets in an offer
+          example:
+          - id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+            seller_product_references:
+            - reference: 123ab-5343
+              source: sap
+            serial_number: BA-3456786-334-9
+            status: shipped
+            title: Pro Laptop 64GB
+            tracking_url: abc123
+        id:
+          type: string
+          description: topi order ID
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        metadata:
+          type: object
+          description: Metadata you can attach to and order. You can store here any JSON information
+          example:
+            tracking_number: '123456'
+          additionalProperties:
+            type: string
+            example: aaa
+            maxLength: 400
+        offer_id:
+          type: string
+          description: Reference to the topi offer ID
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        seller_offer_reference:
+          type: string
+          description: Seller's own reference for this order
+          example: abc123
+        status:
+          type: string
+          example: confirmed
+          enum:
+          - created
+          - confirmed
+          - acknowledged
+          - accepted
+          - partially_fulfilled
+          - completed
+          - canceled
+          - rejected
+      description: Basic information about an order
+      example:
+        assets:
+        - id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+          seller_product_references:
+          - reference: 123ab-5343
+            source: sap
+          serial_number: BA-3456786-334-9
+          status: shipped
+          title: Pro Laptop 64GB
+          tracking_url: abc123
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        metadata:
+          tracking_number: '123456'
+        offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        seller_offer_reference: abc123
+        status: confirmed
+      required:
+      - id
+      - offer_id
+      - seller_offer_reference
+      - status
+      - assets
     SellerProductReference:
       type: object
       properties:
@@ -2233,64 +2138,170 @@ components:
       required:
       - source
       - reference
-    OrdersSummary:
+    BaseOrderLineItem:
       type: object
       properties:
-        orders:
+        base_rental_price:
+          $ref: '#/components/schemas/MoneyAmount'
+        contract_type:
+          type: string
+          description: Different contracts type
+          example: rent
+          enum:
+          - pay_now
+          - rent
+        duration:
+          type: integer
+          description: The duration in months
+          example: 6
+          enum:
+          - 0
+          - 6
+          - 12
+          - 24
+          - 30
+          - 36
+          - 48
+          format: int64
+        monthly_price:
+          $ref: '#/components/schemas/MoneyAmount'
+        pretty_id:
+          type: string
+          description: The pretty ID of the product
+          example: abc123
+        product_id:
+          type: string
+          description: Product ID inside Topi catalog
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        quantity:
+          type: integer
+          description: Amount of products
+          example: 1
+          format: int64
+        selected_first_party_services:
           type: array
           items:
-            $ref: '#/components/schemas/OrderSummary'
-          description: an array with the orders requested
+            $ref: '#/components/schemas/FirstPartyService'
+          description: Available first party services for the product
           example:
-          - agent_name: abc123
-            company_name: abc123
-            created_at: '1970-01-01T00:00:01Z'
-            full_name: abc123
+          - additional_values:
+              accessory_type: experiment_charger
             id: 739b63c2-9e58-4964-b38d-4ebb424de242
-            offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
-            seller_offer_reference: abc123
-            status: confirmed
+            monthly_price:
+              currency: EUR
+              gross: 119000
+              net: 100000
+            type: topi_replace
+        seller_product_references:
+          type: array
+          items:
+            $ref: '#/components/schemas/SellerProductReference'
+          description: Partner's own reference for this product
+          example:
+          - reference: 123ab-5343
+            source: sap
+        subtitle:
+          type: string
+          description: The product subtitle
+          example: abc123
+        title:
+          type: string
+          description: The product name
+          example: abc123
+        unit_price:
+          $ref: '#/components/schemas/MoneyAmount'
       example:
-        orders:
-        - agent_name: abc123
-          company_name: abc123
-          created_at: '1970-01-01T00:00:01Z'
-          full_name: abc123
+        base_rental_price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+        contract_type: rent
+        duration: 6
+        monthly_price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+        pretty_id: abc123
+        product_id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        quantity: 1
+        selected_first_party_services:
+        - additional_values:
+            accessory_type: experiment_charger
           id: 739b63c2-9e58-4964-b38d-4ebb424de242
-          offer_id: 739b63c2-9e58-4964-b38d-4ebb424de242
-          seller_offer_reference: abc123
-          status: confirmed
-    SalesAgent:
+          monthly_price:
+            currency: EUR
+            gross: 119000
+            net: 100000
+          type: topi_replace
+        seller_product_references:
+        - reference: 123ab-5343
+          source: sap
+        subtitle: abc123
+        title: abc123
+        unit_price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+      required:
+      - quantity
+      - title
+      - subtitle
+      - seller_product_references
+      - monthly_price
+      - contract_type
+      - duration
+      - selected_first_party_services
+    FirstPartyService:
       type: object
       properties:
-        email:
+        additional_values:
+          $ref: '#/components/schemas/FirstPartyServiceAdditionalValues'
+        id:
           type: string
-          description: E-mail
-          example: alice@example.com
-          format: email
-        external_agent_id:
+          description: The internal Id for the first party service
+          example: 739b63c2-9e58-4964-b38d-4ebb424de242
+          format: regexp
+          pattern: ^[0-9A-Za-z\-]+$
+        monthly_price:
+          $ref: '#/components/schemas/MoneyAmount'
+        type:
           type: string
-          description: Id number used to identify the sales agent in the seller's internal system
-          example: abc123
-        name:
-          type: string
-          description: Name of the agent
-          example: abc123
-        phone:
-          type: string
-          description: Phone number
-          example: abc123
-      description: Sales agent related to an offer
+          example: topi_replace
+          enum:
+          - topi_repair
+          - topi_replace
+          - demo_first_party_service
+          - topi_accessory
+          - topi_data_deletion_certificate
+          - topi_care_plus_synaxon
+          - topi_care_plus_michaelag
+      description: Info for first party service
       example:
-        email: alice@example.com
-        external_agent_id: abc123
-        name: abc123
-        phone: abc123
+        additional_values:
+          accessory_type: experiment_charger
+        id: 739b63c2-9e58-4964-b38d-4ebb424de242
+        monthly_price:
+          currency: EUR
+          gross: 119000
+          net: 100000
+        type: topi_replace
       required:
-      - name
-      - phone
-      - email
-    PostalAddress:
+      - id
+      - type
+      - monthly_price
+    FirstPartyServiceAdditionalValues:
+      type: object
+      properties:
+        accessory_type:
+          type: string
+          description: if the first party service is an accessory, this value is the kind of the accessory
+          example: experiment_charger
+      description: Additional values for specific first party types.
+      example:
+        accessory_type: experiment_charger
+    ShippingAddress:
       type: object
       properties:
         city:
@@ -2314,39 +2325,28 @@ components:
           type: string
           description: Postal code
           example: '10243'
+        recipient_name:
+          type: string
+          description: Name of the recipient
+          example: Felix Wolf
         region:
           type: string
           description: Region, county, province, etc.
           example: Bavaria
+      description: Shipping Address. If the sales_channel is ecommerce, this field will be required
       example:
         city: Munich
         country_code: DE
         line1: 10 Downing Street
         line2: Flat 42
         postal_code: '10243'
+        recipient_name: Felix Wolf
         region: Bavaria
       required:
       - line1
       - postal_code
       - city
       - country_code
-    SetMetadataRequestBody:
-      type: object
-      properties:
-        metadata:
-          type: object
-          description: Metadata to attach. You can store any JSON information.
-          example:
-            tracking_number: '123456'
-          additionalProperties:
-            type: string
-            example: aaa
-            maxLength: 400
-      example:
-        metadata:
-          tracking_number: '123456'
-      required:
-      - metadata
   securitySchemes:
     OAuth2Seller_header_Authorization:
       type: oauth2
